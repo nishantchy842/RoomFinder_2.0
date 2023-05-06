@@ -1,7 +1,9 @@
-const Header =()=>{
-    return(
+const Header = () => {
+    return (
         <>
-        This is Header
+            <nav className='h-10 w-screen bg-[red]'>
+                This is Header
+            </nav>
         </>
     )
 }
