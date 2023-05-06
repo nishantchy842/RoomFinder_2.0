@@ -5,13 +5,11 @@ function App() {
 
   return (
     <>
-    <div className='h-screen'>
-    <h1 className="text-3xl font-bold underline ">
-    Hello world!
-  </h1>
-  <AddLocation />
-    </div>
-     
+      <div className='h-screen'>
+
+        <AddLocation />
+      </div>
+
     </>
   )
 }
