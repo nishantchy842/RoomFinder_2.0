@@ -1,7 +1,7 @@
 const Footer =()=>{
     return(
         <>
-        This is footer
+     <h1 className="text-lg font-bold bg-secondary">NIshant , Ranjit , Swarup , Pratish</h1>  
         </>
     )
 }
