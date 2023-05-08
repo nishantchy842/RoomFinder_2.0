@@ -26,9 +26,9 @@ const InfoField = ({ mainProps, optionalProps = {}, minLength }) => {
       } else {
         if (error) setError(false);
         if (!success) setSuccess(true);
-        dispatch(UPDATE_DETAILS({[e.target.name]: e.target.value}))
       }
     }, 1000);
+    dispatch(UPDATE_DETAILS({[e.target.name]: e.target.value}))
   };
   return (
     <TextField

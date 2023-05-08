@@ -6,13 +6,20 @@ import ReactMapGL, {
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 import Geocoder from './Geocoder';
-import { UPDATE_LOCATION } from '../../Redux/Reducer/roomSlice';
+import { UPDATE_LOCATION} from '../../Redux/Reducer/roomSlice';
 import { useDispatch, useSelector } from 'react-redux'
-import AddDetails from '../addDetails/AddDetails';
 
 const AddLocation = () => {
   const { lat, lng } = useSelector(state => state.room.location)
   const dispatch = useDispatch()
+  //for address name
+  // useEffect(() => {
+  //   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${import.meta.env.VITE_MAP_KEY}`;
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((data) => dispatch(UPDATE_DETAILS({title: data.features[0]?.place_name})));
+
+  // }, [lat, lng]);
 
   const mapRef = useRef();
 
@@ -36,7 +43,7 @@ const AddLocation = () => {
     <div className='h-[80vh]'>
       <ReactMapGL
         ref={mapRef}
-        mapboxAccessToken='pk.eyJ1IjoibmlzaGFudDg0MiIsImEiOiJjbGgyemNjMm8wNjE2M3BxZzA2NnpxNXZiIn0.AA83bqvjV5J5V9NGgljf5g'
+        mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
         initialViewState={{
           longitude: lng,
           latitude: lat,
@@ -63,7 +70,6 @@ const AddLocation = () => {
         />
         <Geocoder />
       </ReactMapGL>
-      <AddDetails />
     </div>
   );
 };

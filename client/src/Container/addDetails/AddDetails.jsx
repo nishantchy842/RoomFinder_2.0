@@ -21,7 +21,9 @@ const AddDetails = () => {
     const [editing, setEditing] = useState(false);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
+    
     const { title, description, price } = useSelector(state => state.room)
+    
     const dispatch = useDispatch()
 
     const handlePriceChange = (e) => {
@@ -29,7 +31,7 @@ const AddDetails = () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
             setEditing(false);
-            if (e.target.value.length < 4) {
+            if (e.target.value < 1000) {
                 if (!error) setError(true);
                 if (success) setSuccess(false);
             } else {
@@ -78,18 +80,16 @@ const AddDetails = () => {
                 />
             </FormControl>
             <InfoField
-                mainProps={{
-                    name: 'title', label: 'Title',
-                    value: title,
-                    required: true
-                }}
-                minLength={5}
+            mainProps={{ name: 'title', label: 'City', value: title }}
+            minLength={5}
+            required
             />
             <InfoField
                 mainProps={{
-                    name: 'Description',
+                    name: 'description',
                     label: 'Description',
                     value: description,
+                    placeholder: 'Describe you room '
                 }}
                 minLength={10}
                 optionalProps={{
