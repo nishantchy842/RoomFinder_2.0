@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     return (
       <React.Fragment>
         <Header />
-        <main className="min-h-[91vh]">{children}</main>
+        <main className="min-h-[70vh] h-[90vh]">{children}</main>
         <Footer />
       </React.Fragment>
     );

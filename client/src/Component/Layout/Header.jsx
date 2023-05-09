@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { styles } from "../../Utils/Style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const Header = () => {
 
@@ -9,6 +10,7 @@ const Header = () => {
     const [color, setColor] = useState('white')
     const [toggle, setToggle] = useState(false);
 
+    const navigate = useNavigate()
     const listenScrollEvent = () => {
         window.scrollY > 10 ? setNavColor('#283048') : setNavColor('transparent')
         window.scrollY > 10 ? setNavSize('5rem') : setNavSize('6rem')
@@ -31,7 +33,7 @@ const Header = () => {
         }} 
         className={`${
             styles.paddingX
-          } w-full flex items-center py-5 top-0 z-20 `}
+          } w-full flex items-center py-5 top-0`}
         >
 
         <div className='logo w-full flex justify-between items-center max-w-7xl mx-auto'  >
@@ -46,7 +48,7 @@ const Header = () => {
         <div className='home-to-contact'>
             <ul style={{ color: color, cursor:'pointer' }} className='list-none hidden sm:flex flex-row gap-10'>
             <li className='text-secondary'>Home</li>
-            <li><button className="btn">Login</button></li>
+            <li><button className="btn" onClick={()=>navigate('/login')}>Login</button></li>
                 {
                     // NavData.map((item, id) => {
                     //     return <li key={item.id} className='text-secondary'><Link to={item.path} spy={true} smooth={true} offset={-100} duration={500}>{item.title}</Link></li>
