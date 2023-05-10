@@ -12,24 +12,25 @@ import { useEffect, useState } from 'react';
 // import { useValue } from '../../context/ContextProvider';
 // import { createRoom } from '../../actions/room';
 import { useSelector } from 'react-redux';
-import {MdOutlineFilePresent} from 'react-icons/md'
+import { MdOutlineFilePresent } from 'react-icons/md'
 import AddLocation from './addLocation/AddLocation';
 import AddDetails from './addDetails/AddDetails';
-// import AddImage from './addImage/AddImage';
+import AddImage from './addImage/AddImage';
+import Layout from '../Component/Layout/Layout';
 
 const AddRoom = () => {
-//   const {
-//     state: { images, details, location, currentUser },
-//     dispatch,
-//   } = useValue();
- 
-const {details, location} = useSelector(state=>state.room)
+  //   const {
+  //     state: { images, details, location, currentUser },
+  //     dispatch,
+  //   } = useValue();
+
+  const { details, location } = useSelector(state => state.room)
 
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
     { label: 'Location', completed: false },
     { label: 'Details', completed: false },
-    // { label: 'Images', completed: false },
+    { label: 'Images', completed: false },
   ]);
   const [showSubmit, setShowSubmit] = useState(false);
   const handleNext = () => {
@@ -50,13 +51,13 @@ const {details, location} = useSelector(state=>state.room)
     return steps.findIndex((step) => !step.completed);
   };
 
-//   useEffect(() => {
-//     if (images.length) {
-//       if (!steps[2].completed) setComplete(2, true);
-//     } else {
-//       if (steps[2].completed) setComplete(2, false);
-//     }
-//   }, [images]);
+  // useEffect(() => {
+  //   if (images.length) {
+  //     if (!steps[2].completed) setComplete(2, true);
+  //   } else {
+  //     if (steps[2].completed) setComplete(2, false);
+  //   }
+  // }, [images]);
   useEffect(() => {
     if (details.title.length > 4 && details.description.length > 9) {
       if (!steps[1].completed) setComplete(1, true);
@@ -93,61 +94,64 @@ const {details, location} = useSelector(state=>state.room)
       price: details.price,
       title: details.title,
       description: details.description,
-    //   images,
+      //   images,
     };
     console.log(room)
     // createRoom(room, currentUser, dispatch, setPage);
   };
   return (
-    <Container sx={{ my: 4 }}>
-      <Stepper
-        alternativeLabel
-        nonLinear
-        activeStep={activeStep}
-        sx={{ mb: 3 }}
+    <Layout >
+      <Container sx={{ my: 15 }}
       >
-        {steps.map((step, index) => (
-          <Step key={step.label} completed={step.completed}>
-            <StepButton onClick={() => setActiveStep(index)}>
-              {step.label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
-      <Box sx={{ pb: 7 }}>
-        {
+        <Stepper
+          alternativeLabel
+          nonLinear
+          activeStep={activeStep}
+          sx={{ mb: 3 }}
+        >
+          {steps.map((step, index) => (
+            <Step key={step.label} completed={step.completed}>
+              <StepButton onClick={() => setActiveStep(index)}>
+                {step.label}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
+        <Box sx={{ pb: 7 }}>
           {
-            0: <AddLocation />,
-            1: <AddDetails />,
-            // 2: <AddImage />,
-          }[activeStep]
-        }
+            {
+              0: <AddLocation />,
+              1: <AddDetails />,
+              2: <AddImage />,
+            }[activeStep]
+          }
 
-        <Stack direction="row" sx={{ pt: 2, justifyContent: 'space-around' }}>
-          <Button
-            color="inherit"
-            disabled={!activeStep}
-            onClick={() => setActiveStep((activeStep) => activeStep - 1)}
-          >
-            Back
-          </Button>
-          <Button disabled={checkDisabled()} onClick={handleNext}>
-            Next
-          </Button>
-        </Stack>
-        {showSubmit && (
-          <Stack sx={{ alignItems: 'center' }}>
+          <Stack direction="row" sx={{ pt: 2, justifyContent: 'space-around' }}>
             <Button
-              variant="contained"
-              endIcon={<MdOutlineFilePresent />}
-              onClick={handleSubmit}
+              color="inherit"
+              disabled={!activeStep}
+              onClick={() => setActiveStep((activeStep) => activeStep - 1)}
             >
-              Submit
+              Back
+            </Button>
+            <Button disabled={checkDisabled()} onClick={handleNext}>
+              Next
             </Button>
           </Stack>
-        )}
-      </Box>
-    </Container>
+          {showSubmit && (
+            <Stack sx={{ alignItems: 'center' }}>
+              <Button
+                variant="contained"
+                endIcon={<MdOutlineFilePresent />}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </Stack>
+          )}
+        </Box>
+      </Container>
+    </Layout>
   );
 };
 

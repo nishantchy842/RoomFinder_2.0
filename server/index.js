@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const connectDb = require('./db/Connectdb')
 const userRoute = require('./routes/userRoute')
+const roomRoute = require('./routes/roomRoute')
 const dotenv = require('dotenv')
 
 
@@ -15,6 +16,7 @@ dotenv.config()
 connectDb()
 //routes
 app.use('/api/auth', userRoute)
+app.use('/api/room', roomRoute)
 
 app.get('/', (req, res) => {
     res.send('initial setup')
