@@ -11,15 +11,17 @@ const Login = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <Layout title={"Login"}>
-      <div className="flex justify-center items-center min-h-[70vh] h-[95vh] bg-[#2e3239]">
-        <div className="h-auto w-[40%] border bg-white text-3xl text-center mt-5">
-          Login to Your Account
+    <Layout>
+      <div className="flex justify-center items-center h-[100vh] bg-[#a2b2ee]">
+        <div className="card flex-wrap h-auto min-w-[300px]">
+        
+         <p className={`${styles.sectionHeadText} ${styles.paddingX}`}> Room Finder </p> 
+         <p  className={`${styles.sectionSubText} ${styles.paddingX}`}>Login your account</p>
           <Form
             className="p-4"
             name="basic"
             labelCol={{
-              span: 4,
+              span: 7,
             }}
             wrapperCol={{
               span: 20,
@@ -72,7 +74,7 @@ const Login = () => {
 
             <Form.Item
               wrapperCol={{
-                offset: 10,
+                offset: 6,
                 span: 16,
               }}
             >
@@ -80,10 +82,10 @@ const Login = () => {
                 Submit
               </button>
             </Form.Item>
-            <p className="mt-[15px] text-[12px] text-center text-slate-400">
-              Do not have an account?
+            <p className="mt-[15px] text-[20px] text-center text-slate-400">
+              Do not have an account? {" "}
               <Link to="/registration" className="font-bold">
-                Register
+                 Register
               </Link>
             </p>
           </Form>

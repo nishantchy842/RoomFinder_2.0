@@ -32,9 +32,9 @@ const Register = () => {
     return (
         <div>
             <Layout title={"Register"}>
-                <div className='h-[60vh] w-auto flex justify-center items-center bg-[#2e3239]'>
-                    <form onSubmit={handleSubmit} className="bg-[#26292b] w-[500px] border mt-[250px] p-20 ">
-                        <h1 className={`text-center ${styles.heroSubText}`}>REGISTER FORM</h1>
+                <div className='h-[100vh] w-auto flex justify-center items-center bg-[#a2b2ee]'>
+                    <form onSubmit={handleSubmit} className="bg-[#5f7adb] hover:border rounded-tl-lg rounded-br-lg w-[50%] min-w-[300px] mt-10 p-10 ">
+                        <h1 className={`text-center ${styles.sectionHeadText}`}>Register Here</h1>
                         <div className="mb-3">
                             <label className="block ">
                                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
