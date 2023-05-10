@@ -1,20 +1,19 @@
-import { useNavigate } from "react-router"
-import Layout from "../../Component/Layout/Layout"
-import ClusterMap from "./ClusterMap"
+import { useNavigate } from "react-router";
+import Layout from "../../Component/Layout/Layout";
+import ClusterMap from "./ClusterMap";
+import Card from "./Card";
 
 const Home = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Layout>
-     
       <div className="mt-[10rem]">
-      This is home
-      <ClusterMap />
-      <button className="btn" onClick={()=>navigate('/add-room')}> List room </button>
-      <button className="btn" > Find room </button>
+        This is home
+        <ClusterMap />
+        <Card />
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
