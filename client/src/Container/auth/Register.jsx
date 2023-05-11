@@ -31,9 +31,9 @@ const Register = () => {
 
     return (
         <div>
-            <Layout title={"Register"}>
+            <Layout>
                 <div className='h-[100vh] w-auto flex justify-center items-center bg-[#a2b2ee]'>
-                    <form onSubmit={handleSubmit} className="bg-[#5f7adb] hover:border rounded-tl-lg rounded-br-lg w-[50%] min-w-[300px] mt-10 p-10 ">
+                    <form onSubmit={handleSubmit} className="gradient hover:border rounded-tl-lg rounded-br-lg w-[50%] min-w-[300px] mt-10 p-10 ">
                         <h1 className={`text-center ${styles.sectionHeadText}`}>Register Here</h1>
                         <div className="mb-3">
                             <label className="block ">

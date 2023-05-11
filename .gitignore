@@ -5,4 +5,6 @@ server/package-lock.json
 client/package-lock.json
 .env
 
+client/src/uploads
+
 .DS_Store

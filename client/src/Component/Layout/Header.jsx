@@ -88,8 +88,8 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0 z-20">
-      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+    <div className="shadow-md w-full fixed top-0 left-0 z-20 bg-[#295d61]">
+      <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
@@ -109,7 +109,7 @@ const Header = () => {
         </div>
 
         <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 " : "top-[-490px]"
+          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#295d61] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 " : "top-[-490px]"
             }`}
         >
           {Links.map((link) => (
