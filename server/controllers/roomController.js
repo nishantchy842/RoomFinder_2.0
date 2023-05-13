@@ -2,7 +2,7 @@ const roomModel = require('../models/roomModel')
 
 exports.createRoom = async (req, res) => {
     try {
-        const newRoom = new roomModel({ ...req.body, roomImageName: req.file.filename })
+        const newRoom = new roomModel({ ...req.body })
         await newRoom.save();
         res.status(201).send({
              success: true, 

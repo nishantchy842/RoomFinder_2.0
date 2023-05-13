@@ -12,20 +12,12 @@ import { useDispatch, useSelector } from 'react-redux'
 const AddLocation = () => {
   const { lat, lng } = useSelector(state => state.room.location)
   const dispatch = useDispatch()
-  //for address name
-  // useEffect(() => {
-  //   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${import.meta.env.VITE_MAP_KEY}`;
-  //   fetch(url)
-  //     .then((response) => response.json())
-  //     .then((data) => dispatch(UPDATE_DETAILS({title: data.features[0]?.place_name})));
-
-  // }, [lat, lng]);
 
   const mapRef = useRef();
 
   useEffect(() => {
     if (!lng && !lat) {
-      fetch('https://ipapi.co/json/')
+      fetch('https://ipapi.co/2403:3800:3233:1213:3d58:8a5b:acd3:add1/json/')
         .then((response) => {
           return response.json();
         })
@@ -40,7 +32,7 @@ const AddLocation = () => {
 
 
   return (
-    <div className='h-[80vh]'>
+    <div className='h-[70vh]'>
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}

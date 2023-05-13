@@ -8,23 +8,19 @@ import {
   StepButton,
   Stepper,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import { useValue } from '../../context/ContextProvider';
 // import { createRoom } from '../../actions/room';
 import { useSelector } from 'react-redux';
 import { MdOutlineFilePresent } from 'react-icons/md'
 import AddLocation from './addLocation/AddLocation';
 import AddDetails from './addDetails/AddDetails';
-import AddImage from './addImage/AddImage';
 import Layout from '../Component/Layout/Layout';
+import axios from 'axios'
+import AddImages from './addImage/AddImage';
 
 const AddRoom = () => {
-  //   const {
-  //     state: { images, details, location, currentUser },
-  //     dispatch,
-  //   } = useValue();
-
-  const { details, location } = useSelector(state => state.room)
+  const { details, location, amenities, images } = useSelector(state => state.room)
 
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
@@ -51,13 +47,13 @@ const AddRoom = () => {
     return steps.findIndex((step) => !step.completed);
   };
 
-  // useEffect(() => {
-  //   if (images.length) {
-  //     if (!steps[2].completed) setComplete(2, true);
-  //   } else {
-  //     if (steps[2].completed) setComplete(2, false);
-  //   }
-  // }, [images]);
+  useEffect(() => {
+    if (images) {
+      if (!steps[2].completed) setComplete(2, true);
+    } else {
+      if (steps[2].completed) setComplete(2, false);
+    }
+  }, [images]);
   useEffect(() => {
     if (details.title.length > 4 && details.description.length > 9) {
       if (!steps[1].completed) setComplete(1, true);
@@ -87,18 +83,31 @@ const AddRoom = () => {
     }
   }, [steps]);
 
-  const handleSubmit = () => {
-    const room = {
-      lng: location.lng,
-      lat: location.lat,
-      price: details.price,
-      title: details.title,
-      description: details.description,
-      //   images,
-    };
-    console.log(room)
-    // createRoom(room, currentUser, dispatch, setPage);
-  };
+  const handleSubmit = useCallback(async () => {
+    try {
+      const room = {
+        lng: location.lng,
+        lat: location.lat,
+        price: details.price,
+        title: details.title,
+        description: details.description,
+        amenities,
+        images
+      };
+      console.log(room)
+      // createRoom(room, currentUser, dispatch, setPage);
+      axios.post(`${import.meta.env.VITE_APP_URL}/api/room/addroom`,room).then(function (response) {
+          console.log(response);
+        })
+        .catch(function (response) {
+          console.log(response);
+        });
+    } catch (error) {
+      console.log(error)
+    }
+  }, [location.lng, location.lat, details.price, details.title, details.description, amenities])
+
+  
   return (
     <Layout >
       <Container sx={{ my: 15 }}
@@ -122,7 +131,7 @@ const AddRoom = () => {
             {
               0: <AddLocation />,
               1: <AddDetails />,
-              2: <AddImage />,
+              2: <AddImages />
             }[activeStep]
           }
 

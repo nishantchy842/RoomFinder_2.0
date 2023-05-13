@@ -4,12 +4,15 @@ const connectDb = require('./db/Connectdb')
 const userRoute = require('./routes/userRoute')
 const roomRoute = require('./routes/roomRoute')
 const dotenv = require('dotenv')
+const cors = require('cors')
 
 
 
 const app = express()
 app.use(bodyParser.json());
 dotenv.config()
+app.use(cors())
+
 
 
 //connect database
