@@ -13,13 +13,14 @@ const roomSchema = mongoose.Schema(
     },
     amenities: {
       type: [String],
-      validate: (v) => Array.isArray(v) && v.length > 0,
+      validate: (v) => Array.isArray(v) && v.length >= 0,
     },
+    img_collection: [Object],
     // roomImageName: { type: String },
-    images: {
-      type: [String],
-      validate: (v) => Array.isArray(v) && v.length > 0,
-    },
+    // images: {
+    //   type: [String],
+    //   validate: (v) => Array.isArray(v) && v.length > 0,
+    // },
     // uid: { type: String, required: true },
     // uName: { type: String, required: true },
     // uPhoto: { type: String, default: '' },

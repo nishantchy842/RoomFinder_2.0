@@ -1,6 +1,6 @@
 import { MdCheckCircleOutline } from 'react-icons/md'
 import { Box, ImageListItem } from '@mui/material';
-import { useCallback, useEffect, useState,memo } from 'react';
+import {  useEffect, useState } from 'react';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 import { v4 as uuidv4 } from 'uuid';
 import uploadFileProgress from '../../../firebase/uploadFileProgress';
@@ -10,6 +10,7 @@ import { UPDATE_IMAGES } from '../../../Redux/Reducer/roomSlice';
 
 
 const ProgressItem = ({ file }) => {
+    console.log(file, "@@@")
     const [progress, setProgress] = useState(0);
     const [imageURL, setImageURL] = useState(null);
     const dispatch = useDispatch()
@@ -29,32 +30,32 @@ const ProgressItem = ({ file }) => {
     //     state: { currentUser },
     //     dispatch,
     //   } = useValue();
-    const uploadImage = useCallback(async () => {
-        const imageName = uuidv4() + '.' + file.name.split('.').pop();
-        try {
-            const url = await uploadFileProgress(
-                file,
-                `rooms`,
-                imageName,
-                setProgress
-            );
-
-            // dispatch({ type: 'UPDATE_IMAGES', payload: url });
-            dispatch(UPDATE_IMAGES(url));
-            setImageURL(null);
-        } catch (error) {
-            // dispatch({
-            //   type: 'UPDATE_ALERT',
-            //   payload: { open: true, severity: 'error', message: error.message },
-            // });
-            console.log(error);
-        }
-    }, [file]);
-
     useEffect(() => {
+        const uploadImage = async () => {
+            const imageName = uuidv4() + '.' + file.name.split('.').pop();
+            try {
+                const url = await uploadFileProgress(
+                    file,
+                    `rooms/`,
+                    imageName,
+                    setProgress
+                );
+                    console.log(url,"url")
+                // dispatch({ type: 'UPDATE_IMAGES', payload: url });
+                dispatch(UPDATE_IMAGES(url));
+                setImageURL(null);
+            } catch (error) {
+                // dispatch({
+                //   type: 'UPDATE_ALERT',
+                //   payload: { open: true, severity: 'error', message: error.message },
+                // });
+                console.log(error);
+            }
+        }
         setImageURL(URL.createObjectURL(file));
         uploadImage();
-    }, []);
+        //e
+    }, [file, dispatch]);
 
     return (
         imageURL && (
@@ -74,7 +75,7 @@ const ProgressItem = ({ file }) => {
     );
 };
 ProgressItem.propTypes = {
-    file: PropTypes.node,
+    file: PropTypes.any.isRequired,
 };
-export default memo(ProgressItem);
+export default ProgressItem
 

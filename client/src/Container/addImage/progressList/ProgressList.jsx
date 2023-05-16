@@ -1,9 +1,7 @@
 import { ImageList } from '@mui/material';
 import PropTypes from "prop-types";
 import ProgressItem from './ProgressItem';
-import { memo } from 'react';
 const ProgressList = ({ files }) => {
-    console.log(files)
   return (
     <ImageList
       rowHeight={250}
@@ -21,6 +19,6 @@ const ProgressList = ({ files }) => {
   );
 };
 ProgressList.propTypes = {
-    files: PropTypes.node.isRequired,
-  };
-  export default memo(ProgressList);
+  files: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
+  export default ProgressList

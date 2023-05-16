@@ -28,7 +28,7 @@ export const roomSlice = createSlice({
       return { ...state, amenities: [...action.payload] };
     },
     UPDATE_IMAGES: (state, action) => {
-      return { ...state, images: [...state.images, action.payload] };
+      return { ...state, images: [action.payload] };
     },
     DELETE_IMAGES: (state, action) => {
       return {

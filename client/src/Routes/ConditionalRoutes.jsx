@@ -6,6 +6,7 @@ import AddImages from "../Container/addImage/AddImage"
 import AddRoom from "../Container/AddRoom"
 import Register from "../Container/auth/Register"
 import Login from "../Container/auth/Login"
+import RoomCard from '../Component/cards/card'
 
 const ConditionalRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const ConditionalRoutes = () => {
       <Route path="/add-room" element={<AddRoom />} />
       <Route path="/registration" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/card" element={<RoomCard />} />
       
       </Routes>
     </div>

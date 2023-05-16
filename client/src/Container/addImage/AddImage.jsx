@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import ImagesList from './ImagesList';
 import ProgressList from './progressList/ProgressList';
-import { memo } from "react";
 
 const AddImages = () => {
   const [files, setFiles] = useState([]);
@@ -30,7 +29,7 @@ const AddImages = () => {
           {isDragActive ? (
             <p style={{ color: 'green' }}>Drop the files here...</p>
           ) : (
-            <p>Drag or Drop some files here, or click to select files</p>
+            <p>Drag and Drop some files here, or click to select files</p>
           )}
           <em>(images with *.jpeg, *.png, *.jpg extension will be accepted)</em>
         </div>
@@ -41,4 +40,4 @@ const AddImages = () => {
   );
 };
 
-export default memo(AddImages);
+export default AddImages;

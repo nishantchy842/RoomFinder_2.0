@@ -6,24 +6,23 @@ const path = require('path')
 const router = express.Router()
 
 
-// const multer = require('multer')
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, '../client/src/uploads')
-//     },
-//     filename: function (req, file, cb) {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-//         cb(null, file.fieldname + '-' + uniqueSuffix )
-//     }
-// })
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../client/src/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+    }
+})
 
-// const upload = multer({ storage: storage })
+const upload = multer({ storage: storage })
 
 
 
 
 //create room api
-router.post('/addroom', createRoom)
+router.post('/addroom',upload.array('photos', 12), createRoom)
 //get all room
 router.get('/room', getRoom)
 

@@ -1,24 +1,22 @@
-import  { useCallback } from 'react';
 import { GiCancel } from 'react-icons/gi';
 import { IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 import deleteFile from '../../firebase/deleteFile';
 import { useDispatch, useSelector } from 'react-redux';
 import { DELETE_IMAGES } from '../../Redux/Reducer/roomSlice';
-import { memo } from "react";
 
 const ImagesList = () => {
   const { images } = useSelector((state) => state.room);
   const dispatch = useDispatch();
 
-  const handleDelete = useCallback(async (image) => {
+  const handleDelete =async (image) => {
     dispatch(DELETE_IMAGES(image));
-    const imageName = image?.[1]?.split('?')[0];
+    const imageName = image?.split('?')[0];
     try {
       await deleteFile(`rooms/${imageName}`);
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }
 
   return (
     <ImageList
@@ -50,4 +48,4 @@ const ImagesList = () => {
   );
 };
 
-export default memo(ImagesList);
+export default ImagesList
