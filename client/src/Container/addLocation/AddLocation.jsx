@@ -32,7 +32,7 @@ const AddLocation = () => {
 
 
   return (
-    <div className='h-[70vh]'>
+    <div className='h-[60vh]'>
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}

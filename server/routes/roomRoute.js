@@ -1,6 +1,5 @@
 const express = require('express')
 const { createRoom, getRoom } = require('../controllers/roomController')
-const path = require('path')
 
 
 const router = express.Router()

@@ -33,7 +33,8 @@ const Register = () => {
         <div>
             <Layout>
                 <div className='h-[100vh] w-auto flex justify-center items-center bg-[#a2b2ee]'>
-                    <form onSubmit={handleSubmit} className="gradient hover:border rounded-tl-lg rounded-br-lg w-[50%] min-w-[300px] mt-10 p-10 ">
+                    <form onSubmit={handleSubmit} 
+                    className="hover:border rounded-tl-[150px] rounded-br-[150px] w-[50%] min-w-[300px] mt-10 p-10 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% ">
                         <h1 className={`text-center ${styles.sectionHeadText}`}>Register Here</h1>
                         <div className="mb-3">
                             <label className="block ">
@@ -47,7 +48,7 @@ const Register = () => {
                                     placeholder="Enter Your Name"
                                     required
                                     autoFocus
-                                    className="inputStyles mt-1 px-3 py-2 w-full"
+                                    className="mt-1 px-3 py-2 w-full"
                                 />
                             </label>
                         </div>
@@ -77,7 +78,7 @@ const Register = () => {
                                     //   onChange={(e) => setPassword(e.target.value)}
                                     placeholder="Enter Your Password"
                                     required
-                                    className="inputStyles mt-1 px-3 py-2 w-full"
+                                    className="mt-1 px-3 py-2 w-full"
                                 />
                             </label>
                         </div>
@@ -92,7 +93,7 @@ const Register = () => {
                                     //   onChange={(e) => setPhone(e.target.value)}
                                     placeholder="Enter Your Phone"
                                     required
-                                    className="inputStyles mt-1 px-3 py-2 w-full"
+                                    className="mt-1 px-3 py-2 w-full"
                                 />
                             </label>
                         </div>
@@ -107,7 +108,7 @@ const Register = () => {
                                     //   onChange={(e) => setAddress(e.target.value)}
                                     placeholder="Enter Your Address"
                                     required
-                                    className="inputStyles mt-1 px-3 py-2 w-full"
+                                    className="mt-1 px-3 py-2 w-full"
                                 />
                             </label>
                         </div>

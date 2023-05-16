@@ -13,7 +13,7 @@ const Login = () => {
   return (
     <Layout>
       <div className="flex justify-center items-center h-[100vh] bg-[#a2b2ee]">
-        <div className="card flex-wrap h-auto min-w-[300px]">
+        <div className="gradient flex-wrap h-auto min-w-[300px]">
         
          <p className={`${styles.sectionHeadText} ${styles.paddingX}`}> Room Finder </p> 
          <p  className={`${styles.sectionSubText} ${styles.paddingX}`}>Login your account</p>

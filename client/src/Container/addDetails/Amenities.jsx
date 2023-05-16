@@ -54,7 +54,6 @@ const Amenities = () => {
         const {
             target: { value },
         } = event;
-        console.log(event.target.value)
         dispatch(UPDATE_AMENITIES(event.target.value))
         setPersonName(
             // On autofill we get a stringified value.
