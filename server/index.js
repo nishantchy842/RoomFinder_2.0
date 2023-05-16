@@ -5,6 +5,7 @@ const userRoute = require('./routes/userRoute')
 const roomRoute = require('./routes/roomRoute')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const path = require('path')
 
 
 
@@ -12,6 +13,7 @@ const app = express()
 app.use(bodyParser.json());
 dotenv.config()
 app.use(cors())
+app.use('/uploads', express.static(path.join(__dirname, '../client/src/uploads')));
 
 
 
