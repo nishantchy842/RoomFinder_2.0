@@ -6,7 +6,7 @@ import AddRoom from "../Container/AddRoom"
 import Register from "../Container/auth/Register"
 import Login from "../Container/auth/Login"
 import RoomCard from '../Component/cards/card'
-import RespRoom from "../pages/RespRoom"
+import RespRoom from "../pages/RespectiveRoom/RespRoom"
 
 const ConditionalRoutes = () => {
   return (
