@@ -8,8 +8,9 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
-    console.log(reqFiles)
-    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles })
+    const { id: uid, uName } = req.user;
+    console.log(req.user)
+    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, })
     await newRoom.save();
     res.status(201).send({
       success: true,
@@ -32,7 +33,6 @@ exports.getRoom = async (req, res) => {
     const rooms = await roomModel
       .find({})
       .select("-photo")
-      .limit(12)
       .sort({ createdAt: -1 });
 
 

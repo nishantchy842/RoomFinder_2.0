@@ -22,8 +22,8 @@ const roomSchema = mongoose.Schema(
     //   type: [String],
     //   validate: (v) => Array.isArray(v) && v.length > 0,
     // },
-    // uid: { type: String, required: true },
-    // uName: { type: String, required: true },
+    uid: { type: String, required: true },
+    uName: { type: String, required: true },
     // uPhoto: { type: String, default: '' },
   },
   { timestamps: true }

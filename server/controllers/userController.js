@@ -81,7 +81,7 @@ exports.userPostLogin = async (req, res) => {
             });
         }
         //token
-        const token = await JWT.sign({ _id: user._id }, process.env.SECRETE_KEY, {
+        const token = await JWT.sign({ _id: user._id , name: user.name }, process.env.SECRETE_KEY, {
             expiresIn: "7d",
         })
         res.status(200).send({
