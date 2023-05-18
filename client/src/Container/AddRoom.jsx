@@ -9,16 +9,18 @@ import {
   Stepper,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddLocation from './addLocation/AddLocation';
 import AddDetails from './addDetails/AddDetails';
 import Layout from '../Component/Layout/Layout';
 import axios from 'axios'
+import { UPDATE_AMENITIES, UPDATE_DETAILS, apiResStatus, setAlertMessages } from '../Redux/Reducer/roomSlice';
 
 const AddRoom = () => {
   const { details, location, amenities } = useSelector(state => state.room)
   const [images, setImages] = useState([])
   const [activeStep, setActiveStep] = useState(0);
+  const dispatch = useDispatch()
   const [steps, setSteps] = useState([
     { label: 'Location', completed: false },
     { label: 'Details', completed: false },
@@ -87,6 +89,7 @@ const AddRoom = () => {
       price: details.price,
       title: details.title,
       description: details.description,
+      address: details.address,
       amenities: amenities,
     };
     const bodyFormData = new FormData();
@@ -94,15 +97,23 @@ const AddRoom = () => {
     Object.keys(room).map((item) => {
       bodyFormData.append(item, room[item]);
     })
-  for (let i = 0; i < images.length; i++) {
-    bodyFormData.append('photos', images[i]);
-  }
+    for (let i = 0; i < images.length; i++) {
+      bodyFormData.append('photos', images[i]);
+    }
 
     const response = await axios.post(`${import.meta.env.VITE_APP_URL}/api/room/addroom`, bodyFormData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
-    console.log(response.data);
-  
+    if (response && response.data.success) {
+      dispatch(setAlertMessages(response.data.message))
+      dispatch(apiResStatus(true))
+      dispatch(UPDATE_DETAILS({ title: '', price: 0, description: '', address: '' }))
+      dispatch(UPDATE_AMENITIES(''))
+      setImages('')
+    } else {
+      dispatch(setAlertMessages(response.data.message))
+      dispatch(apiResStatus(false))
+    }
   }
 
 
@@ -151,7 +162,7 @@ const AddRoom = () => {
           {showSubmit && (
             <Stack sx={{ alignItems: 'center' }}>
               <button
-               className='btn'
+                className='btn'
                 onClick={handleSubmit}
               >
                 Submit

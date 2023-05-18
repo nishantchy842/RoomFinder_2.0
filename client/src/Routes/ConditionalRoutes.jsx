@@ -7,7 +7,6 @@ import Register from "../Container/auth/Register";
 import Login from "../Container/auth/Login";
 import RoomCard from "../Component/cards/card";
 import RespRoom from "../pages/RespectiveRoom/RespRoom";
-import Cards from "../Component/cards/cards";
 
 const ConditionalRoutes = () => {
   return (
@@ -21,7 +20,6 @@ const ConditionalRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/card" element={<RoomCard />} />
         <Route path="/Room/:slug" element={<RespRoom />} />
-        <Route path="/cards" element={<Cards />} />
       </Routes>
     </div>
   );

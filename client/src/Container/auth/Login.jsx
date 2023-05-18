@@ -1,11 +1,42 @@
 import { Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../Component/Layout/Layout";
 import { styles } from "../../Utils/Style";
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice";
 
 const Login = () => {
+  const [auth, setAuth] = useState();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const onFinish = async (values) => {
-    console.log(values);
+    const { email, password } = values
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/auth/login`, {
+        email,
+        password,
+      });
+      if (res && res.data.success) {
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        dispatch(setAlertMessages(res.data.message))
+        dispatch(apiResStatus(true))
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate(location.state || "/");
+      } else {
+        dispatch(setAlertMessages(res.data.message))
+        dispatch(apiResStatus(false))
+      }
+    } catch (error) {
+      dispatch(apiResStatus(false))
+      dispatch(setAlertMessages(error.response.data.message))
+    }
+
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

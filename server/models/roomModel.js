@@ -11,6 +11,7 @@ const roomSchema = mongoose.Schema(
       minLength: 10,
       maxLength: 1000,
     },
+    address:{type:String, required: true},
     amenities: {
       type: [String],
       validate: (v) => Array.isArray(v) && v.length >= 0,
