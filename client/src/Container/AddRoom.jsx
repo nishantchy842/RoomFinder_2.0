@@ -9,15 +9,11 @@ import {
   Stepper,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-// import { useValue } from '../../context/ContextProvider';
-// import { createRoom } from '../../actions/room';
 import { useSelector } from 'react-redux';
-import { MdOutlineFilePresent } from 'react-icons/md'
 import AddLocation from './addLocation/AddLocation';
 import AddDetails from './addDetails/AddDetails';
 import Layout from '../Component/Layout/Layout';
 import axios from 'axios'
-// import AddImages from './addImage/AddImage';
 
 const AddRoom = () => {
   const { details, location, amenities } = useSelector(state => state.room)
@@ -93,14 +89,11 @@ const AddRoom = () => {
       description: details.description,
       amenities: amenities,
     };
-    console.log(room)
     const bodyFormData = new FormData();
 
     Object.keys(room).map((item) => {
       bodyFormData.append(item, room[item]);
     })
-    console.log(images)
-  debugger
   for (let i = 0; i < images.length; i++) {
     bodyFormData.append('photos', images[i]);
   }

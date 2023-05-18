@@ -12,13 +12,12 @@ const Login = () => {
   };
   return (
     <Layout>
-      <div className="flex justify-center items-center h-[100vh] bg-[#a2b2ee]">
-        <div className="card flex-wrap h-auto min-w-[300px]">
-        
-         <p className={`${styles.sectionHeadText} ${styles.paddingX}`}> Room Finder </p> 
-         <p  className={`${styles.sectionSubText} ${styles.paddingX}`}>Login your account</p>
+      <div className="flex justify-center items-center h-[100vh] bg-slate-800  ">
+        <div className="border flex-wrap h-auto min-w-[300px] p-10 rounded-2xl">
+
+          <p className={`${styles.sectionHeadText} ${styles.paddingX}`}> Room Finder </p>
+          <p className={`${styles.sectionSubText} ${styles.paddingX}`}>Login your account</p>
           <Form
-            className="p-4"
             name="basic"
             labelCol={{
               span: 7,
@@ -28,6 +27,7 @@ const Login = () => {
             }}
             style={{
               maxWidth: 600,
+
             }}
             initialValues={{
               remember: true,
@@ -44,13 +44,13 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your username!",
+                  message: "Please input your email!",
                 },
               ]}
             >
               <Input
-                className="inputStyles"
-                placeholder="Enter you valid mail"
+                className="input placeholder:text-slate-400"
+                placeholder="Enter your valid email"
               />
             </Form.Item>
 
@@ -67,14 +67,14 @@ const Login = () => {
               ]}
             >
               <Input
-                className="inputStyles"
-                placeholder="Enter you valid password"
+                className="input placeholder:text-slate-400"
+                placeholder="Enter your valid password"
               />
             </Form.Item>
 
             <Form.Item
               wrapperCol={{
-                offset: 6,
+                offset: 10,
                 span: 16,
               }}
             >
@@ -85,7 +85,7 @@ const Login = () => {
             <p className="mt-[15px] text-[20px] text-center text-slate-400">
               Do not have an account? {" "}
               <Link to="/registration" className="font-bold">
-                 Register
+                Register
               </Link>
             </p>
           </Form>

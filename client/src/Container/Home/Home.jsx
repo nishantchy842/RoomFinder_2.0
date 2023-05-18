@@ -1,16 +1,15 @@
 // import { useNavigate } from "react-router";
 import Layout from "../../Component/Layout/Layout";
 import ClusterMap from "./ClusterMap";
-import Card from "./Card";
+import Select from "./select";
 
 const Home = () => {
   // const navigate = useNavigate();
   return (
     <Layout>
-      <div className="mt-[10rem]">
-        This is home
+      <div className="mt-[5.2rem]">
         <ClusterMap />
-        <Card />
+        <Select />
       </div>
     </Layout>
   );

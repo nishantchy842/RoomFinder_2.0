@@ -21,9 +21,9 @@ const AddDetails = () => {
     const [editing, setEditing] = useState(false);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    
+
     const { title, description, price } = useSelector(state => state.room)
-    
+
     const dispatch = useDispatch()
 
     const handlePriceChange = (e) => {
@@ -47,7 +47,7 @@ const AddDetails = () => {
                 alignItems: 'center',
                 '& .MuiTextField-root': { width: '100%', maxWidth: 500, m: 1 },
             }}
-            className='min-h-[70vh] flex justify-center items-center'
+            className='inputStyles min-h-[70vh] flex justify-center items-center'
         >
             <FormControl>
                 <TextField
@@ -80,9 +80,9 @@ const AddDetails = () => {
                 />
             </FormControl>
             <InfoField
-            mainProps={{ name: 'title', label: 'City', value: title }}
-            minLength={5}
-            required
+                mainProps={{ name: 'title', label: 'City', value: title }}
+                minLength={5}
+                required
             />
             <InfoField
                 mainProps={{
