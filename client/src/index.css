@@ -10,6 +10,14 @@
   scroll-behavior: smooth;
 }
 
+.btn {
+  @apply bg-violet-600 hover:bg-violet-700 py-3 px-6 text-slate-50 rounded-lg w-auto transition dark:bg-violet-800 dark:hover:bg-violet-900;
+}
+
+.btn:active {
+  @apply scale-95;
+}
+
 ::-webkit-scrollbar {
   @apply w-2;
 }
@@ -28,3 +36,18 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-slate-400 dark:bg-slate-600;
 }
+.input {
+  /* color: #8707ff; */
+  color: aliceblue;
+  border: 2px solid #8707ff;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background: transparent;
+  min-width: 50%;
+  /* max-width: 100%; */
+ }
+
+ .input:active {
+  box-shadow: 2px 2px 15px #8707ff inset;
+ }
+ 

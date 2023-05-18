@@ -3,21 +3,21 @@ import ReactMapGL, {
   Marker,
   NavigationControl,
 } from 'react-map-gl';
-// import { useValue } from '../../../context/ContextProvider';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Geocoder from './Geocoder';
-import Layout from '../../Component/Layout/Layout';
+import { UPDATE_LOCATION} from '../../Redux/Reducer/roomSlice';
+import { useDispatch, useSelector } from 'react-redux'
 
 const AddLocation = () => {
-  const [lat, setLat] = useState(0)
-  const [lng, setLng] = useState(0)
+  const { lat, lng } = useSelector(state => state.room.location)
+  const dispatch = useDispatch()
 
   const mapRef = useRef();
 
   useEffect(() => {
     if (!lng && !lat) {
-      fetch('https://ipapi.co/json/')
+      fetch('https://ipapi.co/2403:3800:3233:1213:3d58:8a5b:acd3:add1/json/')
         .then((response) => {
           return response.json();
         })
@@ -25,24 +25,17 @@ const AddLocation = () => {
           mapRef.current.flyTo({
             center: [data.longitude, data.latitude],
           });
-
-          setLat(data.latitude)
-          setLng(data.longitude)
-          // dispatch({
-          //   type: 'UPDATE_LOCATION',
-          //   payload: { lng: data.longitude, lat: data.latitude },
-          // });
-          console.log(data)
+          dispatch(UPDATE_LOCATION({ lng: data.longitude, lat: data.latitude }))
         });
     }
   }, []);
 
 
   return (
-    <Layout>
+    <div className='h-[60vh]'>
       <ReactMapGL
         ref={mapRef}
-        mapboxAccessToken='pk.eyJ1IjoibmlzaGFudDg0MiIsImEiOiJjbGgyemNjMm8wNjE2M3BxZzA2NnpxNXZiIn0.AA83bqvjV5J5V9NGgljf5g'
+        mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
         initialViewState={{
           longitude: lng,
           latitude: lat,
@@ -55,19 +48,21 @@ const AddLocation = () => {
           longitude={lng}
           draggable
           onDragEnd={(e) => {
-            console.log(e.lngLat.lat)
-            console.log(e.lngLat.lng)
+            dispatch(UPDATE_LOCATION({ lng: e.lngLat.lng, lat: e.lngLat.lat }))
+
           }}
         />
         <NavigationControl position="bottom-right" />
         <GeolocateControl
           position="top-left"
           trackUserLocation
-          onGeolocate={(e) => console.log(e)}
+          onGeolocate={(e) =>
+            dispatch(UPDATE_LOCATION({ lng: e.coords.longitude, lat: e.coords.latitude }))
+          }
         />
         <Geocoder />
       </ReactMapGL>
-    </Layout>
+    </div>
   );
 };
 

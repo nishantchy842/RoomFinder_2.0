@@ -1,16 +1,19 @@
-import Footer from "./Footer"
-import Header from "./Header"
-
+import PropTypes from "prop-types";
+import React from "react";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Layout = ({ children }) => {
-    return (
-        <>
-            <Header />
-            <main className="h-[80vh]">
-                {children}
-            </main>
-            <Footer />
-        </>
-    )
-}
-export default Layout
+  return (
+    <React.Fragment>
+      <Header />
+      <main className="min-h-[100vh]">{children}</main>
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+export default Layout;

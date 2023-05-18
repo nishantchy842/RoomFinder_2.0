@@ -1,15 +1,11 @@
 import './App.css'
-import AddLocation from './Container/addLocation/AddLocation'
+import ConditionalRoutes from './Routes/ConditionalRoutes'
 
 function App() {
 
   return (
     <>
-      <div className='h-screen'>
-
-        <AddLocation />
-      </div>
-
+        <ConditionalRoutes />
     </>
   )
 }
