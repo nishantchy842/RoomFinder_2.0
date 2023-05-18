@@ -1,126 +1,125 @@
+import { useNavigate } from "react-router";
 import Layout from "../../Component/Layout/Layout"
 import { styles } from "../../Utils/Style"
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios'
+
+const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+        .min(2, 'Too Short!')
+        .max(100, 'Too Long!')
+        .required('Required'),
+    address: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    phoneNumber: Yup.string()
+        .matches(/^\d+$/, 'Invalid phone number')
+        .min(10, 'Phone number must be at least 10 digits')
+        .max(10, 'Phone number can have at most 10 digits')
+        .required('Phone number is required'),
+    password: Yup.string()
+        .min(5, 'Password must be at least 5 characters')
+        .max(20, 'Password can have at most 20 characters')
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+            'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+        )
+        .required('Password is required'),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Confirm Password is required'),
+});
 
 const Register = () => {
+    const navigate = useNavigate()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (value) => {
+        const { name, email, phoneNumber, password, address } = value
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/auth/register`, {
+                name,
+                email,
+                password,
+                phone: phoneNumber,
+                address,
+            })
+            if (res && res.data.success) {
+                // toast.success(res.data.message)
+                navigate("/login");
+            } else {
+                // toast.error(res.data.message);
+                console.log(res.data.message)
+            }
 
-
-        e.preventDefault()
-        // try {
-        //   const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v1/auth/register`, {
-        //     name,
-        //     email,
-        //     password,
-        //     phone,
-        //     address,
-        //   })
-        //   if (res && res.data.success) {
-        //     toast.success(res.data.message)
-        //     navigate("/login");
-        //   } else {
-        //     toast.error(res.data.message);
-        //   }
-
-        // } catch (error) {
-        //   console.log(error)
-        // }
-
+        } catch (error) {
+            console.log(error)
+        }
 
     }
 
+
     return (
-        <div>
-            <Layout>
-                <div className='h-[100vh] w-auto flex justify-center items-center bg-[#a2b2ee]'>
-                    <form onSubmit={handleSubmit} 
-                    className="hover:border rounded-tl-[150px] rounded-br-[150px] w-[50%] min-w-[300px] mt-10 p-10 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% ">
-                        <h1 className={`text-center ${styles.sectionHeadText}`}>Register Here</h1>
-                        <div className="mb-3">
-                            <label className="block ">
-                                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
-                                    Name
-                                </span>
-                                <input
-                                    type="text"
-                                    //   value={name}
-                                    //   onChange={(e) => setName(e.target.value)}
-                                    placeholder="Enter Your Name"
-                                    required
-                                    autoFocus
-                                    className="mt-1 px-3 py-2 w-full"
-                                />
-                            </label>
-                        </div>
-                        <div className="mb-3">
-                            <label className="block">
-                                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
-                                    Email
-                                </span>
-                                <input
-                                    type="email"
-                                    //   value={email}
-                                    //   onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter Your Email "
-                                    required
-                                    className="inputStyles mt-1 px-3 py-2 w-full"
-                                />
-                            </label>
-                        </div>
-                        <div className="mb-3">
-                            <label className="block">
-                                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
-                                    Password
-                                </span>
-                                <input
-                                    type="password"
-                                    //   value={password}
-                                    //   onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter Your Password"
-                                    required
-                                    className="mt-1 px-3 py-2 w-full"
-                                />
-                            </label>
-                        </div>
-                        <div className="mb-3">
-                            <label className="block">
-                                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
-                                    Phone
-                                </span>
-                                <input
-                                    type="number"
-                                    //   value={phone}
-                                    //   onChange={(e) => setPhone(e.target.value)}
-                                    placeholder="Enter Your Phone"
-                                    required
-                                    className="mt-1 px-3 py-2 w-full"
-                                />
-                            </label>
-                        </div>
-                        <div className="mb-3 ">
-                            <label className="block">
-                                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-400">
-                                    Address
-                                </span>
-                                <input
-                                    type="text"
-                                    //   value={address}
-                                    //   onChange={(e) => setAddress(e.target.value)}
-                                    placeholder="Enter Your Address"
-                                    required
-                                    className="mt-1 px-3 py-2 w-full"
-                                />
-                            </label>
-                        </div>
-                        <div className="flex justify-center align-middle mt-10">
-                            <button type="submit" className='btn'>
-                                REGISTER
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </Layout>
-        </div>
+        <Layout>
+            <div className="h-screen bg-slate-800 flex flex-col justify-center items-center ">
+                <Formik
+                    initialValues={{
+                        name: '',
+                        address: '',
+                        email: '',
+                        phoneNumber: '',
+                        password: '',
+                        confirmPassword: '',
+                    }}
+                    validationSchema={SignupSchema}
+                    onSubmit={values => {
+                        // same shape as initial values
+                        handleSubmit(values);
+                    }}
+                >
+                    {({ errors, touched }) => (
+                        <Form className="border min-w-[70%] flex flex-col justify-center items-center mt-20 p-5 rounded-2xl">
+                            <h1 className={`${styles.heroHeadText}`}>Signup</h1>
+
+                            <Field name="name" placeholder="Full Name" className='input mt-2' />
+                            {errors.name && touched.name ? (
+                                <div>{errors.name}</div>
+                            ) : null}
+                            <Field name="address" className='input mt-2' placeholder="Address" />
+                            {errors.address && touched.address ? (
+                                <div>{errors.address}</div>
+                            ) : null}
+                            <Field name="email" type="email" placeholder="Email" className='input mt-2' />
+                            {errors.email && touched.email ? <div>{errors.email}</div> : null}
+
+                            <Field name="phoneNumber" className='input mt-2' placeholder="Phone Number" />
+                            {errors.phoneNumber && touched.phoneNumber ? (
+                                <div>{errors.phoneNumber}</div>
+                            ) : null}
+                            <Field
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                className='input mt-2'
+                            />
+                            <ErrorMessage name="password" component="div" />
+                            <Field
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Confirm your password"
+                                className="input mt-2"
+                            />
+                            <ErrorMessage name="confirmPassword" component="div" />
+                            <button className="btn mt-2" type="submit">Submit</button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        </Layout>
     )
 }
 
