@@ -17,7 +17,6 @@ const ClusterMap = () => {
   const [bounds, setBounds] = useState([-180, -85, 180, 85]);
   const [zoom, setZoom] = useState(0);
   const data = useRooms()
-  console.log(data)
 
   useEffect(() => {
     const points = data.map((room) => ({

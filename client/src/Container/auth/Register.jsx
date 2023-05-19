@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import { useDispatch } from "react-redux";
 import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice";
+import { useState } from "react";
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -38,16 +39,21 @@ const SignupSchema = Yup.object().shape({
 const Register = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [profile, setProfile] = useState("")
     const handleSubmit = async (value) => {
         const { name, email, phoneNumber, password, address } = value
+
+        const bodyFormData = new FormData();
+        bodyFormData.append('name', name)
+        bodyFormData.append('email', email)
+        bodyFormData.append('password', password)
+        bodyFormData.append('phone', phoneNumber)
+        bodyFormData.append('address', address)
+        bodyFormData.append('profile', profile)
         try {
-            const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/auth/register`, {
-                name,
-                email,
-                password,
-                phone: phoneNumber,
-                address,
-            })
+            const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/auth/register`,
+                bodyFormData
+            )
             if (res && res.data.success) {
                 dispatch(setAlertMessages(res.data.message))
                 dispatch(apiResStatus(true))
@@ -86,6 +92,32 @@ const Register = () => {
                     {({ errors, touched }) => (
                         <Form className="border min-w-[70%] flex flex-col justify-center items-center mt-20 p-5 rounded-2xl">
                             <h1 className={`${styles.heroHeadText}`}>Signup</h1>
+                            <div className="m-3">
+                                <label className="btn-outline-secondary col-md-12 text-white-100">
+                                    {profile ? profile.name : "Upload Profile Picture"}
+                                    <input
+                                        type="file"
+                                        name="photo"
+                                        accept="image/*"
+                                        className='input placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm'
+                                        onChange={(e) => setProfile(e.target.files[0])}
+                                        hidden
+                                    />
+                                </label>
+                            </div>
+                            <div className="mb-3 ">
+                                {profile && (
+                                    <div className="text-center">
+                                        <img
+                                            src={URL.createObjectURL(profile)}
+                                            alt="product_photo"
+                                            width={'100px'}
+                                            height={'100px'}
+                                            className="img img-responsive rounded-full"
+                                        />
+                                    </div>
+                                )}
+                            </div>
 
                             <Field name="name" placeholder="Full Name" className='input mt-2' />
                             {errors.name && touched.name ? (
@@ -122,6 +154,7 @@ const Register = () => {
                         </Form>
                     )}
                 </Formik>
+
             </div>
         </Layout>
     )

@@ -25,6 +25,7 @@ const DefaulRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/card" element={<RoomCard />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/Room/:slug" element={<RespRoom />} />
       <Route path="/registration" element={<Register />} />
     </Routes>
   );

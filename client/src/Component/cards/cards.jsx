@@ -15,7 +15,7 @@ const Cards = ({ item }) => {
             <h1 className="cards__title">{item.title}</h1>
             <h2 className="cards__subtitle">{item?.address}</h2>
             <p className="cards__description">
-              {item.description}
+              {`${item.description.substring(0, 50)}.....`}
             </p>
           </div>
           <div className="cards__room__price__container">

@@ -39,7 +39,7 @@ const ImgSwiper = ({ item }) => {
                     },
                 }}
                 modules={[Pagination]}
-                className="mySwiper h-[50vh] mt-24 border-b-2 flex"
+                className="mySwiper h-[50vh] mt-24 border-b-2 "
             >
                 {
                     item?.img_collection.map((image, id) => {

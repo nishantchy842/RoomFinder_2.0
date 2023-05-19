@@ -1,5 +1,5 @@
 const express = require('express')
-const { createRoom, getRoom } = require('../controllers/roomController')
+const { createRoom, getRoom, getUserRooms } = require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
 const router = express.Router()
@@ -24,6 +24,8 @@ const upload = multer({ storage: storage })
 router.post('/addroom', upload.array('photos', 12), requireSignIn, createRoom)
 //get all room
 router.get('/room', getRoom)
+//get room of user
+router.get('/userRoom/:uid', getUserRooms)
 
 
 module.exports = router

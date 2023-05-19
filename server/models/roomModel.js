@@ -24,7 +24,7 @@ const roomSchema = mongoose.Schema(
     // },
     uid: { type: String, required: true },
     uName: { type: String, required: true },
-    // uPhoto: { type: String, default: '' },
+    uPhoto: { type: String, default: '' },
   },
   { timestamps: true }
 );
