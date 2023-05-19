@@ -1,11 +1,46 @@
 import { Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../Component/Layout/Layout";
 import { styles } from "../../Utils/Style";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice";
+import { assignUserRole, setLoginDetails } from "../../Redux/Reducer/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const onFinish = async (values) => {
-    console.log(values);
+    const { email, password } = values
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/auth/login`, {
+        email,
+        password,
+      });
+      if (res && res.data.success) {
+        const { token } = res.data;
+        console.log(res.data)
+        // Set the authorization header for subsequent requests
+        axios.defaults.headers.common["Authorization"] = token
+        dispatch(assignUserRole('user'))
+        dispatch(setLoginDetails({ id: res.data.user._id, token: res.data.token }))
+        dispatch(setAlertMessages(res.data.message))
+        dispatch(apiResStatus(true))
+        localStorage.setItem("token", JSON.stringify(res.data));
+        navigate(location.state || "/");
+      } else {
+        dispatch(setAlertMessages(res.data.message))
+        dispatch(apiResStatus(false))
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        dispatch(setAlertMessages(error.response.data.message));
+      } else {
+        dispatch(setAlertMessages('An error occurred.'));
+      }
+      dispatch(apiResStatus(false));
+    }
+
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -86,6 +87,7 @@ const Header = () => {
   let Links = [{ name: "ABOUT", link: "/" }];
   let [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { isLoggedIn } = useSelector(state => state.user)
 
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-20 bg-[#295d61]">
@@ -122,13 +124,23 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          <button
-            className="btn text-white py-2 px-6 rounded md:ml-8
+          {isLoggedIn==false ?
+            <button
+              className="btn text-white py-2 px-6 rounded md:ml-8
     duration-500"
-            onClick={() => navigate("/login")}
-          >
-            LOGIN
-          </button>
+              onClick={() => navigate("/login")}
+            >
+              LOGIN
+            </button> :
+            <button
+              className="btn text-white py-2 px-6 rounded md:ml-8
+    duration-500"
+              onClick={() => console.log("logout clicked")}
+            >
+              LOGOUT
+            </button>
+          }
+
         </ul>
       </div>
     </div>

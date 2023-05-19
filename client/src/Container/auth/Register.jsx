@@ -4,6 +4,8 @@ import { styles } from "../../Utils/Style"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios'
+import { useDispatch } from "react-redux";
+import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice";
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -35,7 +37,7 @@ const SignupSchema = Yup.object().shape({
 
 const Register = () => {
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
     const handleSubmit = async (value) => {
         const { name, email, phoneNumber, password, address } = value
         try {
@@ -47,15 +49,17 @@ const Register = () => {
                 address,
             })
             if (res && res.data.success) {
-                // toast.success(res.data.message)
+                dispatch(setAlertMessages(res.data.message))
+                dispatch(apiResStatus(true))
                 navigate("/login");
             } else {
-                // toast.error(res.data.message);
-                console.log(res.data.message)
+                dispatch(setAlertMessages(res.data.message))
+                dispatch(apiResStatus(false))
             }
 
         } catch (error) {
-            console.log(error)
+            dispatch(apiResStatus(false))
+            dispatch(setAlertMessages(error.response.data.message))
         }
 
     }

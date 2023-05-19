@@ -3,17 +3,17 @@ import "./cards.css";
 import PropTypes from "prop-types";
 
 const Cards = ({ item }) => {
-const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
     <div >
-      <div className="cards__wrapper cursor-pointer" onClick={()=>navigate(`/Room/${item.title}`,{state: item})}>
+      <div className="cards__wrapper cursor-pointer" onClick={() => navigate(`/Room/${item.title}`, { state: item })}>
         <div className="cards__room-img">
           <img src={item.img_collection[0]} height={420} width={327} />
         </div>
         <div className="cards__room-info">
           <div className="cards__room-text">
             <h1>{item.title}</h1>
-            <h2>Satodobato, Lalitpur, Nepal</h2>
+            <h2>{item?.address}</h2>
             <p>
               {item.description}
             </p>
@@ -29,6 +29,6 @@ const navigate = useNavigate()
   );
 };
 Cards.propTypes = {
-  item:  PropTypes.object,
+  item: PropTypes.object,
 };
 export default Cards;
