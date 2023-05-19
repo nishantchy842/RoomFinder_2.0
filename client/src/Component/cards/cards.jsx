@@ -12,15 +12,15 @@ const Cards = ({ item }) => {
         </div>
         <div className="cards__room-info">
           <div className="cards__room-text">
-            <h1>{item.title}</h1>
-            <h2>{item?.address}</h2>
-            <p>
+            <h1 className="cards__title">{item.title}</h1>
+            <h2 className="cards__subtitle">{item?.address}</h2>
+            <p className="cards__description">
               {item.description}
             </p>
           </div>
-          <div className="cards__room-price">
-            <p>
-              NRs. <span>{item.price}</span>
+          <div className="cards__room__price__container">
+            <p className="cards__room__price__text">
+              NRs. <span className="cards__room__price__number">{item.price}</span>
             </p>
           </div>
         </div>
