@@ -73,88 +73,91 @@ const Register = () => {
 
     return (
         <Layout>
-            <div className="h-screen bg-slate-800 flex flex-col justify-center items-center ">
-                <Formik
-                    initialValues={{
-                        name: '',
-                        address: '',
-                        email: '',
-                        phoneNumber: '',
-                        password: '',
-                        confirmPassword: '',
-                    }}
-                    validationSchema={SignupSchema}
-                    onSubmit={values => {
-                        // same shape as initial values
-                        handleSubmit(values);
-                    }}
-                >
-                    {({ errors, touched }) => (
-                        <Form className="border min-w-[70%] flex flex-col justify-center items-center mt-20 p-5 rounded-2xl">
-                            <h1 className={`${styles.heroHeadText}`}>Signup</h1>
-                            <div className="m-3">
-                                <label className="btn-outline-secondary col-md-12 text-white-100">
-                                    {profile ? profile.name : "Upload Profile Picture"}
-                                    <input
-                                        type="file"
-                                        name="photo"
-                                        accept="image/*"
-                                        className='input placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm'
-                                        onChange={(e) => setProfile(e.target.files[0])}
-                                        hidden
-                                    />
-                                </label>
-                            </div>
-                            <div className="mb-3 ">
-                                {profile && (
-                                    <div className="text-center">
-                                        <img
-                                            src={URL.createObjectURL(profile)}
-                                            alt="product_photo"
-                                            width={'100px'}
-                                            height={'100px'}
-                                            className="img img-responsive rounded-full"
+            <div className="h-screen w-auto bg-slate-800 flex flex-col justify-center items-center ">
+                <div className="outer_card mt-24">
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <Formik
+                        initialValues={{
+                            name: '',
+                            address: '',
+                            email: '',
+                            phoneNumber: '',
+                            password: '',
+                            confirmPassword: '',
+                        }}
+                        validationSchema={SignupSchema}
+                        onSubmit={values => {
+                            // same shape as initial values
+                            handleSubmit(values);
+                        }}
+                    >
+                        {({ errors, touched }) => (
+                            <Form className="card-inner flex flex-col justify-center items-center p-5 rounded-2xl">
+                                <h1 className={`${styles.heroHeadText}`}>Signup</h1>
+                                <div className="m-3">
+                                    <label className="btn-outline-secondary col-md-12 text-white-100">
+                                        {profile ? profile.name : "Upload Profile Picture"}
+                                        <input
+                                            type="file"
+                                            name="photo"
+                                            accept="image/*"
+                                            className='input placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm'
+                                            onChange={(e) => setProfile(e.target.files[0])}
+                                            hidden
                                         />
-                                    </div>
-                                )}
-                            </div>
+                                    </label>
+                                </div>
+                                <div className="mb-3 ">
+                                    {profile && (
+                                        <div className="text-center">
+                                            <img
+                                                src={URL.createObjectURL(profile)}
+                                                alt="product_photo"
+                                                width={'100px'}
+                                                height={'100px'}
+                                                className="img img-responsive rounded-full"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
 
-                            <Field name="name" placeholder="Full Name" className='input mt-2' />
-                            {errors.name && touched.name ? (
-                                <div>{errors.name}</div>
-                            ) : null}
-                            <Field name="address" className='input mt-2' placeholder="Address" />
-                            {errors.address && touched.address ? (
-                                <div>{errors.address}</div>
-                            ) : null}
-                            <Field name="email" type="email" placeholder="Email" className='input mt-2' />
-                            {errors.email && touched.email ? <div>{errors.email}</div> : null}
+                                <Field name="name" placeholder="Full Name" className='input mt-2' />
+                                {errors.name && touched.name ? (
+                                    <div>{errors.name}</div>
+                                ) : null}
+                                <Field name="address" className='input mt-2' placeholder="Address" />
+                                {errors.address && touched.address ? (
+                                    <div>{errors.address}</div>
+                                ) : null}
+                                <Field name="email" type="email" placeholder="Email" className='input mt-2' />
+                                {errors.email && touched.email ? <div>{errors.email}</div> : null}
 
-                            <Field name="phoneNumber" className='input mt-2' placeholder="Phone Number" />
-                            {errors.phoneNumber && touched.phoneNumber ? (
-                                <div>{errors.phoneNumber}</div>
-                            ) : null}
-                            <Field
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                className='input mt-2'
-                            />
-                            <ErrorMessage name="password" component="div" />
-                            <Field
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                placeholder="Confirm your password"
-                                className="input mt-2"
-                            />
-                            <ErrorMessage name="confirmPassword" component="div" />
-                            <button className="btn mt-2" type="submit">Submit</button>
-                        </Form>
-                    )}
-                </Formik>
-
+                                <Field name="phoneNumber" className='input mt-2' placeholder="Phone Number" />
+                                {errors.phoneNumber && touched.phoneNumber ? (
+                                    <div>{errors.phoneNumber}</div>
+                                ) : null}
+                                <Field
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    className='input mt-2'
+                                />
+                                <ErrorMessage name="password" component="div" />
+                                <Field
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Confirm your password"
+                                    className="input mt-2"
+                                />
+                                <ErrorMessage name="confirmPassword" component="div" />
+                                <button className="btn mt-2" type="submit">Submit</button>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
             </div>
         </Layout>
     )

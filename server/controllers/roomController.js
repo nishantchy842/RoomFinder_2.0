@@ -8,7 +8,7 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
-    const { id: uid, uName ,uPhoto } = req.user;
+    const { id: uid, uName, uPhoto } = req.user;
     console.log(req.user)
     const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto })
     await newRoom.save();
@@ -57,7 +57,7 @@ exports.getRoom = async (req, res) => {
 exports.getUserRooms = async (req, res) => {
   try {
     const userId = req.params.uid;
-    const rooms = await roomModel.find({uid: userId }).select("-photo");
+    const rooms = await roomModel.find({ uid: userId }).select("-photo");
 
     res.status(200).send({
       success: true,
@@ -69,6 +69,28 @@ exports.getUserRooms = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error while getting Rooms"
+    })
+  }
+}
+
+//delete Room controller
+
+exports.deleteRoom = async (req, res) => {
+  try {
+    // const { id: uid } = req.user
+    const roomId = req.params.rid      //rid =  room id
+
+    const room = await roomModel.findByIdAndDelete(roomId);
+    res.status(200).send({
+      success: true,
+      message: 'Successfully Deleted'
+    })
+
+  } catch (error) {
+    console.log(error, "delete controller")
+    res.status(500).send({
+      success: false,
+      message: "Failed to delete"
     })
   }
 }

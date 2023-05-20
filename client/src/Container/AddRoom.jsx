@@ -18,8 +18,6 @@ import { UPDATE_AMENITIES, UPDATE_DETAILS, apiResStatus, setAlertMessages } from
 
 const AddRoom = () => {
   const { details, location, amenities } = useSelector(state => state.room)
-  const { token } = useSelector(state => state.user)
-  console.log(token)
   const [images, setImages] = useState([])
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch()
