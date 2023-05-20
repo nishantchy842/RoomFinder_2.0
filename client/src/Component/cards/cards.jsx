@@ -1,34 +1,30 @@
 import { useNavigate } from "react-router";
-import "./cards.css";
 import PropTypes from "prop-types";
 
 const Cards = ({ item }) => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <div >
-      <div className="cards__wrapper cursor-pointer" onClick={()=>navigate(`/Room/${item.title}`,{state: item})}>
-        <div className="cards__room-img">
-          <img src={item.img_collection[0]} height={420} width={327} />
-        </div>
-        <div className="cards__room-info">
-          <div className="cards__room-text">
-            <h1>{item.title}</h1>
-            <h2>Satodobato, Lalitpur, Nepal</h2>
-            <p>
-              {item.description}
-            </p>
-          </div>
-          <div className="cards__room-price">
-            <p>
-              NRs. <span>{item.price}</span>
-            </p>
-          </div>
+    <div>
+      <div
+        className="grid grid-cols-1 bg-white rounded-md"
+        onClick={() => navigate(`/Room/${item.title}`, { state: item })}
+      >
+        <img
+          className="rounded-md rounded-b-none"
+          src={item.img_collection[0]}
+        />
+        <div className="p-4">
+          <h2 className="font-semibold">{item.title}</h2>
+          <button className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm">
+            {item.price}
+          </button>
+          <p className="text-xs mt-1">{item.description}</p>
         </div>
       </div>
     </div>
   );
 };
 Cards.propTypes = {
-  item:  PropTypes.object,
+  item: PropTypes.object,
 };
 export default Cards;
