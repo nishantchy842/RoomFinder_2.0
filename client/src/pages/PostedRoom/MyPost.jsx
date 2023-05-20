@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Cards from "../../Component/cards/cards"
 import Layout from "../../Component/Layout/Layout"
 import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice"
+import { message, Popconfirm } from 'antd';
 
 const MyPost = () => {
     const [room, setRoom] = useState()
@@ -42,7 +43,10 @@ const MyPost = () => {
             console.log(error)
         }
     }
-
+    const cancel = (e) => {
+        console.log(e);
+        message.error('Click on No');
+    }
     return (
         <Layout>
             <div className="flex justify-center items-center flex-wrap mt-24">
@@ -52,7 +56,16 @@ const MyPost = () => {
                             <div key={item._id} className="border flex flex-col justify-center items-center p-2 hover:bg-[#f5f5f5]">
                                 <Cards item={item} />
                                 <div className=" mb-4 w-[40%] flex justify-around items-center">
-                                    <button className="btn uppercase" onClick={() => handleDelete(item._id)}>Delete </button>
+                                    <Popconfirm
+                                        title="Delete the room"
+                                        description="Are you sure to delete this room?"
+                                        onConfirm={() => handleDelete(item._id)}
+                                        onCancel={cancel}
+                                        okText={<span style={{ color: 'green' }}>Yes</span>}
+                                        cancelText={<span style={{ color: 'red' }}>No</span>}
+                                    >
+                                        <button type="link" className="btn uppercase">Delete </button>
+                                    </Popconfirm>
                                     <button className="btn uppercase">Update</button>
                                 </div>
                             </div>

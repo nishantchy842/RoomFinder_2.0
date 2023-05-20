@@ -9,7 +9,6 @@ exports.createRoom = async (req, res) => {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
     const { id: uid, uName, uPhoto } = req.user;
-    console.log(req.user)
     const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto })
     await newRoom.save();
     res.status(201).send({
@@ -77,13 +76,22 @@ exports.getUserRooms = async (req, res) => {
 
 exports.deleteRoom = async (req, res) => {
   try {
-    // const { id: uid } = req.user
-    const roomId = req.params.rid      //rid =  room id
+    const { id: uid } = req.user
+    const roomId = req.params.rid
+    //rid =  room id
+    const room = await roomModel.findById(roomId)
 
-    const room = await roomModel.findByIdAndDelete(roomId);
+    if (!room || room.id !== roomId) {
+      return res.status(500).send({
+        success: false,
+        message: "Access denied. You are not authorized to delete this room."
+      })
+    }
+    await roomModel.findByIdAndDelete(roomId);
     res.status(200).send({
       success: true,
-      message: 'Successfully Deleted'
+      message: 'Room deleted successfully.',
+      room
     })
 
   } catch (error) {
@@ -91,6 +99,43 @@ exports.deleteRoom = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Failed to delete"
+    })
+  }
+}
+
+// update room
+
+exports.updateRoom = async (req, res) => {
+  try {
+    const reqFiles = [];
+    const url = req.protocol + '://' + req.get('host');
+    for (let i = 0; i < req.files.length; i++) {
+      reqFiles.push(url + '/uploads/' + req.files[i].filename);
+    }
+    const { id } = req.user; //user id
+    const roomId = req.params.rid
+    const room = await roomModel.findById(roomId)
+    if (!room || room.uid !== id) {
+      return res.status(403).send({
+        success: false,
+        message: "Access denied. You are not authorized to update this room."
+      })
+    }
+    room.img_collection = reqFiles;
+    Object.assign(room, req.body); // Merge properties from req.body
+    const updatedRoom = await room.save();
+
+    await updatedRoom.save()
+    res.status(200).send({
+      success: true,
+      message: "Room Updated SuccessFully",
+      updatedRoom
+    })
+  } catch (error) {
+    console.log(error, "update error")
+    res.status(500).send({
+      success: true,
+      message: "Error While Upadating Room"
     })
   }
 }
