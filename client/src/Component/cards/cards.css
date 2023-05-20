@@ -17,6 +17,9 @@
 }
 
 .cards__room-img img {
+  height: 420px;
+  width: 327px;
+  object-fit: fill;
   border-radius: 7px 0 0 7px;
   transition: transform 0.2s;
 }
@@ -30,17 +33,30 @@
   height: 420px;
   width: 327px;
   border-radius: 0 7px 10px 7px;
-  background-color: #ffffff;
+  backdrop-filter: blur(7px);
+  background-color: rgba(255, 255, 255, 0.5);
+  /* border-radius: 26px; */
+  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+  transition: all 0.3s;
+}
+.cards__room-info:hover {
+  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.5);
+}
+
+.cards__room-info:active {
+  transform: scale(0.95);
+  border: 1px solid blue;
 }
 
 .cards__room-text {
-  height: 300px;
-  width: 327px;
+  max-height: 300px;
+  max-width: 327px;
+  padding: 20px;
 }
 
 .cards__room-text h1 {
-  margin: 0 0 0 38px;
-  padding-top: 52px;
+  margin: 0 0 0 25px;
+  /* padding-top: 52px; */
   font-size: 34px;
   color: #474747;
 }
@@ -51,24 +67,23 @@
 }
 
 .cards__subtitle {
-  margin: 0 0 47px 38px;
+  margin: 0 0 10px 38px;
   font-size: 13px;
   font-family: "Raleway", sans-serif;
   font-weight: 400;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #000000;
   letter-spacing: 0.2em;
 }
 
 .cards__description {
-  height: 125px;
-  margin: 0 0 0 38px;
+  max-height: 105px;
+  margin: 0 0 0 30px;
   font-family: "Playfair Display", serif;
-  color: #8d8d8d;
+  color: #474747;
   line-height: 1.7em;
   font-size: 15px;
   font-weight: lighter;
-  overflow: hidden;
 }
 
 .cards__room__price__container {

@@ -13,15 +13,15 @@ import {
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetLoginDetails } from '../../Redux/reducer/userSlice';
+import { resetLoginDetails } from '../../Redux/Reducer/userSlice';
 
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const { isLoggedIn, userProfilePicture,username } = useSelector(state => state.user)
+  const { isLoggedIn, userProfilePicture, username } = useSelector(state => state.user)
 
-  const settings = [username, 'Dashboard', 'Logout'];
+  const settings = [username, "My Post", 'Dashboard', 'Logout'];
 
   const dispatch = useDispatch()
   const handleOpenUserMenu = (event) => {
@@ -33,6 +33,10 @@ const Header = () => {
     if (e.target.textContent == "Logout") {
       dispatch(resetLoginDetails())
       localStorage.removeItem("token")
+      navigate('/')
+    }
+    if (e.target.textContent == "My Post") {
+      navigate('/mypost')
     }
   };
 

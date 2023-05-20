@@ -5,11 +5,13 @@ import { styles } from "../../Utils/Style"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice"
-import { assignUserRole, setLoginDetails } from "../../Redux/reducer/userSlice"
+import { assignUserRole, setLoginDetails } from "../../Redux/Reducer/userSlice"
 
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+
   const onFinish = async (values) => {
     const { email, password } = values
     try {
@@ -25,7 +27,8 @@ const Login = () => {
         dispatch(setLoginDetails({ id: res.data.user._id, username: res.data.user.name, token: res.data.token, profile: res.data?.user?.profile }))
         dispatch(setAlertMessages(res.data.message))
         dispatch(apiResStatus(true))
-        localStorage.setItem("token", JSON.stringify(res.data))
+        localStorage.setItem('token', token);
+        localStorage.setItem("data", JSON.stringify(res.data))
         navigate("/")
       } else {
         dispatch(setAlertMessages(res.data.message))

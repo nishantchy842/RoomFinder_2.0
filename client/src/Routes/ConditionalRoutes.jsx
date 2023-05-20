@@ -8,6 +8,7 @@ import Login from "../Container/auth/Login";
 import RoomCard from "../Component/cards/card";
 import RespRoom from "../pages/RespectiveRoom/RespRoom";
 import { useSelector } from "react-redux";
+import MyPost from "../pages/PostedRoom/MyPost";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -39,6 +40,7 @@ const UserRoutes = () => {
       <Route path="/add-details" element={<AddDetails />} />
       <Route path="/add-room" element={<AddRoom />} />
       <Route path="/Room/:slug" element={<RespRoom />} />
+      <Route path="/mypost" element={<MyPost />} />
     </Routes>
   );
 };
