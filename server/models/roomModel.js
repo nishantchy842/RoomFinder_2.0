@@ -11,6 +11,7 @@ const roomSchema = mongoose.Schema(
       minLength: 10,
       maxLength: 1000,
     },
+    address:{type:String, required: true},
     amenities: {
       type: [String],
       validate: (v) => Array.isArray(v) && v.length >= 0,
@@ -21,9 +22,9 @@ const roomSchema = mongoose.Schema(
     //   type: [String],
     //   validate: (v) => Array.isArray(v) && v.length > 0,
     // },
-    // uid: { type: String, required: true },
-    // uName: { type: String, required: true },
-    // uPhoto: { type: String, default: '' },
+    uid: { type: String, required: true },
+    uName: { type: String, required: true },
+    uPhoto: { type: String, default: '' },
   },
   { timestamps: true }
 );

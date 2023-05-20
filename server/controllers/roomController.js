@@ -8,8 +8,9 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
-    console.log(reqFiles)
-    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles })
+    const { id: uid, uName ,uPhoto } = req.user;
+    console.log(req.user)
+    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto })
     await newRoom.save();
     res.status(201).send({
       success: true,
@@ -32,7 +33,6 @@ exports.getRoom = async (req, res) => {
     const rooms = await roomModel
       .find({})
       .select("-photo")
-      .limit(12)
       .sort({ createdAt: -1 });
 
 
@@ -49,6 +49,26 @@ exports.getRoom = async (req, res) => {
       success: false,
       error: error.message,
       message: "error in getting room"
+    })
+  }
+}
+//get all rooms of specific users
+
+exports.getUserRooms = async (req, res) => {
+  try {
+    const userId = req.params.uid;
+    const rooms = await roomModel.find({uid: userId }).select("-photo");
+
+    res.status(200).send({
+      success: true,
+      message: "Rooms Fetched",
+      rooms,
+    });
+  } catch (error) {
+    console.log(error, "from getUserRooms Controller")
+    res.status(500).send({
+      success: false,
+      message: "Error while getting Rooms"
     })
   }
 }

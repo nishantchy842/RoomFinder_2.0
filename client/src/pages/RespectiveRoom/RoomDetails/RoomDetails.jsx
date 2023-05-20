@@ -20,14 +20,15 @@ const RoomDetails = ({ item }) => {
                     minHeight: '50vh',
                     textAlign: 'center',
                     display: 'flex',
+                    // flexDirection:'column',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    gap:'2',
                     flexWrap: 'wrap'
                 }}
             >
-                    <DetailsRoom item={item} />
-                
-                    <Description item={item} />
+                <DetailsRoom item={item} />
+                <Description item={item} />
 
             </Box>
         </div>

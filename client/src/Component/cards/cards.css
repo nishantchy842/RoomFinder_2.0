@@ -17,6 +17,9 @@
 }
 
 .cards__room-img img {
+  height: 420px;
+  width: 327px;
+  object-fit: fill;
   border-radius: 7px 0 0 7px;
   transition: transform 0.2s;
 }
@@ -30,55 +33,67 @@
   height: 420px;
   width: 327px;
   border-radius: 0 7px 10px 7px;
-  background-color: #ffffff;
+  backdrop-filter: blur(7px);
+  background-color: rgba(255, 255, 255, 0.5);
+  /* border-radius: 26px; */
+  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+  transition: all 0.3s;
+}
+.cards__room-info:hover {
+  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.5);
+}
+
+.cards__room-info:active {
+  transform: scale(0.95);
+  border: 1px solid blue;
 }
 
 .cards__room-text {
-  height: 300px;
-  width: 327px;
+  max-height: 300px;
+  max-width: 327px;
+  padding: 20px;
 }
 
 .cards__room-text h1 {
-  margin: 0 0 0 38px;
-  padding-top: 52px;
+  margin: 0 0 0 25px;
+  /* padding-top: 52px; */
   font-size: 34px;
   color: #474747;
 }
 
-.cards__room-text h1,
+.cards__title,
 .cards__room-price p {
   font-family: "Bentham", serif;
 }
 
-.cards__room-text h2 {
-  margin: 0 0 47px 38px;
+.cards__subtitle {
+  margin: 0 0 10px 38px;
   font-size: 13px;
   font-family: "Raleway", sans-serif;
   font-weight: 400;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #000000;
   letter-spacing: 0.2em;
 }
 
-.cards__room-text p {
-  height: 125px;
-  margin: 0 0 0 38px;
+.cards__description {
+  max-height: 105px;
+  margin: 0 0 0 30px;
   font-family: "Playfair Display", serif;
-  color: #8d8d8d;
+  color: #474747;
   line-height: 1.7em;
   font-size: 15px;
   font-weight: lighter;
-  overflow: hidden;
 }
 
-.cards__room-price {
+.cards__room__price__container {
   height: 103px;
   width: 327px;
   margin-top: 25px;
   position: relative;
 }
 
-.cards__room-price p {
+.cards__room__price__text {
   display: inline-block;
   position: absolute;
   top: -13px;
@@ -90,7 +105,7 @@
   color: #474747;
 }
 
-span {
+.cards__room__price__number {
   display: inline-block;
   height: 50px;
   font-family: "Suranna", serif;

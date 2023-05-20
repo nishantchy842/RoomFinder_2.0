@@ -6,7 +6,7 @@ import ReactMapGL, {
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 import Geocoder from './Geocoder';
-import { UPDATE_LOCATION} from '../../Redux/Reducer/roomSlice';
+import { UPDATE_DETAILS, UPDATE_LOCATION} from '../../Redux/Reducer/roomSlice';
 import { useDispatch, useSelector } from 'react-redux'
 
 const AddLocation = () => {
@@ -30,7 +30,14 @@ const AddLocation = () => {
     }
   }, []);
 
-
+  useEffect(() => {
+    if (lng && lat) {
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${import.meta.env.VITE_MAP_KEY}`;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => dispatch(UPDATE_DETAILS({address:data.features[0].place_name})));
+    }
+}, [lng, lat]);
   return (
     <div className='h-[60vh]'>
       <ReactMapGL

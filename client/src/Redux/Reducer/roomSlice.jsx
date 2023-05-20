@@ -5,10 +5,10 @@ const initialState = {
   currentUser: null,
   openLogin: false,
   loading: false,
-  alert: { open: false, severity: 'info', message: '' },
+  alert: { isApiSuccessMsgOpen: false, apiResIsSuccess: true, apiSuccessMessage: '' },
   profile: { open: false, file: null, photoURL: '' },
   images: [],
-  details: { title: '', description: '', price: 0 },
+  details: { title: '', description: '', price: 0, address: '' },
   amenities: [],
   location: { lng: 0, lat: 0 },
   rooms: [],
@@ -35,6 +35,17 @@ export const roomSlice = createSlice({
         ...state,
         images: state.images.filter((image) => image !== action.payload),
       };
+    },
+    setAlertMessages: (state, actions) => {
+      state.alert.apiSuccessMessage = actions.payload
+      state.alert.isApiSuccessMsgOpen = true
+    },
+    resetAlertMessages: (state) => {
+      state.alert.apiSuccessMessage = ''
+      state.alert.isApiSuccessMsgOpen = false
+    },
+    apiResStatus: (state, actions) => {
+      state.alert.apiResIsSuccess = actions.payload
     }
   },
 })
@@ -45,7 +56,10 @@ export const {
   UPDATE_DETAILS,
   UPDATE_AMENITIES,
   UPDATE_IMAGES,
-  DELETE_IMAGES
+  DELETE_IMAGES,
+  setAlertMessages,
+  resetAlertMessages,
+  apiResStatus
 } = roomSlice.actions
 
 export default roomSlice.reducer
