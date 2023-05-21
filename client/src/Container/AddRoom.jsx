@@ -15,12 +15,14 @@ import AddDetails from './addDetails/AddDetails';
 import Layout from '../Component/Layout/Layout';
 import axios from 'axios'
 import { UPDATE_AMENITIES, UPDATE_DETAILS, apiResStatus, setAlertMessages } from '../Redux/Reducer/roomSlice';
+import { useNavigate } from 'react-router';
 
 const AddRoom = () => {
   const { details, location, amenities } = useSelector(state => state.room)
   const [images, setImages] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [steps, setSteps] = useState([
     { label: 'Location', completed: false },
     { label: 'Details', completed: false },
@@ -110,6 +112,8 @@ const AddRoom = () => {
       dispatch(UPDATE_DETAILS({ title: '', price: 0, description: '', address: '' }))
       dispatch(UPDATE_AMENITIES(''))
       setImages('')
+      navigate('/mypost')
+      
     } else {
       dispatch(setAlertMessages(response.data.message))
       dispatch(apiResStatus(false))

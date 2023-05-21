@@ -10,6 +10,7 @@ import RespRoom from "../pages/RespectiveRoom/RespRoom";
 import { useSelector } from "react-redux";
 import MyPost from "../pages/PostedRoom/MyPost";
 import UpdateRoom from "../pages/PostedRoom/UpdateRoom";
+import PageNotFound from "../Utils/PageNotFound";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -29,6 +30,8 @@ const DefaulRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/Room/:slug" element={<RespRoom />} />
       <Route path="/registration" element={<Register />} />
+      <Route path="*" element={<PageNotFound />} />
+      
     </Routes>
   );
 };
@@ -43,6 +46,8 @@ const UserRoutes = () => {
       <Route path="/Room/:slug" element={<RespRoom />} />
       <Route path="/mypost" element={<MyPost />} />
       <Route path="/update-room" element={<UpdateRoom />} />
+      <Route path="*" element={<PageNotFound />} />
+
     </Routes>
   );
 };
@@ -55,6 +60,7 @@ const AdminRoute = () => {
       <Route path="/add-details" element={<AddDetails />} />
       <Route path="/Room/:slug" element={<RespRoom />} />
       <Route path="/add-room" element={<AddRoom />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
