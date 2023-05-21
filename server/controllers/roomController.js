@@ -103,6 +103,24 @@ exports.deleteRoom = async (req, res) => {
   }
 }
 
+//get single room
+exports.getSingleRoom = async (req,res)=>{
+  try{
+      const room = await roomModel.findById(req.params.rid)
+      res.status(200).send({
+        success:true,
+        message:"get room success",
+        room
+      })
+  }catch(error){
+    console.log(error)
+    res.status(500).send({
+      success:false,
+      message:"Failed to get room"
+    })
+  }
+}
+
 // update room
 
 exports.updateRoom = async (req, res) => {

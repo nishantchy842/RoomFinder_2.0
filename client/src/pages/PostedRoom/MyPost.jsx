@@ -3,13 +3,14 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cards from "../../Component/cards/cards"
 import Layout from "../../Component/Layout/Layout"
-import { apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice"
+import { UPDATE_AMENITIES, UPDATE_DETAILS, UPDATE_IMAGES, UPDATE_LOCATION, apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice"
 import { message, Popconfirm } from 'antd';
+import { useNavigate } from "react-router"
 
 const MyPost = () => {
     const [room, setRoom] = useState()
     const [isDeleted, setIsDeleted] = useState(false);
-
+    const navigate = useNavigate()
     const { id } = useSelector(state => state.user)
     const dispatch = useDispatch()
 
@@ -27,6 +28,32 @@ const MyPost = () => {
         handleUserRoom()
     }, [isDeleted])
 
+    //when update button click you will get the room by its id and dispatch to the redux
+
+    const handleUpdate = async (rid) => {
+        try {
+            const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room//single-room/${rid}`)
+            console.log(data)
+            dispatch(UPDATE_LOCATION({ lng: data.room.lng, lat: data.room.lat }))
+            dispatch(UPDATE_DETAILS({
+                title: data.room.title,
+                description: data.room.description,
+                price: data.room.price,
+                address: data.room.address
+            }))
+            data.room?.amenities.map(item => {
+                return dispatch(UPDATE_AMENITIES(item.split(',')))
+            })
+            dispatch(UPDATE_IMAGES(data.room?.img_collection))
+            navigate('/update-room',{state: rid})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+    //handle delete room 
     const handleDelete = async (id) => {
         try {
             const { data } = await axios.delete(`${import.meta.env.VITE_APP_URL}/api/room/deleteroom/${id}`)
@@ -66,13 +93,15 @@ const MyPost = () => {
                                     >
                                         <button type="link" className="btn uppercase">Delete </button>
                                     </Popconfirm>
-                                    <button className="btn uppercase">Update</button>
+                                    <button
+                                        className="btn uppercase"
+                                        onClick={() => handleUpdate(item._id)}
+                                    >Update</button>
                                 </div>
                             </div>
                         )
 
                     })
-
                 }
             </div>
         </Layout>

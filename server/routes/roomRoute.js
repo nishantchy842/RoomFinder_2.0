@@ -1,5 +1,5 @@
 const express = require('express')
-const { createRoom, getRoom, getUserRooms, deleteRoom, updateRoom } = require('../controllers/roomController')
+const { createRoom, getRoom, getUserRooms, deleteRoom, updateRoom, getSingleRoom } = require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
 const router = express.Router()
@@ -30,7 +30,8 @@ router.get('/userRoom/:uid', getUserRooms)
 router.delete('/deleteroom/:rid', requireSignIn, deleteRoom)
 //update room
 router.put('/update/:rid',upload.array('photos', 12), requireSignIn, updateRoom)
-
+//get single room
+router.get('/single-room/:rid',getSingleRoom)
 
 
 module.exports = router

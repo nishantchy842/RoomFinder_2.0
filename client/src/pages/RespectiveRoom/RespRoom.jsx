@@ -6,7 +6,6 @@ import ImgSwiper from "./imgSwiper";
 import RoomDetails from "./RoomDetails/RoomDetails";
 const RespRoom = () => {
     const {state} = useLocation()
-    console.log(state)
   return (
     <Layout>      
       <ImgSwiper item={state} />
