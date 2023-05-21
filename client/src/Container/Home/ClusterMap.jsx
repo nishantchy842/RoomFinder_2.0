@@ -1,9 +1,11 @@
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Supercluster from 'supercluster';
 import { Avatar, Paper, Tooltip } from '@mui/material';
 import useRooms from "../../hooks/useRooms"
 import { useEffect, useRef, useState } from 'react';
 import './cluster.css'
+import PopupRoom from './PopUpRoom';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const supercluster = new Supercluster({
   radius: 75,
@@ -17,6 +19,8 @@ const ClusterMap = () => {
   const [bounds, setBounds] = useState([-180, -85, 180, 85]);
   const [zoom, setZoom] = useState(0);
   const data = useRooms()
+  const [popupInfo, setPopupInfo] = useState(null);
+
 
   useEffect(() => {
     const points = data.map((room) => ({
@@ -29,9 +33,9 @@ const ClusterMap = () => {
         description: room.description,
         lng: room.lng,
         lat: room.lat,
-        images: room.img_collection[0],
-        // uPhoto: room.uPhoto,
-        // uName: room.uName,
+        images: room.img_collection,
+        uPhoto: room.uPhoto,
+        uName: room.uName,
       },
       geometry: {
         type: 'Point',
@@ -104,14 +108,30 @@ const ClusterMap = () => {
             >
               <Tooltip title={cluster.properties.uName}>
                 <Avatar
-                  src={cluster.properties.uPhoto}
+                  src={`${import.meta.env.VITE_APP_URL}/uploads/${cluster.properties.uPhoto}`}
                   component={Paper}
                   elevation={2}
+                  onClick={() => setPopupInfo(cluster.properties)}
                 />
               </Tooltip>
             </Marker>
           );
         })}
+        {popupInfo && (
+          <Popup
+            longitude={popupInfo.lng}
+            latitude={popupInfo.lat}
+            maxWidth="auto"
+            closeOnClick={false}
+            focusAfterOpen={false}
+            // onClose={() => setPopupInfo(null)}
+          >
+            <div  onClick={() => setPopupInfo(null)}>
+              <AiFillCloseCircle className="h-10 w-10 absolute -top-0.5 -right-1 z-10 cursor-pointer text-red-500" />
+            </div>
+            <PopupRoom {...{ popupInfo }} />
+          </Popup>
+        )}
       </ReactMapGL>
     </div>
   )
