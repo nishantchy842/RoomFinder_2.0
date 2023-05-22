@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router";
 import "./pagenotfound.css";
 
 const PageNotFound = () => {
+  const navigate = useNavigate()
   return (
     <div className="error-container">
       <svg
@@ -748,8 +750,8 @@ const PageNotFound = () => {
         </g>
       </svg>
 
-      <h1 className="error-title">Looks like this page doesn't exist...</h1>
-      <button className="error-button">Go Home</button>
+      <h1 className="error-title">Looks like this page does not exist...</h1>
+      <button className="error-button" onClick={()=>navigate('/')}>Go Home</button>
     </div>
   );
 };

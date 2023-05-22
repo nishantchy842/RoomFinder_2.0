@@ -56,7 +56,7 @@ exports.getRoom = async (req, res) => {
 exports.getUserRooms = async (req, res) => {
   try {
     const userId = req.params.uid;
-    const rooms = await roomModel.find({ uid: userId }).select("-photo");
+    const rooms = await roomModel.find({ uid: userId }).select("-photo").sort({ createdAt: -1 });;
 
     res.status(200).send({
       success: true,
@@ -104,19 +104,19 @@ exports.deleteRoom = async (req, res) => {
 }
 
 //get single room
-exports.getSingleRoom = async (req,res)=>{
-  try{
-      const room = await roomModel.findById(req.params.rid)
-      res.status(200).send({
-        success:true,
-        message:"get room success",
-        room
-      })
-  }catch(error){
+exports.getSingleRoom = async (req, res) => {
+  try {
+    const room = await roomModel.findById(req.params.rid)
+    res.status(200).send({
+      success: true,
+      message: "get room success",
+      room
+    })
+  } catch (error) {
     console.log(error)
     res.status(500).send({
-      success:false,
-      message:"Failed to get room"
+      success: false,
+      message: "Failed to get room"
     })
   }
 }
@@ -157,3 +157,30 @@ exports.updateRoom = async (req, res) => {
     })
   }
 }
+
+//search room
+
+exports.searchRoom = async (req, res) => {
+    try {
+      const { keyword } = req.params;
+      const resutls = await roomModel
+        .find({
+          $or: [
+            { title: { $regex: keyword, $options: "i" } },
+            { description: { $regex: keyword, $options: "i" } },
+            { amenities: { $regex: keyword, $options: "i" } },
+            { address: { $regex: keyword, $options: "i" } },
+          ],
+        })
+        .populate('amenities') // Replace 'fieldName' with the actual field you want to populate
+        .select('-img_collection')
+      res.send({resutls});
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({
+        success: false,
+        message: "Error In Search Product API",
+        error,
+      });
+    }
+};

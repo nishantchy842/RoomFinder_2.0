@@ -1,5 +1,5 @@
 import { Form, Input } from "antd"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import Layout from "../../Component/Layout/Layout"
 import { styles } from "../../Utils/Style"
 import axios from "axios"
@@ -11,6 +11,7 @@ import './login.css'
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  let { state } = useLocation()
 
 
   const onFinish = async (values) => {
@@ -30,7 +31,11 @@ const Login = () => {
         dispatch(apiResStatus(true))
         localStorage.setItem('token', token);
         localStorage.setItem("data", JSON.stringify(res.data))
-        navigate("/")
+        if (state?.onSuccessNavigation === '/add-room') {
+          navigate('/add-room')
+        } else {
+          navigate('/')
+        }
       } else {
         dispatch(setAlertMessages(res.data.message))
         dispatch(apiResStatus(false))

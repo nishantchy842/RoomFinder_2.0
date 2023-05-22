@@ -4,10 +4,25 @@ import { Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router';
 
 
 const PopupRoom = ({ popupInfo }) => {
-    const { title, description, price, images } = popupInfo;
+    const navigate = useNavigate()
+    const { title, description, price, images,address,amenities,lat,lng } = popupInfo;
+
+    const item = {
+        title,
+        description,
+        price,
+        img_collection: images,
+        address,
+        amenities,
+        lat,
+        lng
+    }
+    console.log(item)
+
     return (
         <Card sx={{ maxWidth: 400 }}>
             <ImageListItem sx={{ display: 'block' }}>
@@ -23,7 +38,7 @@ const PopupRoom = ({ popupInfo }) => {
                 <ImageListItemBar
                     title={title}
                     subtitle={description.substr(0, 30) + '...'}
-                    sx={{ zIndex: 2 }}
+                    sx={{ zIndex: 2, cursor: 'pointer' }}
                 />
                 <Swiper
                     modules={[Autoplay, Pagination]}
@@ -50,9 +65,8 @@ const PopupRoom = ({ popupInfo }) => {
                                     cursor: 'pointer',
                                     objectFit: 'cover',
                                 }}
-                            // onClick={() =>
-                            //   dispatch({ type: 'UPDATE_ROOM', payload: popupInfo })
-                            // }
+                                onClick={() => navigate(`/Room/${item.title}`, {state: item})}
+
                             />
                         </SwiperSlide>
                     ))}

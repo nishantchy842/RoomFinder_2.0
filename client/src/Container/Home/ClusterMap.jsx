@@ -21,6 +21,7 @@ const ClusterMap = () => {
   const data = useRooms()
   const [popupInfo, setPopupInfo] = useState(null);
 
+  console.log(data)
 
   useEffect(() => {
     const points = data.map((room) => ({
@@ -33,6 +34,8 @@ const ClusterMap = () => {
         description: room.description,
         lng: room.lng,
         lat: room.lat,
+        amenities:room.amenities,
+        address: room.address,
         images: room.img_collection,
         uPhoto: room.uPhoto,
         uName: room.uName,

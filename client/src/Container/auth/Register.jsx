@@ -124,18 +124,19 @@ const Register = () => {
 
                                 <Field name="name" placeholder="Full Name" className='input mt-2' />
                                 {errors.name && touched.name ? (
-                                    <div>{errors.name}</div>
+                                    <div className=" text-red-700">{errors.name}</div>
                                 ) : null}
                                 <Field name="address" className='input mt-2' placeholder="Address" />
                                 {errors.address && touched.address ? (
-                                    <div>{errors.address}</div>
+                                    <div className=" text-red-700">{errors.address}</div>
                                 ) : null}
                                 <Field name="email" type="email" placeholder="Email" className='input mt-2' />
-                                {errors.email && touched.email ? <div>{errors.email}</div> : null}
+                                {errors.email && touched.email ? 
+                                    <div className=" text-red-700">{errors.email}</div> : null}
 
                                 <Field name="phoneNumber" className='input mt-2' placeholder="Phone Number" />
                                 {errors.phoneNumber && touched.phoneNumber ? (
-                                    <div>{errors.phoneNumber}</div>
+                                    <div className=" text-red-700">{errors.phoneNumber}</div>
                                 ) : null}
                                 <Field
                                     type="password"
@@ -144,7 +145,7 @@ const Register = () => {
                                     placeholder="Enter your password"
                                     className='input mt-2'
                                 />
-                                <ErrorMessage name="password" component="div" />
+                                <ErrorMessage className=" text-red-700" name="password" component="div" />
                                 <Field
                                     type="password"
                                     id="confirmPassword"
@@ -152,7 +153,7 @@ const Register = () => {
                                     placeholder="Confirm your password"
                                     className="input mt-2"
                                 />
-                                <ErrorMessage name="confirmPassword" component="div" />
+                                <ErrorMessage className=" text-red-700" name="confirmPassword" component="div" />
                                 <button className="btn mt-2" type="submit">Submit</button>
                             </Form>
                         )}

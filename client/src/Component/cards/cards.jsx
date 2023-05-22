@@ -6,7 +6,7 @@ import { styles } from '../../Utils/Style'
 const Cards = ({ item }) => {
   const navigate = useNavigate()
   return (
-    <div className="border p-2 ">
+    <div className=" border p-2 h-[100%]">
       <div className="cards__wrapper cursor-pointer" >
         <div className="cards__room-img max-h-[420px] max-w-[327px]">
           <img src={item.img_collection[0]} alt="room image" />
@@ -23,8 +23,8 @@ const Cards = ({ item }) => {
               }
               <p className='bold m-2'>{item?.uName}</p>
             </div>
-            <h1 className={`${styles.heroSubText}`}>{item.title.substring(0, 30)}...</h1>
-            <h2 className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-gray-200`}>{item?.address}</h2>
+            <h1 className={`${styles.heroSubText} capitalize`}>{item.title.substring(0, 30)}...</h1>
+            <h2 className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-gray-200`}>{item?.address.substring(0, 50)}.....</h2>
             <p className="cards__description">
               {`${item.description.substring(0, 50)}.....`}
             </p>
