@@ -172,8 +172,6 @@ exports.searchRoom = async (req, res) => {
             { address: { $regex: keyword, $options: "i" } },
           ],
         })
-        .populate('amenities') // Replace 'fieldName' with the actual field you want to populate
-        .select('-img_collection')
       res.send({resutls});
     } catch (error) {
       console.log(error);

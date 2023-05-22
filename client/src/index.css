@@ -38,12 +38,12 @@
 }
 .input {
   /* color: #8707ff; */
-  color: aliceblue;
+  color: black;
   border: 2px solid #8707ff;
   border-radius: 10px;
   padding: 10px 25px;
   background: transparent;
-  min-width: 50%;
+  min-width: 60%;
   /* max-width: 100%; */
  }
 

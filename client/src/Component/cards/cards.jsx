@@ -24,7 +24,7 @@ const Cards = ({ item }) => {
               <p className='bold m-2'>{item?.uName}</p>
             </div>
             <h1 className={`${styles.heroSubText} capitalize`}>{item.title.substring(0, 30)}...</h1>
-            <h2 className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-gray-200`}>{item?.address.substring(0, 50)}.....</h2>
+            <h2 className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-slate-700`}>{item?.address.substring(0, 50)}.....</h2>
             <p className="cards__description">
               {`${item.description.substring(0, 50)}.....`}
             </p>
