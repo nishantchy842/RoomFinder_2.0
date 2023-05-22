@@ -73,7 +73,7 @@ const Register = () => {
 
     return (
         <Layout>
-            <div className="h-screen w-auto bg-slate-800 flex flex-col justify-center items-center ">
+            <div className="login_wrapper h-screen w-auto bg-slate-800 flex flex-col justify-center items-center ">
                 <div className="outer_card mt-24">
                     <div className="circle"></div>
                     <div className="circle"></div>

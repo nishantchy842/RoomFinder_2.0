@@ -2,17 +2,17 @@ import { useNavigate } from "react-router";
 import "./cards.css";
 import PropTypes from "prop-types";
 import { Avatar } from "@mui/material";
-
+import { styles } from '../../Utils/Style'
 const Cards = ({ item }) => {
   const navigate = useNavigate()
   return (
-    <div >
-      <div className="cards__wrapper cursor-pointer" onClick={() => navigate(`/Room/${item.title}`, { state: item })}>
-        <div className="cards__room-img">
-          <img src={item.img_collection[0]} height={420} width={327} />
+    <div className="border p-2 ">
+      <div className="cards__wrapper cursor-pointer" >
+        <div className="cards__room-img max-h-[420px] max-w-[327px]">
+          <img src={item.img_collection[0]} alt="room image" />
         </div>
 
-        <div className="cards__room-info">
+        <div className="cards__room-info bg-secondary">
           <div className="cards__room-text">
             <div className="flex justify-start">
               {
@@ -21,18 +21,17 @@ const Cards = ({ item }) => {
                   :
                   (<Avatar sx={{ backgroundColor: '#1a1d4e' }} >{item?.uName?.charAt(0)}</Avatar>)
               }
-              <p className="bold m-2">{item?.uName}</p>
+              <p className='bold m-2'>{item?.uName}</p>
             </div>
-            <h1 className="cards__title">{item.title}</h1>
-            <h2 className="cards__subtitle underline">{item?.address}</h2>
+            <h1 className={`${styles.heroSubText}`}>{item.title.substring(0, 30)}...</h1>
+            <h2 className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-gray-200`}>{item?.address}</h2>
             <p className="cards__description">
               {`${item.description.substring(0, 50)}.....`}
             </p>
           </div>
-          <div className="cards__room__price__container">
-            <p className="cards__room__price__text">
-              NRs. <span className="cards__room__price__number">{item.price}</span>
-            </p>
+          <div className=" flex flex-col justify-center items-center ">
+            <p> NRs. <span className="cards__room__price__number">{item.price}</span></p>
+            <button className="btn" onClick={() => navigate(`/Room/${item.title}`, { state: item })}>See more details</button>
           </div>
         </div>
       </div>

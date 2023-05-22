@@ -1,7 +1,7 @@
 .cards__wrapper {
-  height: 420px;
-  width: 654px;
-  margin: 50px auto;
+  max-height: 1000px;
+  max-width: 654px;
+  margin: 10px auto;
   border-radius: 7px 7px 7px 7px;
   /* VIA CSS MATIC https://goo.gl/cIbnS */
   -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
@@ -32,11 +32,11 @@
   float: left;
   height: 420px;
   width: 327px;
-  border-radius: 0 7px 10px 7px;
+  /* border-radius: 0 7px 10px 7px; */
   backdrop-filter: blur(7px);
   background-color: rgba(255, 255, 255, 0.5);
   /* border-radius: 26px; */
-  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+  /* box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255); */
   transition: all 0.3s;
 }
 .cards__room-info:hover {

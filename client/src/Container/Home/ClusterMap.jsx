@@ -58,7 +58,7 @@ const ClusterMap = () => {
   }, [mapRef?.current]);
 
   return (
-    <div className='h-[70vh]'>
+    <div className='cluter_map h-[80vh] w-[80vw]'>
       <ReactMapGL
         initialViewState={{ latitude: 27.678011981717034, longitude: 85.307303340504 }}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
@@ -77,7 +77,7 @@ const ClusterMap = () => {
                 latitude={latitude}
               >
                 <div
-                  className="cluster-marker"
+                  className="cluster-marker hover:bg-violet-700"
                   style={{
                     width: `${10 + (point_count / points.length) * 20}px`,
                     height: `${10 + (point_count / points.length) * 20}px`,
