@@ -7,7 +7,7 @@ const Home = () => {
   // const navigate = useNavigate();
   return (
     <Layout>
-      <div className="mt-[5.2rem]">
+      <div className="mt-[5.5rem] flex flex-col justify-center items-center">
         <ClusterMap />
         <Select />
       </div>

@@ -17,7 +17,7 @@ const RoomCard = () => {
     }, [])
     return (
         <Layout>
-            <div className='flex flex-wrap justify-center gap-3 flex-shrink-0 mt-20'>
+            <div className='flex justify-center items-center flex-wrap mt-24'>
                 {
                     room?.map((item) => {
                         return (

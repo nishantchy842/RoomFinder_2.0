@@ -13,10 +13,10 @@ const Description = ({item}) => {
             <CssBaseline />
             <Container maxWidth="sm">
                 <Box sx={{ bgcolor: '#cfe8fc', height: 'auto' }} >
-                    <div className='max-h-[200px] border max-w-[500px] w-[20%]'>
+                    <div className='bg-[blue] min-h-[100px] border min-w-[100px] '>
                         chat box
                     </div>
-                    <div className='h-[500px] w-[500px]'>
+                    <div className='h-[400px] w-[400px] '>
                         <ReactMapGL
                             mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
                             initialViewState={{ 

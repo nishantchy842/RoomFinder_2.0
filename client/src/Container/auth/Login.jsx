@@ -50,11 +50,11 @@ const Login = () => {
   };
   return (
     <Layout>
-      <div className="flex justify-center items-center h-[100vh] bg-slate-800  ">
+      <div className="login_wrapper flex justify-center items-center ">
         <div className="outer_card">
           <div className="circle"></div>
           <div className="circle"></div>
-          <div className="card-inner p-5 ">
+          <div className="card-inner p-5 text-center">
             <p className={`${styles.sectionHeadText} ${styles.paddingX}`}> Room Finder </p>
             <p className={`${styles.sectionSubText} ${styles.paddingX}`}>Login your account</p>
             <Form
@@ -77,10 +77,9 @@ const Login = () => {
               autoComplete="on"
             >
               <Form.Item
-                label="Email"
+                label = {<span className={`${styles.sectionSubText} capitalize`}>Email</span> }
                 name="email"
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
+                
                 rules={[
                   {
                     required: true,
@@ -95,10 +94,8 @@ const Login = () => {
               </Form.Item>
 
               <Form.Item
-                label="Password"
+                label={<span className={`${styles.sectionSubText} capitalize`}>Password</span> }
                 name="password"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
                 rules={[
                   {
                     required: true,
