@@ -161,24 +161,56 @@ exports.updateRoom = async (req, res) => {
 //search room
 
 exports.searchRoom = async (req, res) => {
-    try {
-      const { keyword } = req.params;
-      const resutls = await roomModel
-        .find({
-          $or: [
-            { title: { $regex: keyword, $options: "i" } },
-            { description: { $regex: keyword, $options: "i" } },
-            { amenities: { $regex: keyword, $options: "i" } },
-            { address: { $regex: keyword, $options: "i" } },
-          ],
-        })
-      res.send({resutls});
-    } catch (error) {
-      console.log(error);
-      res.status(400).send({
-        success: false,
-        message: "Error In Search Product API",
-        error,
-      });
+  try {
+    const { keyword } = req.params;
+    const resutls = await roomModel
+      .find({
+        $or: [
+          { title: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+          { amenities: { $regex: keyword, $options: "i" } },
+          { address: { $regex: keyword, $options: "i" } },
+        ],
+      })
+    res.send({ resutls });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In Search Product API",
+      error,
+    });
+  }
+};
+
+// product list base on page
+exports.productListController = async (req, res) => {
+  try {
+    const page = req.params.page ? req.params.page : 1;
+    let totalItem = await roomModel.find().count()
+    if (totalItem % req.query.size != 0) {
+      totalItem = Math.ceil(totalItem / req.query.size)
+    } else {
+      totalItem = totalItem / req.query.size
     }
+    const rooms = await roomModel
+      .find()
+      .select("-photo")
+      .skip((page - 1) * req.query.size)
+      .limit(req.query.size)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      rooms,
+      totalItem
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error in per page ctrl",
+      error,
+    });
+  }
 };

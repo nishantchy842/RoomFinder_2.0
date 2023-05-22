@@ -93,7 +93,7 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  className="input placeholder:text-slate-400"
+                  className="input text-white placeholder:text-slate-400"
                   placeholder="Enter your valid email"
                 />
               </Form.Item>
@@ -109,7 +109,7 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  className="input placeholder:text-slate-400"
+                  className="input text-white placeholder:text-slate-400"
                   placeholder="Enter your valid password"
                 />
               </Form.Item>

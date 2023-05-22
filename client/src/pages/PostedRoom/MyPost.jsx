@@ -8,7 +8,7 @@ import { message, Popconfirm } from 'antd';
 import { useNavigate } from "react-router"
 
 const MyPost = () => {
-    const [room, setRoom] = useState()
+    const [room, setRoom] = useState(null)
     const [isDeleted, setIsDeleted] = useState(false);
     const navigate = useNavigate()
     const { id } = useSelector(state => state.user)
@@ -45,7 +45,7 @@ const MyPost = () => {
                 return dispatch(UPDATE_AMENITIES(item.split(',')))
             })
             dispatch(UPDATE_IMAGES(data.room?.img_collection))
-            navigate('/update-room',{state: rid})
+            navigate('/update-room', { state: rid })
         } catch (error) {
             console.log(error)
         }
@@ -78,30 +78,36 @@ const MyPost = () => {
         <Layout>
             <div className="flex justify-center items-center flex-wrap mt-24">
                 {
-                    room?.rooms.map((item) => {
-                        return (
-                            <div key={item._id} className="border flex flex-col justify-center items-center p-2 hover:bg-[#f5f5f5]">
-                                <Cards item={item} />
-                                <div className=" mb-4 w-[40%] flex justify-around items-center">
-                                    <Popconfirm
-                                        title="Delete the room"
-                                        description="Are you sure to delete this room?"
-                                        onConfirm={() => handleDelete(item._id)}
-                                        onCancel={cancel}
-                                        okText={<span style={{ color: 'green' }}>Yes</span>}
-                                        cancelText={<span style={{ color: 'red' }}>No</span>}
-                                    >
-                                        <button type="link" className="btn uppercase">Delete </button>
-                                    </Popconfirm>
-                                    <button
-                                        className="btn uppercase"
-                                        onClick={() => handleUpdate(item._id)}
-                                    >Update</button>
+                    room?.rooms?.length !== 0 ?
+                        room?.rooms.map((item) => {
+                            return (
+                                <div key={item._id} className="border flex flex-col justify-center items-center p-2 hover:bg-[#f5f5f5]">
+                                    <Cards item={item} />
+                                    <div className=" mb-4 w-[40%] flex justify-around items-center">
+                                        <Popconfirm
+                                            title="Delete the room"
+                                            description="Are you sure to delete this room?"
+                                            onConfirm={() => handleDelete(item._id)}
+                                            onCancel={cancel}
+                                            okText={<span style={{ color: 'green' }}>Yes</span>}
+                                            cancelText={<span style={{ color: 'red' }}>No</span>}
+                                        >
+                                            <button type="link" className="btn uppercase">Delete </button>
+                                        </Popconfirm>
+                                        <button
+                                            className="btn uppercase"
+                                            onClick={() => handleUpdate(item._id)}
+                                        >Update</button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
+                            )
 
-                    })
+                        }) : <div className="h-[80vh] flex flex-col justify-center items-center">
+                            <p> No room yet </p>
+                            <button className="btn" onClick={() => navigate('/add-room')}>click here to post room</button>
+                        </div>
+
+
                 }
             </div>
         </Layout>

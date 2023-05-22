@@ -5,6 +5,7 @@ import axios from 'axios'
 import Layout from '../Layout/Layout'
 import Cards from './cards'
 import SearchBar from '../../Utils/SearchBar'
+import Paginations from '../../Utils/Pagination'
 
 
 const RoomCard = () => {
@@ -30,7 +31,7 @@ const RoomCard = () => {
                         )
                     })
                 }
-
+                <Paginations />
             </div>
         </Layout>
     )
