@@ -12,7 +12,7 @@ const Cards = ({ item }) => {
           <img src={item.img_collection[0]} alt="room image" />
         </div>
 
-        <div className="cards__room-info bg-secondary">
+        <div className="cards__room-info ">
           <div className="cards__room-text">
             <div className="flex justify-start">
               {

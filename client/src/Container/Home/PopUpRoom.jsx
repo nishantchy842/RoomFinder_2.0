@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 
 const PopupRoom = ({ popupInfo }) => {
     const navigate = useNavigate()
-    const { title, description, price, images,address,amenities,lat,lng } = popupInfo;
+    const { title, description, price, images, address, amenities, lat, lng } = popupInfo;
 
     const item = {
         title,
@@ -24,7 +24,7 @@ const PopupRoom = ({ popupInfo }) => {
     console.log(item)
 
     return (
-        <Card sx={{ maxWidth: 400 }}>
+        <Card sx={{ maxWidth: 400, overflow: 'hidden' }}>
             <ImageListItem sx={{ display: 'block' }}>
                 <ImageListItemBar
                     sx={{
@@ -49,6 +49,7 @@ const PopupRoom = ({ popupInfo }) => {
                         '--swiper-pagination-color': 'rgba(255,255,255, 0.8)',
                         '--swiper-pagination-bullet-inactive-color': '#fff',
                         '--swiper-pagination-bullet-inactive-opacity': 0.5,
+                        overflow: 'hidden',
                     }}
                 >
                     {images.map((url) => (
@@ -60,12 +61,11 @@ const PopupRoom = ({ popupInfo }) => {
                                 sx={{
                                     height: 255,
                                     display: 'block',
-                                    overflow: 'hidden',
                                     width: '100%',
                                     cursor: 'pointer',
                                     objectFit: 'cover',
                                 }}
-                                onClick={() => navigate(`/Room/${item.title}`, {state: item})}
+                                onClick={() => navigate(`/Room/${item.title}`, { state: item })}
 
                             />
                         </SwiperSlide>
