@@ -8,16 +8,16 @@ import { useNavigate } from "react-router";
 const { Search } = Input;
 
 const SearchBar = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate()
   const onSearch = async (value) => {
-try{
-  console.log(value);
-  const {data} = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room/search/${value}`)
-  console.log(data.resutls)
-  navigate('/result',{state:{rooms: data.resutls, value}})
-}catch(error){
-console.log(error)
-}
+    try {
+      console.log(value);
+      const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room/search/${value}`)
+      console.log(data.resutls)
+      navigate('/result', { state: { rooms: data.resutls, value } })
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <>

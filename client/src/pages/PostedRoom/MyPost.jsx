@@ -6,18 +6,21 @@ import Layout from "../../Component/Layout/Layout"
 import { UPDATE_AMENITIES, UPDATE_DETAILS, UPDATE_IMAGES, UPDATE_LOCATION, apiResStatus, setAlertMessages } from "../../Redux/Reducer/roomSlice"
 import { message, Popconfirm } from 'antd';
 import { useNavigate } from "react-router"
+import Paginations from "../../Utils/Pagination"
 
 const MyPost = () => {
     const [room, setRoom] = useState(null)
     const [isDeleted, setIsDeleted] = useState(false);
+    const [pageNumber, setPageNumber] = useState()
     const navigate = useNavigate()
     const { id } = useSelector(state => state.user)
     const dispatch = useDispatch()
 
-    const handleUserRoom = async () => {
+    const handleUserRoom = async (page) => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room/userRoom/${id}`)
+            const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room/userRoom/${id}/${page}?size=6`)
             setRoom(data)
+            setPageNumber(data.totalItem)
 
         } catch (error) {
             console.log(error)
@@ -109,6 +112,9 @@ const MyPost = () => {
 
 
                 }
+            </div>
+            <div className="flex justify-end">
+                <Paginations pageNumber={pageNumber} handlePage={handleUserRoom} />
             </div>
         </Layout>
     )

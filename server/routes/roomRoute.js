@@ -25,7 +25,7 @@ router.post('/addroom', upload.array('photos', 12), requireSignIn, createRoom)
 //get all room
 router.get('/room', getRoom)
 //get room of user
-router.get('/userRoom/:uid', getUserRooms)
+router.get('/userRoom/:uid/:page', getUserRooms, productListController)
 //delete room
 router.delete('/deleteroom/:rid', requireSignIn, deleteRoom)
 //update room

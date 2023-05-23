@@ -10,17 +10,21 @@ import Paginations from '../../Utils/Pagination'
 
 const RoomCard = () => {
     const [room, setRoom] = useState()
-    const getAllRooms = async () => {
-        const res = await axios('http://localhost:8000/api/room/room')
+    const [pageNumber, setPageNumber] = useState()
+    const getAllRooms = async (page) => {
+        const res = await axios(`${import.meta.env.VITE_APP_URL}/api/room/product-list/${page}?size=6`)
         setRoom(res.data.rooms)
+        setPageNumber(res.data.totalItem)
     }
 
     useEffect(() => {
         getAllRooms()
     }, [])
+
+
     return (
         <Layout>
-            <div>
+            <div >
                 <SearchBar />
             </div>
             <div className='flex w-[100%] justify-center items-center flex-wrap mt-6'>
@@ -31,7 +35,9 @@ const RoomCard = () => {
                         )
                     })
                 }
-                <Paginations />
+            </div>
+            <div className="flex justify-end p-10">
+                <Paginations pageNumber={pageNumber} handlePage={getAllRooms} />
             </div>
         </Layout>
     )
