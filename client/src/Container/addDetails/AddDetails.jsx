@@ -23,7 +23,6 @@ const AddDetails = () => {
     const [success, setSuccess] = useState(false);
 
     const { title, description, price, address } = useSelector(state => state.room.details)
-    console.log(address, '@@@)')
     const dispatch = useDispatch()
 
     const handlePriceChange = (e) => {

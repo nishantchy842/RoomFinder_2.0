@@ -2,15 +2,14 @@ import { Box, Card, ImageListItem, ImageListItemBar } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-
+import { styles } from '../../Utils/Style';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 
-
 const PopupRoom = ({ popupInfo }) => {
     const navigate = useNavigate()
-    const { title, description, price, images, address, amenities, lat, lng } = popupInfo;
-
+    const { title, description, price, images, address, amenities, lat, lng ,createdAt} = popupInfo;
+  
     const item = {
         title,
         description,
@@ -19,9 +18,10 @@ const PopupRoom = ({ popupInfo }) => {
         address,
         amenities,
         lat,
-        lng
+        lng,
+        createdAt
     }
-    console.log(item)
+    console.log(item.createdAt)
 
     return (
         <Card sx={{ maxWidth: 400, overflow: 'hidden' }}>
@@ -32,7 +32,7 @@ const PopupRoom = ({ popupInfo }) => {
                             'linear-gradient(to bottom, rgba(0,0,0,0.7)0%, rgba(0,0,0,0.3)70%, rgba(0,0,0,0)100%)',
                         zIndex: 2,
                     }}
-                    title={price}
+                    title={<span className={`${styles.heroSubText} border rounded-lg`}>Nrs {price}</span>}
                     position="top"
                 />
                 <ImageListItemBar

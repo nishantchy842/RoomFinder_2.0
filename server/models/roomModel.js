@@ -12,16 +12,13 @@ const roomSchema = mongoose.Schema(
       maxLength: 1000,
     },
     address:{type:String, required: true},
+    place:{type:String, required: true},
     amenities: {
       type: [String],
       validate: (v) => Array.isArray(v) && v.length >= 0,
     },
     img_collection: [Object],
-    // roomImageName: { type: String },
-    // images: {
-    //   type: [String],
-    //   validate: (v) => Array.isArray(v) && v.length > 0,
-    // },
+ 
     uid: { type: String, required: true },
     uName: { type: String, required: true },
     uPhoto: { type: String, default: '' },

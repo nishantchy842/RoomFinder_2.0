@@ -1,5 +1,16 @@
 const express = require('express')
-const { createRoom, getRoom, getUserRooms, deleteRoom, updateRoom, getSingleRoom, searchRoom, productListController } = require('../controllers/roomController')
+const { createRoom, 
+    getRoom, 
+    getUserRooms, 
+    deleteRoom, 
+    updateRoom, 
+    getSingleRoom, 
+    searchRoom, 
+    productListController, 
+    productFiltersController, 
+    realtedProductController, 
+    placeName } = 
+    require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
 const router = express.Router()
@@ -36,6 +47,9 @@ router.get('/single-room/:rid', getSingleRoom)
 router.get('/search/:keyword', searchRoom)
 //
 router.get("/product-list/:page", productListController);
-
+//filter
+router.get('/filter/:place',productFiltersController)
+router.get("/related-product/:pid", realtedProductController);
+router.get("/placename",placeName)
 
 module.exports = router

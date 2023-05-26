@@ -195,7 +195,6 @@ exports.productListController = async (req, res) => {
     }
     const rooms = await roomModel
       .find()
-      .select("-photo")
       .skip((page - 1) * req.query.size)
       .limit(req.query.size)
       .sort({ createdAt: -1 });
@@ -214,3 +213,75 @@ exports.productListController = async (req, res) => {
     });
   }
 };
+
+// similar products
+exports.realtedProductController = async (req, res) => {
+  try {
+    const { pid } = req.params;
+    const rooms = await roomModel
+      .find({
+        // category: cid,
+        _id: { $ne: pid },
+      })
+      // .select("-img_collection")
+      .limit(3)
+    // .populate("category");
+    res.status(200).send({
+      success: true,
+      rooms,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error while geting related product",
+      error,
+    });
+  }
+};
+
+
+// filters
+exports.productFiltersController = async (req, res) => {
+  try {
+    // const { checked, radio } = req.body;
+    // let args = {};
+    // if (checked.length > 0) args.address = checked;
+    // if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const { place } = req.params
+    const products = await roomModel.find({ place });
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error WHile Filtering Products",
+      error,
+    });
+  }
+};
+
+// get unique place name
+exports.placeName = async (req, res) => {
+  try {
+    roomModel.distinct("place")
+      .then((uniquePlaces) => {
+        // 'uniquePlaces' will contain an array of unique place names
+        console.log(uniquePlaces);
+        res.status(200).send({
+          success:true,
+          message:"get place successfull",
+          uniquePlaces
+        })
+      })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "failed to get place name"
+    })
+  }
+}

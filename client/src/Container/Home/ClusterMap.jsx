@@ -22,8 +22,6 @@ const ClusterMap = () => {
   const data = useRooms()
   const [popupInfo, setPopupInfo] = useState(null);
 
-  console.log(data)
-
   useEffect(() => {
     const points = data.map((room) => ({
       type: 'Feature',
@@ -40,6 +38,7 @@ const ClusterMap = () => {
         images: room.img_collection,
         uPhoto: room.uPhoto,
         uName: room.uName,
+        createdAt: room.createdAt
       },
       geometry: {
         type: 'Point',
@@ -48,6 +47,7 @@ const ClusterMap = () => {
     }));
     setPoints(points);
   }, [data]);
+
 
   useEffect(() => {
     supercluster.load(points);

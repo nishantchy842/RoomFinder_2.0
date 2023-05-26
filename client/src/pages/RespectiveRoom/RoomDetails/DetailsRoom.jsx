@@ -23,18 +23,12 @@ const DetailsRoom = ({ item }) => {
     useEffect(() => {
         // Fetch your data from MongoDB and extract the createdAt value
         const createdAt = item.createdAt; // Replace with your createdAt value
-
         // Calculate the relative time using Moment.js
         const relative = moment(createdAt).fromNow();
 
         // Update the state with the relative time
         setTime(relative);
     }, []);
-
-
-
-
-
 
 
 

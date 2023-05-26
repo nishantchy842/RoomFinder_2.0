@@ -35,7 +35,10 @@ const AddLocation = () => {
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${import.meta.env.VITE_MAP_KEY}`;
         fetch(url)
             .then((response) => response.json())
-            .then((data) => dispatch(UPDATE_DETAILS({address:data.features[0].place_name})));
+            .then((data) =>{
+              console.log(data)
+              dispatch(UPDATE_DETAILS({address:data.features[0].place_name,place:data.features[0].properties.address}))
+            } )
     }
 }, [lng, lat]);
   return (
