@@ -244,10 +244,6 @@ exports.realtedProductController = async (req, res) => {
 // filters
 exports.productFiltersController = async (req, res) => {
   try {
-    // const { checked, radio } = req.body;
-    // let args = {};
-    // if (checked.length > 0) args.address = checked;
-    // if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
     const { place } = req.params
     const products = await roomModel.find({ place });
     res.status(200).send({
@@ -270,10 +266,10 @@ exports.placeName = async (req, res) => {
     roomModel.distinct("place")
       .then((uniquePlaces) => {
         // 'uniquePlaces' will contain an array of unique place names
-        console.log(uniquePlaces);
+        uniquePlaces.sort();
         res.status(200).send({
-          success:true,
-          message:"get place successfull",
+          success: true,
+          message: "get place successfull",
           uniquePlaces
         })
       })
@@ -282,6 +278,26 @@ exports.placeName = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "failed to get place name"
+    })
+  }
+}
+
+exports.filterByPrice = async (req, res) => {
+  try {
+    const { radio } = req.body;
+    let args = {};
+
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const rooms = await roomModel.find(args);
+    res.status(200).send({
+      success: true,
+      rooms,
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "filter failed"
     })
   }
 }

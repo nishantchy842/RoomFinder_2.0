@@ -1,15 +1,16 @@
 const express = require('express')
-const { createRoom, 
-    getRoom, 
-    getUserRooms, 
-    deleteRoom, 
-    updateRoom, 
-    getSingleRoom, 
-    searchRoom, 
-    productListController, 
-    productFiltersController, 
-    realtedProductController, 
-    placeName } = 
+const { createRoom,
+    getRoom,
+    getUserRooms,
+    deleteRoom,
+    updateRoom,
+    getSingleRoom,
+    searchRoom,
+    productListController,
+    productFiltersController,
+    realtedProductController,
+    placeName,
+    filterByPrice } =
     require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
@@ -48,8 +49,10 @@ router.get('/search/:keyword', searchRoom)
 //
 router.get("/product-list/:page", productListController);
 //filter
-router.get('/filter/:place',productFiltersController)
+router.get('/filter/:place', productFiltersController)
 router.get("/related-product/:pid", realtedProductController);
-router.get("/placename",placeName)
+router.get("/placename", placeName)
+//filter by price
+router.post("/filterprice", filterByPrice)
 
 module.exports = router

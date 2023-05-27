@@ -1,7 +1,7 @@
 // import { useNavigate } from "react-router";
 import Layout from "../../Component/Layout/Layout";
 import ClusterMap from "./ClusterMap";
-import Places from "./Places";
+import Places from "./Places/Places";
 import Select from "./select";
 
 const Home = () => {
