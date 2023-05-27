@@ -8,8 +8,23 @@ import { useNavigate } from 'react-router';
 
 const PopupRoom = ({ popupInfo }) => {
     const navigate = useNavigate()
-    const { title, description, price, images, address, amenities, lat, lng ,createdAt} = popupInfo;
-  
+    const {
+        title,
+        description,
+        price,
+        images,
+        address,
+        amenities,
+        lat,
+        lng,
+        createdAt,
+        uPhone,
+        uEmail,
+        uName,
+        uPhoto,
+        roomId
+    } = popupInfo;
+
     const item = {
         title,
         description,
@@ -19,7 +34,12 @@ const PopupRoom = ({ popupInfo }) => {
         amenities,
         lat,
         lng,
-        createdAt
+        createdAt,
+        uPhone,
+        uEmail,
+        uName,
+        uPhoto,
+        _id: roomId
     }
     console.log(item.createdAt)
 

@@ -72,7 +72,9 @@ const RoomCard = () => {
                 {
                     room?.map((item) => {
                         return (
-                            <Cards key={item._id} item={item} />
+                            <>
+                                <Cards key={item._id} item={item} />
+                            </>
                         )
                     })
                 }

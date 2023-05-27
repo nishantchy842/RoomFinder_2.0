@@ -31,7 +31,12 @@ const Cards = ({ item }) => {
           </div>
           <div className=" flex flex-col justify-center items-center ">
             <p> NRs. <span className="cards__room__price__number">{item.price}</span></p>
-            <button className="btn" onClick={() => navigate(`/Room/${item.title}`, { state: item })}>See more details</button>
+            <button className="btn" onClick={() => {
+              navigate(`/Room/${item.title}`, { state: item })
+              window.location.reload();
+            }
+            }
+            >See more details</button>
           </div>
         </div>
       </div>

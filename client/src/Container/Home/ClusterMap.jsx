@@ -38,6 +38,8 @@ const ClusterMap = () => {
         images: room.img_collection,
         uPhoto: room.uPhoto,
         uName: room.uName,
+        uPhone: room.uPhone,
+        uEmail: room.uEmail,
         createdAt: room.createdAt
       },
       geometry: {
