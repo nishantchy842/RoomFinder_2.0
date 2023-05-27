@@ -8,8 +8,8 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
-    const { id: uid, uName, uPhoto } = req.user;
-    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto })
+    const { id: uid, uName, uPhoto, uPhone, uEmail } = req.user;
+    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto, uPhone, uEmail })
     await newRoom.save();
     res.status(201).send({
       success: true,
@@ -286,7 +286,6 @@ exports.filterByPrice = async (req, res) => {
   try {
     const { radio } = req.body;
     let args = {};
-
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
     const rooms = await roomModel.find(args);
     res.status(200).send({

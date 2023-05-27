@@ -82,7 +82,13 @@ exports.userPostLogin = async (req, res) => {
             });
         }
         //token
-        const token = await JWT.sign({ _id: user._id , name: user.name, uPhoto: user.profile }, process.env.SECRETE_KEY, {
+        const token = await JWT.sign({ 
+            _id: user._id , 
+            name: user.name, 
+            uPhoto: user.profile ,
+            uEmail: user.email,
+            uPhone:user.phone
+        }, process.env.SECRETE_KEY, {
             expiresIn: "7d",
         })
         res.status(200).send({

@@ -9,6 +9,7 @@ import Paginations from '../../Utils/Pagination'
 import { Drawer, Radio } from 'antd'
 import { AiOutlineAlignLeft } from 'react-icons/ai'
 import { Prices } from '../../config/Price'
+import { styles } from '../../Utils/Style'
 
 const RoomCard = () => {
     const [room, setRoom] = useState()
@@ -67,7 +68,7 @@ const RoomCard = () => {
             <div >
                 <SearchBar />
             </div>
-            <div className='flex w-[100%] justify-center items-center flex-wrap mt-6'>
+            <div className={`${styles.paddingX} flex w-[100%] flex-row items-start flex-wrap mt-6`}>
                 {
                     room?.map((item) => {
                         return (
@@ -76,9 +77,13 @@ const RoomCard = () => {
                     })
                 }
             </div>
-            <div className="flex justify-end p-10">
-                <Paginations pageNumber={pageNumber} handlePage={getAllRooms} />
-            </div>
+            {
+                radio.length == 0 ?
+                    <div className="flex justify-end p-10">
+                        <Paginations pageNumber={pageNumber} handlePage={getAllRooms} />
+                    </div> : " "
+            }
+
         </Layout>
     )
 }

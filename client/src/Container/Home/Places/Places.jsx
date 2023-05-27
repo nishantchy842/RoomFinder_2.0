@@ -32,8 +32,8 @@ const Places = () => {
 
     return (
         <div className="min-h-[50vh]">
-            <h1 className={`${styles.heroHeadText}`}>Room Locations</h1>
-            <div className=" w-[80vw] flex justify-center items-center flex-wrap ">
+            <h1 className={`${styles.heroHeadText} text-center`}>Room Locations</h1>
+            <div className=" w-[80vw] flex items-start flex-wrap ">
                 {
                     place && place.map((item, id) => {
                         return <div key={id} className="btn m-2 p-2 rounded-lg cursor-pointer" onClick={() => handlePlace(item)}>

@@ -6,7 +6,7 @@ import { styles } from '../../Utils/Style'
 const Cards = ({ item }) => {
   const navigate = useNavigate()
   return (
-    <div className=" border p-2 h-[100%]">
+    <div className=" border p-2 h-[100%] mr-7 ">
       <div className="cards__wrapper cursor-pointer" >
         <div className="cards__room-img max-h-[420px] max-w-[327px]">
           <img src={item.img_collection[0]} alt="room image" />
