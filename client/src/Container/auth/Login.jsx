@@ -111,7 +111,7 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  className={`${styles.input} ${styles.whiteText}`}
+                  className="input text-white placeholder:text-slate-400"
                   placeholder="Enter your valid email"
                 />
               </Form.Item>
@@ -131,7 +131,7 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  className={`${styles.input} ${styles.whiteText}`}
+                  className="input placeholder:text-slate-400"
                   placeholder="Enter your valid password"
                 />
               </Form.Item>

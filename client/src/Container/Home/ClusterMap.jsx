@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import './cluster.css'
 import PopupRoom from './PopUpRoom';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import Geocoder from '../addLocation/Geocoder';
 
 const supercluster = new Supercluster({
   radius: 75,
@@ -21,8 +22,6 @@ const ClusterMap = () => {
   const data = useRooms()
   const [popupInfo, setPopupInfo] = useState(null);
 
-  console.log(data)
-
   useEffect(() => {
     const points = data.map((room) => ({
       type: 'Feature',
@@ -34,11 +33,14 @@ const ClusterMap = () => {
         description: room.description,
         lng: room.lng,
         lat: room.lat,
-        amenities:room.amenities,
+        amenities: room.amenities,
         address: room.address,
         images: room.img_collection,
         uPhoto: room.uPhoto,
         uName: room.uName,
+        uPhone: room.uPhone,
+        uEmail: room.uEmail,
+        createdAt: room.createdAt
       },
       geometry: {
         type: 'Point',
@@ -47,6 +49,7 @@ const ClusterMap = () => {
     }));
     setPoints(points);
   }, [data]);
+
 
   useEffect(() => {
     supercluster.load(points);
@@ -69,6 +72,7 @@ const ClusterMap = () => {
         ref={mapRef}
         onZoomEnd={(e) => setZoom(Math.round(e.viewState.zoom))}
       >
+        <Geocoder />
         {clusters.map((cluster) => {
           const { cluster: isCluster, point_count } = cluster.properties;
           const [longitude, latitude] = cluster.geometry.coordinates;
@@ -127,9 +131,9 @@ const ClusterMap = () => {
             maxWidth="auto"
             closeOnClick={false}
             focusAfterOpen={false}
-            // onClose={() => setPopupInfo(null)}
+          // onClose={() => setPopupInfo(null)}
           >
-            <div  onClick={() => setPopupInfo(null)}>
+            <div onClick={() => setPopupInfo(null)}>
               <AiFillCloseCircle className="h-10 w-10 absolute -top-0.5 -right-1 z-10 cursor-pointer text-red-500" />
             </div>
             <PopupRoom {...{ popupInfo }} />

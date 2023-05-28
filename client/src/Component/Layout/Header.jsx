@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" className="header_color shadow-md w-full fixed top-0 left-0 z-20 bg-secondary p-2">
+      <Container maxWidth="xl" className=" bg-[#f5f5f5] shadow-md w-full fixed top-0 left-0 z-20  p-2">
         <Toolbar disableGutters className='flex justify-between'>
           <div
             className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins]

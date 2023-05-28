@@ -123,14 +123,14 @@ const Register = () => {
                 <Field
                   name="name"
                   placeholder="Full Name"
-                  className="input mt-2"
+                  className="input mt-2 text-white-100"
                 />
                 {errors.name && touched.name ? (
                   <div className=" text-red-700">{errors.name}</div>
                 ) : null}
                 <Field
                   name="address"
-                  className="input mt-2"
+                  className="input mt-2 text-white-100"
                   placeholder="Address"
                 />
                 {errors.address && touched.address ? (
@@ -140,7 +140,7 @@ const Register = () => {
                   name="email"
                   type="email"
                   placeholder="Email"
-                  className="input mt-2"
+                  className="input mt-2 text-white-100"
                 />
                 {errors.email && touched.email ? (
                   <div className=" text-red-700">{errors.email}</div>

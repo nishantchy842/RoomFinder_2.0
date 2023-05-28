@@ -12,6 +12,7 @@ import MyPost from "../pages/PostedRoom/MyPost";
 import UpdateRoom from "../pages/PostedRoom/UpdateRoom";
 import PageNotFound from "../Utils/PageNotFound";
 import SearchResult from "../pages/searchResult/SearchResult";
+import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -32,6 +33,7 @@ const DefaulRoutes = () => {
       <Route path="/Room/:slug" element={<RespRoom />} />
       <Route path="/registration" element={<Register />} />
       <Route path="/result" element={<SearchResult />} />
+      <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="*" element={<PageNotFound />} />
 
     </Routes>
@@ -50,6 +52,7 @@ const UserRoutes = () => {
       <Route path="/update-room" element={<UpdateRoom />} />
       <Route path="*" element={<PageNotFound />} />
       <Route path="/result" element={<SearchResult />} />
+      <Route path="/rooms/:place" element={<RoomsAccPlace />} />
 
     </Routes>
   );
@@ -65,6 +68,7 @@ const AdminRoute = () => {
       <Route path="/add-room" element={<AddRoom />} />
       <Route path="*" element={<PageNotFound />} />
       <Route path="/result" element={<SearchResult />} />
+      <Route path="/rooms/:place" element={<RoomsAccPlace />} />
 
     </Routes>
   );

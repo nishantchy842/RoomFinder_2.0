@@ -92,6 +92,7 @@ const AddRoom = () => {
       title: details.title,
       description: details.description,
       address: details.address,
+      place: details.place,
       amenities: amenities,
     };
     const bodyFormData = new FormData();

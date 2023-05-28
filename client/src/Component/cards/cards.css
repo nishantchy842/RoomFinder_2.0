@@ -22,6 +22,7 @@
   object-fit: fill;
   border-radius: 7px 0 0 7px;
   transition: transform 0.2s;
+  object-fit: cover;
 }
 
 .cards__room-img img:hover {
@@ -43,10 +44,10 @@
   box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.5);
 }
 
-.cards__room-info:active {
+/* .cards__room-info:active {
   transform: scale(0.95);
   border: 1px solid blue;
-}
+} */
 
 .cards__room-text {
   max-height: 300px;

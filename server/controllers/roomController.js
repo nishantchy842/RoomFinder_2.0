@@ -8,8 +8,8 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + '/uploads/' + req.files[i].filename);
     }
-    const { id: uid, uName, uPhoto } = req.user;
-    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto })
+    const { id: uid, uName, uPhoto, uPhone, uEmail } = req.user;
+    const newRoom = new roomModel({ ...req.body, img_collection: reqFiles, uid, uName, uPhoto, uPhone, uEmail })
     await newRoom.save();
     res.status(201).send({
       success: true,
@@ -161,24 +161,142 @@ exports.updateRoom = async (req, res) => {
 //search room
 
 exports.searchRoom = async (req, res) => {
-    try {
-      const { keyword } = req.params;
-      const resutls = await roomModel
-        .find({
-          $or: [
-            { title: { $regex: keyword, $options: "i" } },
-            { description: { $regex: keyword, $options: "i" } },
-            { amenities: { $regex: keyword, $options: "i" } },
-            { address: { $regex: keyword, $options: "i" } },
-          ],
-        })
-      res.send({resutls});
-    } catch (error) {
-      console.log(error);
-      res.status(400).send({
-        success: false,
-        message: "Error In Search Product API",
-        error,
-      });
-    }
+  try {
+    const { keyword } = req.params;
+    const resutls = await roomModel
+      .find({
+        $or: [
+          { title: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+          { amenities: { $regex: keyword, $options: "i" } },
+          { address: { $regex: keyword, $options: "i" } },
+        ],
+      })
+    res.send({ resutls });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In Search Product API",
+      error,
+    });
+  }
 };
+
+// product list base on page
+exports.productListController = async (req, res) => {
+  try {
+    const page = req.params.page ? req.params.page : 1;
+    let totalItem = await roomModel.find().count()
+    if (totalItem % req.query.size != 0) {
+      totalItem = Math.ceil(totalItem / req.query.size)
+    } else {
+      totalItem = totalItem / req.query.size
+    }
+    const rooms = await roomModel
+      .find()
+      .skip((page - 1) * req.query.size)
+      .limit(req.query.size)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      rooms,
+      totalItem
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error in per page ctrl",
+      error,
+    });
+  }
+};
+
+// similar products
+exports.realtedProductController = async (req, res) => {
+  try {
+    const { pid } = req.params;
+    const rooms = await roomModel
+      .find({
+        // category: cid,
+        _id: { $ne: pid },
+      })
+      // .select("-img_collection")
+      .limit(3)
+    // .populate("category");
+    res.status(200).send({
+      success: true,
+      rooms,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error while geting related product",
+      error,
+    });
+  }
+};
+
+
+// filters
+exports.productFiltersController = async (req, res) => {
+  try {
+    const { place } = req.params
+    const products = await roomModel.find({ place });
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error WHile Filtering Products",
+      error,
+    });
+  }
+};
+
+// get unique place name
+exports.placeName = async (req, res) => {
+  try {
+    roomModel.distinct("place")
+      .then((uniquePlaces) => {
+        // 'uniquePlaces' will contain an array of unique place names
+        uniquePlaces.sort();
+        res.status(200).send({
+          success: true,
+          message: "get place successfull",
+          uniquePlaces
+        })
+      })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "failed to get place name"
+    })
+  }
+}
+
+exports.filterByPrice = async (req, res) => {
+  try {
+    const { radio } = req.body;
+    let args = {};
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const rooms = await roomModel.find(args);
+    res.status(200).send({
+      success: true,
+      rooms,
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "filter failed"
+    })
+  }
+}

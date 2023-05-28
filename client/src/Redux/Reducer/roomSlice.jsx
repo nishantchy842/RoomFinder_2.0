@@ -8,7 +8,7 @@ const initialState = {
   alert: { isApiSuccessMsgOpen: false, apiResIsSuccess: true, apiSuccessMessage: '' },
   profile: { open: false, file: null, photoURL: '' },
   images: [],
-  details: { title: '', description: '', price: 0, address: '' },
+  details: { title: '', description: '', price: 0, address: '', place: '' },
   amenities: [],
   location: { lng: 0, lat: 0 },
   rooms: [],
