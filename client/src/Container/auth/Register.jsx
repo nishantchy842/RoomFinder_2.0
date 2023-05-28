@@ -92,7 +92,7 @@ const Register = () => {
           >
             {({ errors, touched }) => (
               <Form className="card-inner flex flex-col justify-center items-center p-5 rounded-2xl">
-                <h1 className={`${styles.heroHeadText}`}>Signup</h1>
+                <h1 className={`${styles.heroHeadText} text-slate-100`}>Signup</h1>
                 <div className="m-3">
                   <label className="btn-outline-secondary col-md-12 text-white-100">
                     {profile ? profile.name : "Upload Profile Picture"}
