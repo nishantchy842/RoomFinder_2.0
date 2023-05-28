@@ -1,23 +1,25 @@
 .login_wrapper {
   height: 100vh;
   width: auto;
-  background-image: url("../../assets/blob.svg");
+  background-image: url('../../assets/blob.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; /* or background-size: contain; */
+  background-size: cover;
+  /* or background-size: contain; */
+}
+
+.outer_card {
+  transition: all 0.2s;
+  position: relative;
 }
 
 .card-inner {
   width: inherit;
   height: inherit;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, .05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
   border-radius: 8px;
-}
-
-.whiteText input {
-  color: white;
 }
 
 .circle {
@@ -38,10 +40,6 @@
   bottom: -25px;
   right: -25px;
   animation-name: move-down1;
-}
-
-.white-text {
-  color: white;
 }
 
 @keyframes move-up6 {
