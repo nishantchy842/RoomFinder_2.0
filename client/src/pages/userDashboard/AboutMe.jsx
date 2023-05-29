@@ -3,7 +3,7 @@ import "./aboutme.css";
 const AboutMe = () => {
   return (
     <div className="about-me-container">
-      <div className="profile-dashboard-card">
+      <div className="profile-dashboard-card shadows">
         <img
           src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTK7Os2YW_6OfJJGh9rvPUSbNYqUwQXZce6mMIrqMasLen8sg4BDbHwN-UMOAV6Q_lXdvqdhbY-NqCTcGA"
           alt="User"

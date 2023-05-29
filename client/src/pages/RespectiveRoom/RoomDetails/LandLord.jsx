@@ -6,7 +6,7 @@ const LandLord = ({ item }) => {
     return (
         <>
             <div className={`${styles.padding} w-full min-h-[70vh] lg:w-[40%]`}>
-                <div className="shadows min-h-[100vh] border w-full  md:w-[50%]`">
+                <div className=" min-h-[100vh] border w-full  md:w-[50%]`">
                     <div className=" relative right-0 -top-10 overflow-hidden h-24 flex flex-col justify-center items-center">
                         <Image
                             width={180}

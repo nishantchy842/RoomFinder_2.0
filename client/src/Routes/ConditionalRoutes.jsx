@@ -14,6 +14,7 @@ import PageNotFound from "../Utils/PageNotFound";
 import SearchResult from "../pages/searchResult/SearchResult";
 import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
 import Dashboard from "../pages/userDashboard/Dashboard";
+import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -62,7 +63,7 @@ const UserRoutes = () => {
 const AdminRoute = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<AdminDashboard />} />
       <Route path="/card" element={<RoomCard />} />
       <Route path="/add-map" element={<AddLocation />} />
       <Route path="/add-details" element={<AddDetails />} />

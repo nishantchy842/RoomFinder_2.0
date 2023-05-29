@@ -27,7 +27,11 @@ const Login = () => {
         const { token } = res.data;
         // Set the authorization header for subsequent requests
         axios.defaults.headers.common["Authorization"] = token;
-        dispatch(assignUserRole("user"));
+        if (res.data.user.role == 0) {
+          dispatch(assignUserRole("user"));
+        } else {
+          dispatch(assignUserRole("admin"));
+        }
         dispatch(
           setLoginDetails({
             id: res.data.user._id,

@@ -34,7 +34,7 @@ const DetailsRoom = ({ item }) => {
 
 
     return (
-        <div className={`${styles.padding} w-full min-h-[70vh] shadows lg:w-[60%]`}>
+        <div className={`${styles.padding} w-full min-h-[70vh] lg:w-[60%]`}>
             <p
                 className={`${styles.sectionSubText} lowercase bg-slate-300 text-primary absolute top-[29rem] z-10 right-11 p-1`}>
                 {time}</p>

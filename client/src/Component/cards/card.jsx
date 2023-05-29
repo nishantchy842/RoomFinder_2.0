@@ -57,7 +57,7 @@ const RoomCard = () => {
                     <div className="d-flex flex-column">
                         <Radio.Group onChange={(e) => setRadio(e.target.value)}>
                             {Prices?.map((p) => (
-                                <div key={p._id}>
+                                <div key={p._id} className='m-5'>
                                     <Radio value={p.array}>{p.name}</Radio>
                                 </div>
                             ))}
@@ -72,9 +72,7 @@ const RoomCard = () => {
                 {
                     room?.map((item) => {
                         return (
-                            <>
-                                <Cards key={item._id} item={item} />
-                            </>
+                            <Cards key={item._id} item={item} />
                         )
                     })
                 }

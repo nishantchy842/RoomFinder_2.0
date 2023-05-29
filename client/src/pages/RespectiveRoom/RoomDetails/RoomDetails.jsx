@@ -9,7 +9,7 @@ import SimilarRoom from './SimilarRoom';
 const RoomDetails = ({ item }) => {
     return (
         <>
-            <div className='min-h-[80vh] pt-24 flex justify-around items-start text-start flex-wrap'>
+            <div className='min-h-[80vh] shadows pt-24 flex justify-around items-start text-start flex-wrap'>
 
                 <DetailsRoom item={item} />
                 <LandLord item={item} />
