@@ -1,4 +1,6 @@
 const roomModel = require('../models/roomModel')
+const userModel = require('../models/userModel')
+const moment = require("moment");
 
 exports.createRoom = async (req, res) => {
   try {
@@ -297,6 +299,60 @@ exports.filterByPrice = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "filter failed"
+    })
+  }
+}
+
+//Request rooms
+exports.requestRoom = async (req, res) => {
+
+  try {
+    const { user, room } = req.body;
+
+    const roomDetails = await roomModel.findOne({ _id: room._id });
+    const userDetails = await userModel.findOne({ _id: user._id });
+
+    // Check if the user ID already exists in appliedCandidates
+    const existingCandidate = roomDetails.appliedCandidates.find(
+      (candidate) => candidate.userid === user._id
+    );
+
+    if (existingCandidate) {
+      return res.send({
+        success: false,
+        message: "You have already requested this room"
+      });
+    }
+
+    const appliedCandidate = {
+      userid: user._id,
+      appliedDate: moment().format("MMM DD yyyy"),
+    };
+    roomDetails.appliedCandidates.push(appliedCandidate);
+
+    await roomDetails.save();
+
+
+    const appliedRoom = {
+      roomid: room._id,
+      appliedDate: moment().format("MMM DD yyyy"),
+    };
+
+    userDetails.appliedRooms.push(appliedRoom);
+
+    await userDetails.save();
+
+    res.send({
+      success: true,
+      message: "Room Requested successfully",
+      roomDetails,
+      userDetails
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "Request for Rent Failed"
     })
   }
 }

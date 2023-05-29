@@ -148,7 +148,7 @@ const Register = () => {
 
                 <Field
                   name="phoneNumber"
-                  className="input mt-2"
+                  className="input mt-2 text-slate-100"
                   placeholder="Phone Number"
                 />
                 {errors.phoneNumber && touched.phoneNumber ? (
@@ -159,7 +159,7 @@ const Register = () => {
                   id="password"
                   name="password"
                   placeholder="Enter your password"
-                  className="input mt-2"
+                  className="input mt-2 text-slate-100"
                 />
                 <ErrorMessage
                   className=" text-red-700"
@@ -171,7 +171,7 @@ const Register = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder="Confirm your password"
-                  className="input mt-2"
+                  className="input mt-2 text-slate-100"
                 />
                 <ErrorMessage
                   className=" text-red-700"

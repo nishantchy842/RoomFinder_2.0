@@ -16,16 +16,33 @@ app.use(
   express.static(path.join(__dirname, "../client/src/uploads"))
 );
 
+const http = require('http');
+const { Server } = require('socket.io');
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*"
+  }
+});
+
+
 //connect database
 connectDb();
+
 //routes
 app.use("/api/auth", userRoute);
 app.use("/api/room", roomRoute);
 
-app.get("/", (req, res) => {
-  res.send("initial setup");
+io.on('connection', (socket) => {
+  console.log("connected")
+
+  socket.on("chat", (payload) => {
+    console.log("what is payLoad", payload)
+    io.emit("chat", payload)
+  })
 });
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`Server running is port ${process.env.PORT}`);
 });

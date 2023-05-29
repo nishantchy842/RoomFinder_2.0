@@ -13,6 +13,7 @@ import UpdateRoom from "../pages/PostedRoom/UpdateRoom";
 import PageNotFound from "../Utils/PageNotFound";
 import SearchResult from "../pages/searchResult/SearchResult";
 import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
+import Dashboard from "../pages/userDashboard/Dashboard";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -52,6 +53,7 @@ const UserRoutes = () => {
       <Route path="/update-room" element={<UpdateRoom />} />
       <Route path="*" element={<PageNotFound />} />
       <Route path="/result" element={<SearchResult />} />
+      <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
 
     </Routes>

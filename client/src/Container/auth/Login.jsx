@@ -131,7 +131,8 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  className="input placeholder:text-slate-400"
+                  type="password"
+                  className="input placeholder:text-slate-400 text-slate-100"
                   placeholder="Enter your valid password"
                 />
               </Form.Item>

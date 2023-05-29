@@ -15,7 +15,7 @@ const SimilarRoom = ({ item }) => {
 
     useEffect(() => {
         handleData()
-    }, [result])
+    }, [])
     return (
         <div className={`${styles.paddingY} min-h-screen w-screen `}>
             <p className={`${styles.heroHeadText} capitalize`}>similar Rooms </p>

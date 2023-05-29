@@ -21,7 +21,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, userProfilePicture, username } = useSelector(state => state.user)
 
-  const settings = [username, "My Post", 'Dashboard', 'Logout'];
+  const settings = [username, "My Post", 'Logout'];
 
   const dispatch = useDispatch()
   const handleOpenUserMenu = (event) => {
@@ -37,6 +37,9 @@ const Header = () => {
     }
     if (e.target.textContent == "My Post") {
       navigate('/mypost')
+    }
+    if (e.target.textContent === username) {
+      navigate('/user-dashboard')
     }
   };
 
@@ -58,7 +61,7 @@ const Header = () => {
 
             {
               isLoggedIn ?
-                <Tooltip title="Open settings">
+                <Tooltip title="Open Menu">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt="Remy Sharp" src={`${import.meta.env.VITE_APP_URL}/uploads/${userProfilePicture}`}
                       sx={{ width: 50, height: 50 }}> </Avatar>

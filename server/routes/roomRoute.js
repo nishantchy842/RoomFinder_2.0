@@ -10,7 +10,8 @@ const { createRoom,
     productFiltersController,
     realtedProductController,
     placeName,
-    filterByPrice } =
+    filterByPrice,
+    requestRoom } =
     require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
@@ -54,5 +55,7 @@ router.get("/related-product/:pid", realtedProductController);
 router.get("/placename", placeName)
 //filter by price
 router.post("/filterprice", filterByPrice)
+//
+router.post('/request-room', requestRoom)
 
 module.exports = router

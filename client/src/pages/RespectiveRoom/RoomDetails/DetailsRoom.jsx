@@ -41,7 +41,7 @@ const DetailsRoom = ({ item }) => {
             <div className="title border-b-2 mb-20">
                 <Box sx={{ flexGrow: 1, flexWrap: 'wrap' }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={9} className={`${styles.heroSubText} text-primary capitalize font-extrabold`}>
+                        <Grid item xs={9} className={`${styles.heroSubText} text-primary capitalize underline`}>
                             {item.title}
                         </Grid>
                         <Grid item xs={3} className={`${styles.sectionSubText} capitalize bg-slate-400 rounded-lg text-slate-200`}>
