@@ -82,12 +82,12 @@ exports.userPostLogin = async (req, res) => {
             });
         }
         //token
-        const token = await JWT.sign({ 
-            _id: user._id , 
-            name: user.name, 
-            uPhoto: user.profile ,
+        const token = await JWT.sign({
+            _id: user._id,
+            name: user.name,
+            uPhoto: user.profile,
             uEmail: user.email,
-            uPhone:user.phone
+            uPhone: user.phone
         }, process.env.SECRETE_KEY, {
             expiresIn: "7d",
         })
@@ -111,6 +111,25 @@ exports.userPostLogin = async (req, res) => {
             success: false,
             message: 'Fail login',
             error
+        })
+    }
+}
+
+exports.getSingleUser = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.params.id)
+
+        res.status(200).send({
+            success: true,
+            message: "user info",
+            user
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "get user failed",
         })
     }
 }
