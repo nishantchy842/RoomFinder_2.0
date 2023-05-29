@@ -16,16 +16,15 @@ app.use(
   express.static(path.join(__dirname, "../client/src/uploads"))
 );
 
-const http = require('http');
-const { Server } = require('socket.io');
+const http = require("http");
+const { Server } = require("socket.io");
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*"
-  }
+    origin: "*",
+  },
 });
-
 
 //connect database
 connectDb();
@@ -34,13 +33,13 @@ connectDb();
 app.use("/api/auth", userRoute);
 app.use("/api/room", roomRoute);
 
-io.on('connection', (socket) => {
-  console.log("connected")
+io.on("connection", (socket) => {
+  console.log("connected");
 
   socket.on("chat", (payload) => {
-    console.log("what is payLoad", payload)
-    io.emit("chat", payload)
-  })
+    console.log("what is payLoad", payload);
+    io.emit("chat", payload);
+  });
 });
 
 server.listen(process.env.PORT, () => {
