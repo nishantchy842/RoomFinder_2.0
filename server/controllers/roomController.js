@@ -326,6 +326,9 @@ exports.requestRoom = async (req, res) => {
 
     const appliedCandidate = {
       userid: user._id,
+      userName:user.name,
+      userPhone: user.phone,
+      userEmail: user.email,
       appliedDate: moment().format("MMM DD yyyy"),
     };
     roomDetails.appliedCandidates.push(appliedCandidate);
@@ -335,6 +338,10 @@ exports.requestRoom = async (req, res) => {
 
     const appliedRoom = {
       roomid: room._id,
+      roomPrice: room.price,
+      roomUname: room.uName,
+      roomUphone: room.uPhone,
+      roomUphoto: room.uPhoto,
       appliedDate: moment().format("MMM DD yyyy"),
     };
 

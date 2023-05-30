@@ -22,7 +22,8 @@ const PopupRoom = ({ popupInfo }) => {
         uEmail,
         uName,
         uPhoto,
-        roomId
+        roomId,
+        appliedCandidates
     } = popupInfo;
 
     const item = {
@@ -39,6 +40,7 @@ const PopupRoom = ({ popupInfo }) => {
         uEmail,
         uName,
         uPhoto,
+        appliedCandidates,
         _id: roomId
     }
     console.log(item.createdAt)

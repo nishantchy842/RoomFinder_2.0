@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Layout from '../../Component/Layout/Layout';
 import AboutMe from './AboutMe';
 import MyRoomRequests from './MyRoomRequests';
+import RequestedRoom from './RequestedRoom';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -90,7 +91,7 @@ const Dashboard = () => {
                         <MyRoomRequests />
                     </TabPanel>
                     <TabPanel value={value} index={2} dir={theme.direction}>
-                        Item Three
+                        <RequestedRoom />
                     </TabPanel>
                 </SwipeableViews>
             </Box>
