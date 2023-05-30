@@ -1,6 +1,7 @@
 .about-me-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .profile-dashboard-card {
@@ -36,6 +37,7 @@
   border-radius: 10px;
   border: 5px solid white;
   position: relative;
+  object-fit: cover;
   z-index: 2;
 }
 
