@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./admindashboard.css";
 import { FaUserFriends, FaHouseUser } from "react-icons/fa";
 import Layout from "../../Component/Layout/Layout";
 import Piechart from "./Piechart";
 import Linechart from "./Linechart";
+import { styles } from "../../Utils/Style";
+import { Box, Divider, List, Paper, Typography } from "@mui/material";
 
 const AdminDashboard = () => {
   const [recentUsers, setRecentUsers] = useState([
@@ -70,80 +72,93 @@ const AdminDashboard = () => {
 
   return (
     <Layout>
-      <div className="admin-container mt-24">
-        <div className="admin-data-container">
-          <div className="admin-room-data">
-            <div className="admin-data-title">Total Users</div>
+      <Box
+        sx={{
+          display: { xs: 'flex', md: 'grid' },
+          gridTemplateColumns: 'repeat(3,1fr)',
+          gridAutoRows: 'minmax(100px, auto)',
+          gap: 3,
+          textAlign: 'center',
+          flexDirection: 'column',
+          marginTop: "90px",
+        }}
+      >
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Users</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <div className="admin-data-icon">
               <FaUserFriends />
             </div>
-            <div className="admin-data">200 Users</div>
-          </div>
-          <div className="admin-user-data">
-            <div className="admin-data-title">Total Rooms</div>
+            <Typography variant="h4">124</Typography> {/* user length */}
+          </Box>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Rooms</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <div className="admin-data-icon">
               <FaHouseUser />
             </div>
-            <div className="admin-data">75 Rooms</div>
-          </div>
-        </div>
-        <div className="admin-piechart-container">
-          <div className="admin-recent-data-title">Piechart</div>
+            <Typography variant="h4">222</Typography> {/* room length */}
+          </Box>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: 3, gridRow: '1/4' }}>
+          <Box>
+            <Typography variant="h4">Recently added Users</Typography>
+            <List>
+              {recentUsers.map((user) => (
+                <div key={user.id}>
+                  <img
+                    src={user.image}
+                    alt={`User ${user.id}`}
+                    className="admin-recent-data-img"
+                  />
+                  <div className="admin-recent-name">{user.username}</div>
+                  <div className="admin-recent-time">
+                    Time created: {user.timestamp}
+                  </div>
+                </div>
+              ))}
+            </List>
+          </Box>
+          <Divider sx={{ mt: 3, mb: 3, opacity: 0.7 }} />
+          <Box>
+            <Typography variant="h4">Recently added Rooms</Typography>
+            <List>
+              {recentRooms.map((room) => (
+                <div key={room.id}>
+                  <img
+                    src={room.imageName}
+                    alt={`Room ${room.id}`}
+                    className="admin-recent-data-img"
+                  />
+                  <div className="admin-recent-name">{room.roomtitle}</div>
+                  <div className="admin-recent-time">
+                    Time added: {room.timestamp}
+                  </div>
+                </div>
+              ))}
+            </List>
+          </Box>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: '1/3' }}>
           <Piechart />
-        </div>
-        <div className="admin-linechart-container">
-          <div className="admin-recent-data-title">Linechart</div>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: '1/3' }}>
           <Linechart />
-        </div>
-
-        <div className="admin-recent-data-container">
-          <div className="admin-recent-user-data">
-            <div className="admin-recent-data-card">
-              <div className="admin-recent-data-title">
-                Recently added users
-              </div>
-              <div className="admin-recent-data-grid">
-                {recentUsers.map((user) => (
-                  <div key={user.id}>
-                    <img
-                      src={user.image}
-                      alt={`User ${user.id}`}
-                      className="admin-recent-data-img"
-                    />
-                    <div className="admin-recent-name">{user.username}</div>
-                    <div className="admin-recent-time">
-                      Time created: {user.timestamp}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="admin-recent-room-data">
-            <div className="admin-recent-data-card">
-              <div className="admin-recent-data-title">
-                Recently added rooms
-              </div>
-              <div className="admin-recent-data-grid">
-                {recentRooms.map((room) => (
-                  <div key={room.id}>
-                    <img
-                      src={room.imageName}
-                      alt={`Room ${room.id}`}
-                      className="admin-recent-data-img"
-                    />
-                    <div className="admin-recent-name">{room.roomtitle}</div>
-                    <div className="admin-recent-time">
-                      Time added: {room.timestamp}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </Paper>
+      </Box>
     </Layout>
   );
 };
