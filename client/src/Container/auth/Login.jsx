@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let { state } = useLocation();
-
+  console.log(state?.onSuccessNavigation, "login")
   const onFinish = async (values) => {
     const { email, password } = values;
     try {
@@ -44,8 +44,8 @@ const Login = () => {
         dispatch(apiResStatus(true));
         localStorage.setItem("token", token);
         localStorage.setItem("data", JSON.stringify(res.data));
-        if (state?.onSuccessNavigation === "/add-room") {
-          navigate("/add-room");
+        if (state?.onSuccessNavigation) {
+          navigate(state.onSuccessNavigation);
         } else {
           navigate("/");
         }

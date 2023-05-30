@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Layout from '../../Component/Layout/Layout';
 import AboutMe from './AboutMe';
+import MyRoomRequests from './MyRoomRequests';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -83,10 +84,10 @@ const Dashboard = () => {
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                       <AboutMe />
+                        <AboutMe />
                     </TabPanel>
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        Item Two
+                        <MyRoomRequests />
                     </TabPanel>
                     <TabPanel value={value} index={2} dir={theme.direction}>
                         Item Three

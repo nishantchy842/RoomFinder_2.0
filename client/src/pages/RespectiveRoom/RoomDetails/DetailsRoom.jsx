@@ -34,7 +34,7 @@ const DetailsRoom = ({ item }) => {
 
 
     return (
-        <div className={`${styles.padding} w-full min-h-[70vh] lg:w-[60%]`}>
+        <div className={`${styles.padding} w-full min-h-[70vh] shadows lg:w-[55%]`}>
             <p
                 className={`${styles.sectionSubText} lowercase bg-slate-300 text-primary absolute top-[29rem] z-10 right-11 p-1`}>
                 {time}</p>
@@ -42,7 +42,7 @@ const DetailsRoom = ({ item }) => {
                 <Box sx={{ flexGrow: 1, flexWrap: 'wrap' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9} className={`${styles.heroSubText} text-primary capitalize underline`}>
-                            {item.title}
+                            {item?.title}
                         </Grid>
                         <Grid item xs={3} className={`${styles.sectionSubText} capitalize bg-slate-400 rounded-lg text-slate-200`}>
                             <p> <strong>price per Month:  </strong>  <span className="text-primary font-bold">Nrs {item.price}</span></p>

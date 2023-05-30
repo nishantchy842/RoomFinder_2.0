@@ -2,38 +2,46 @@ import { styles } from "../../../Utils/Style"
 import PropTypes from "prop-types";
 import { Image, Tag } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { apiResStatus, setAlertMessages } from "../../../Redux/Reducer/roomSlice";
+import { useNavigate } from "react-router";
+
 
 const LandLord = ({ item }) => {
     const dispatch = useDispatch()
-
-
-    const { user } = JSON.parse(localStorage.getItem("data"))
-    console.log(user)
+    const navigate = useNavigate()
+    const [result, setResult] = useState(false)
+    const { isLoggedIn, id } = useSelector(state => state.user)
 
     //to get usedetails
-    debugger
     const handleRequest = async () => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_APP_URL}/api/room/request-room`, {
-                room: item,
-                user
-            })
-            dispatch(setAlertMessages(data.message));
-            dispatch(apiResStatus(true));
+            if (isLoggedIn) {
+                const { user } = JSON.parse(localStorage.getItem("data"))
+                const { data } = await axios.post(`${import.meta.env.VITE_APP_URL}/api/room/request-room`, {
+                    room: item,
+                    user
+                })
+                dispatch(setAlertMessages(data.message));
+                dispatch(apiResStatus(true));
+                setResult(true)
+            } else {
+                navigate("/login", {
+                    state: { onSuccessNavigation: `/card` },
+                });
+            }
+
         } catch (error) {
             console.log(error)
         }
     }
-    const userid = JSON.parse(localStorage.getItem("data")).user._id;
 
-    const alreadyApplied = item.appliedCandidates.map((candidate) => candidate.userid === userid);
-    console.log(alreadyApplied)
+    const alreadyApplied = item.appliedCandidates.map((candidate) => candidate.userid);
+    var foundUser = alreadyApplied.find((userid) => userid === id);
     return (
         <>
-            <div className={`${styles.padding} w-full min-h-[70vh] lg:w-[40%]`}>
+            <div className={`${styles.padding} w-full min-h-[70vh] shadows lg:w-[40%]`}>
                 <div className=" min-h-[100vh] border w-full  md:w-[50%]`">
                     <div className=" relative right-0 -top-10 overflow-hidden h-24 flex flex-col justify-center items-center">
                         <Image
@@ -53,8 +61,8 @@ const LandLord = ({ item }) => {
                             >Email: {item.uEmail}</p>
 
                             {
-                                alreadyApplied ===true ?
-                                    <Tag color="green">Already Applied</Tag>
+                                foundUser || result ?
+                                    <Tag color="green">Requested</Tag>
                                     :
                                     <button className="btn" onClick={handleRequest}>Request Room</button>
                             }
