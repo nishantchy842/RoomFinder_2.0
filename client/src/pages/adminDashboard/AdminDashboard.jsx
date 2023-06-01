@@ -1,74 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./admindashboard.css";
 import { FaUserFriends, FaHouseUser } from "react-icons/fa";
 import Layout from "../../Component/Layout/Layout";
 import Piechart from "./Piechart";
 import Linechart from "./Linechart";
-import { styles } from "../../Utils/Style";
 import { Box, Divider, List, Paper, Typography } from "@mui/material";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { totalUsers } from "../../Redux/Reducer/userSlice";
+import { totalRoom } from "../../Redux/Reducer/roomSlice";
 
 const AdminDashboard = () => {
-  const [recentUsers, setRecentUsers] = useState([
-    {
-      id: 1,
-      username: "John Smith",
-      image:
-        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80",
-      timestamp: "2023-05-29 10:30 AM",
-    },
-    {
-      id: 2,
-      username: "Emily Davis",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80",
-      timestamp: "2023-05-28 03:45 PM",
-    },
-    {
-      id: 3,
-      username: "Michael Johnson",
-      image:
-        "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww&w=1000&q=80",
-      timestamp: "2023-05-27 09:15 AM",
-    },
-    {
-      id: 4,
-      username: "Sophia Martinez",
-      image:
-        "https://miro.medium.com/v2/resize:fit:1400/1*y_uyQN1xEjppGVWJJkibMQ.jpeg",
-      timestamp: "2023-05-27 09:15 AM",
-    },
-  ]);
+  const [users, setusers] = useState(0)
+  const [rooms, setRooms] = useState(0)
+  const dispatch = useDispatch()
 
-  const [recentRooms, setRecentRooms] = useState([
-    {
-      id: 1,
-      roomtitle: "Great room",
-      imageName:
-        "https://imageio.forbes.com/specials-images/imageserve/5cdb058a5218470008b0b00f/Nobu-Ryokan-Malibu/0x0.jpg?format=jpg&height=1009&width=2000",
-      timestamp: "2023-05-26 02:00 PM",
-    },
-    {
-      id: 2,
-      roomtitle: "Good room",
-      imageName:
-        "https://hips.hearstapps.com/hmg-prod/images/kips-bay-dallas-2021-bedroom-martyn-lawrence-bullard-1632328947.jpg",
-      timestamp: "2023-05-25 11:45 AM",
-    },
-    {
-      id: 3,
-      roomtitle: "Best room",
-      imageName:
-        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww&w=1000&q=80",
-      timestamp: "2023-05-24 05:30 PM",
-    },
-    {
-      id: 4,
-      roomtitle: "Babal room",
-      imageName:
-        "https://m.lemontreehotels.com/getattachment/a991b8ea-7ff7-45c4-9c3a-4c0476cef534/Business-Rooms.aspx",
-      timestamp: "2023-05-24 05:30 PM",
-    },
-  ]);
+  const totalusers = async () => {
+    const { data } = await axios.get('http://localhost:8000/api/auth/totaluser')
+    setusers(data.totaluser)
+    dispatch(totalUsers(data.totaluser))
+  }
+
+  const totalrooms = async () => {
+    const { data } = await axios.get('http://localhost:8000/api/room/totalroom')
+    setRooms(data.totalRoom)
+    dispatch(totalRoom(data.totalRoom))
+  }
+
+  const [recentUsers, setRecentUsers] = useState([]);
+
+  const recentUser = async () => {
+    const { data } = await axios.get(`http://localhost:8000/api/auth/recentusers`)
+    setRecentUsers(data.recentUser)
+  }
+
+  const [recentRooms, setRecentRooms] = useState([])
+
+  const recentRoom = async () => {
+    const { data } = await axios.get(`http://localhost:8000/api/room/recentroom`)
+    setRecentRooms(data.recentRoom)
+  }
+
+
+  useEffect(() => {
+    totalusers()
+    totalrooms()
+    recentUser()
+    recentRoom()
+  }, [])
 
   return (
     <Layout>
@@ -95,7 +74,7 @@ const AdminDashboard = () => {
             <div className="admin-data-icon">
               <FaUserFriends />
             </div>
-            <Typography variant="h4">124</Typography> {/* user length */}
+            <Typography variant="h4" className=" text-primary  p-2">{users}</Typography> {/* user length */}
           </Box>
         </Paper>
         <Paper elevation={3} sx={{ p: 3 }}>
@@ -110,7 +89,7 @@ const AdminDashboard = () => {
             <div className="admin-data-icon">
               <FaHouseUser />
             </div>
-            <Typography variant="h4">222</Typography> {/* room length */}
+            <Typography variant="h4" className=" text-primary p-2">{rooms}</Typography> {/* room length */}
           </Box>
         </Paper>
         <Paper elevation={3} sx={{ p: 2, gridColumn: 3, gridRow: '1/4' }}>
@@ -118,15 +97,15 @@ const AdminDashboard = () => {
             <Typography variant="h4">Recently added Users</Typography>
             <List>
               {recentUsers.map((user) => (
-                <div key={user.id}>
+                <div key={user._id}>
                   <img
-                    src={user.image}
+                    src={`${import.meta.env.VITE_APP_URL}/uploads/${user.profile}`}
                     alt={`User ${user.id}`}
                     className="admin-recent-data-img"
                   />
-                  <div className="admin-recent-name">{user.username}</div>
+                  <div className="admin-recent-name">Name: {user.name}</div>
                   <div className="admin-recent-time">
-                    Time created: {user.timestamp}
+                    Time created: {user.createdAt}
                   </div>
                 </div>
               ))}
@@ -137,15 +116,16 @@ const AdminDashboard = () => {
             <Typography variant="h4">Recently added Rooms</Typography>
             <List>
               {recentRooms.map((room) => (
-                <div key={room.id}>
+                <div key={room._id}>
                   <img
-                    src={room.imageName}
+                    src={room.img_collection[0]}
                     alt={`Room ${room.id}`}
                     className="admin-recent-data-img"
                   />
-                  <div className="admin-recent-name">{room.roomtitle}</div>
+                  <div className="admin-recent-name">{room.title}</div>
+                  <div className="admin-recent-name">Address: {room.place}</div>
                   <div className="admin-recent-time">
-                    Time added: {room.timestamp}
+                    Time added: {room.createdAt}
                   </div>
                 </div>
               ))}

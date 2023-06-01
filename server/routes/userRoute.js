@@ -1,5 +1,5 @@
 const express = require('express')
-const { userRegister, userPostLogin, getSingleUser } = require('../controllers/userController')
+const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers } = require('../controllers/userController')
 
 
 
@@ -25,5 +25,7 @@ router.post('/register', upload.single('profile'), userRegister)
 //login route || method post
 router.post('/login', userPostLogin)
 router.get('/user/:id', getSingleUser)
+router.get('/totaluser', totalUsers)
+router.get('/recentusers', recentUsers)
 
 module.exports = router

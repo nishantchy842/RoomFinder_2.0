@@ -33,7 +33,6 @@ exports.getRoom = async (req, res) => {
   try {
     const rooms = await roomModel
       .find({})
-      .select("-photo")
       .sort({ createdAt: -1 });
 
 
@@ -326,7 +325,7 @@ exports.requestRoom = async (req, res) => {
 
     const appliedCandidate = {
       userid: user._id,
-      userName:user.name,
+      userName: user.name,
       userPhone: user.phone,
       userEmail: user.email,
       appliedDate: moment().format("MMM DD yyyy"),
@@ -361,5 +360,31 @@ exports.requestRoom = async (req, res) => {
       success: false,
       message: "Request for Rent Failed"
     })
+  }
+}
+
+// total room count 
+exports.totalRoom = async (req, res) => {
+  try {
+    const totalRoom = await roomModel.estimatedDocumentCount()
+    res.send({
+      totalRoom
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+//recent added room
+exports.recentRooms = async (req, res) => {
+  try {
+      const recentRoom = await roomModel.find().sort({ createdAt: -1 }).limit(4)
+      res.status(200).send({
+          success:true,
+          message:"Recent users",
+          recentRoom
+      })
+  } catch (error) {
+      console.log(error)
+      res.send("no users found")
   }
 }

@@ -133,3 +133,33 @@ exports.getSingleUser = async (req, res) => {
         })
     }
 }
+//count number of users
+
+exports.totalUsers = async (req, res) => {
+    try {
+        const estimate = await userModel.estimatedDocumentCount();
+        res.status(200).send({
+            success: true,
+            totaluser: estimate
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.send("total number of user no found")
+    }
+}
+//get recently added users
+
+exports.recentUsers = async (req, res) => {
+    try {
+        const recentUser = await userModel.find().sort({ createdAt: -1 }).limit(4)
+        res.status(200).send({
+            success:true,
+            message:"Recent users",
+            recentUser
+        })
+    } catch (error) {
+        console.log(error)
+        res.send("no users found")
+    }
+}

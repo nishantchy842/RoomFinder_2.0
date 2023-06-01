@@ -5,8 +5,7 @@ import { useSelector } from "react-redux"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { GrFormView } from 'react-icons/gr'
-
+import { styles } from "../../Utils/Style";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -27,12 +26,13 @@ const MyRoomRequests = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleUser = async () => {
+  const handleUser = async (userid) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/auth/user/${id}`)
+      const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/auth/user/${userid}`)
 
-      console.log(data.user.appliedRooms)
-      setApplied(data.user.appliedRooms)
+      console.log(data)
+      setApplied(data.user)
+      setOpen(true)
     } catch (error) {
       console.log(error)
     }
@@ -43,7 +43,6 @@ const MyRoomRequests = () => {
       const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/room/userRoom/${id}/6?size=6`)
       setRoomDetails(data)
       // setPageNumber(data.totalItem)
-      console.log(data)
 
     } catch (error) {
       console.log(error)
@@ -56,8 +55,8 @@ const MyRoomRequests = () => {
 
   return (
     <div>
-      <div className="about-me-container min-h-[80vh] p-2 w-screen">
-        <div className="profile-dashboard-card shadows">
+      <div className="about-me-container min-h-[80vh] p-2 w-screen ">
+        <div className="profile-dashboard-card shadows ">
           <table className="table-fixed border z-10">
             <thead>
               <tr className="border">
@@ -66,6 +65,7 @@ const MyRoomRequests = () => {
                 <th className="border">Address</th>
                 <th className="border">Client Name</th>
                 <th className="border">Client Phone</th>
+                <th className="border">Applied Date</th>
               </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@ const MyRoomRequests = () => {
                         {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
                           item?.appliedCandidates?.map((userinfo) => {
                             return <ul key={userinfo.userid} className="list-disc cursor-pointer">
-                              <li>{userinfo?.userName}</li>
+                              <li onClick={() => handleUser(userinfo.userid)} className=" hover:text-slate-600">{userinfo?.userName}</li>
                             </ul>
                           })
                         }
@@ -91,6 +91,15 @@ const MyRoomRequests = () => {
                           item?.appliedCandidates?.map((userinfo) => {
                             return <ul key={userinfo.userid} className="list-disc">
                               <li> {userinfo?.userPhone}</li>
+                            </ul>
+                          })
+                        }
+                      </td>
+                      <td className="border p-5">
+                        {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
+                          item?.appliedCandidates?.map((userinfo) => {
+                            return <ul key={userinfo.userid} className="list-disc">
+                              <li> {userinfo?.appliedDate}</li>
                             </ul>
                           })
                         }
@@ -110,27 +119,31 @@ const MyRoomRequests = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          <Typography id="modal-modal-title" variant="h3" component="h3">
+            Tenant Details
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <table className="table-fixed border z-10">
-              <thead>
-                <tr className="border">
-                  <th className="border">Image</th>
-                  <th className="border">Title</th>
-                  <th className="border">Address</th>
-                  <th className="border">Client Phone</th>
-                  <th className="border">Applied Date</th>
-                  <th className="border">View Requests</th>
-                </tr>
-              </thead>
-              <tbody>
 
+          {
+            !applied ? "Tenant is no more with use" :
+              <div className={`${styles.padding} shadows flex flex-col justify-center items-center`}>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <img className=" rounded-full w-[100px] h-[100px]" src={`${import.meta.env.VITE_APP_URL}/uploads/${applied.profile}`} alt="profile" />
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <span> <strong>  Name:</strong></span> {applied.name}
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <span> <strong>  Phone:</strong></span> {applied.phone}
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <span> <strong>  Email:</strong></span> {applied.email}
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <span> <strong>  Address:</strong></span> {applied.address}
+                </Typography>
+              </div>
+          }
 
-              </tbody>
-            </table>
-          </Typography>
         </Box>
       </Modal>
     </div>
