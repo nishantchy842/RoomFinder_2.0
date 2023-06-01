@@ -42,8 +42,17 @@ const userSlice = createSlice({
     totalUsers: (state, actions) => {
       state.totalUsers = actions.payload
     },
+    userDetails:(state,actions)=>{
+      if (actions.payload) {
+        const { token, id, username } = actions.payload
+        state.token = token
+        state.id = id
+        state.username = username
+        // state.userProfilePicture= profile
+      }
+    }
   }
 });
 
-export const { assignUserRole, setLoginDetails, resetLoginDetails,totalUsers } = userSlice.actions;
+export const { assignUserRole, setLoginDetails, resetLoginDetails,totalUsers,userDetails } = userSlice.actions;
 export default userSlice.reducer;

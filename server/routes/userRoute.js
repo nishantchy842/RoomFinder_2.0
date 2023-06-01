@@ -1,5 +1,5 @@
 const express = require('express')
-const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers } = require('../controllers/userController')
+const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers, updateProfile } = require('../controllers/userController')
 
 
 
@@ -7,6 +7,7 @@ const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers } = 
 const router = express.Router()
 
 const multer = require('multer')
+const { requireSignIn } = require('../middlewares/authMiddleware')
 
 
 const storage = multer.diskStorage({
@@ -27,5 +28,7 @@ router.post('/login', userPostLogin)
 router.get('/user/:id', getSingleUser)
 router.get('/totaluser', totalUsers)
 router.get('/recentusers', recentUsers)
+router.patch('/updateProfile', requireSignIn, updateProfile);
+
 
 module.exports = router
