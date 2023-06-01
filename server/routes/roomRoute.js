@@ -11,7 +11,9 @@ const { createRoom,
     realtedProductController,
     placeName,
     filterByPrice,
-    requestRoom } =
+    requestRoom,
+    totalRoom,
+    recentRooms } =
     require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
@@ -57,5 +59,7 @@ router.get("/placename", placeName)
 router.post("/filterprice", filterByPrice)
 //
 router.post('/request-room', requestRoom)
+router.get('/totalroom', totalRoom)
+router.get('/recentroom', recentRooms)
 
 module.exports = router

@@ -13,7 +13,6 @@ const LandLord = ({ item }) => {
     const navigate = useNavigate()
     const [result, setResult] = useState(false)
     const { isLoggedIn, id } = useSelector(state => state.user)
-
     //to get usedetails
     const handleRequest = async () => {
         try {
@@ -36,9 +35,10 @@ const LandLord = ({ item }) => {
             console.log(error)
         }
     }
-
     const alreadyApplied = item.appliedCandidates.map((candidate) => candidate.userid);
-    var foundUser = alreadyApplied.find((userid) => userid === id);
+    const foundUser = alreadyApplied.find((userid) => userid === id);
+
+    console.log(foundUser)
     return (
         <>
             <div className={`${styles.padding} w-full min-h-[70vh] shadows lg:w-[40%]`}>
@@ -66,8 +66,6 @@ const LandLord = ({ item }) => {
                                     :
                                     <button className="btn" onClick={handleRequest}>Request Room</button>
                             }
-
-
                         </div>
                     </div>
                 </div>

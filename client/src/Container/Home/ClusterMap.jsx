@@ -40,6 +40,7 @@ const ClusterMap = () => {
         uName: room.uName,
         uPhone: room.uPhone,
         uEmail: room.uEmail,
+        appliedCandidates: room.appliedCandidates,
         createdAt: room.createdAt
       },
       geometry: {

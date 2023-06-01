@@ -1,3 +1,4 @@
+const roomModel = require('../models/roomModel')
 const userModel = require('../models/userModel')
 const { hashPassword, comparePassword } = require("../helper/userHelper");
 const JWT = require('jsonwebtoken')
@@ -133,3 +134,77 @@ exports.getSingleUser = async (req, res) => {
         })
     }
 }
+//count number of users
+
+exports.totalUsers = async (req, res) => {
+    try {
+        const estimate = await userModel.estimatedDocumentCount();
+        res.status(200).send({
+            success: true,
+            totaluser: estimate
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.send("total number of user no found")
+    }
+}
+//get recently added users
+
+exports.recentUsers = async (req, res) => {
+    try {
+        const recentUser = await userModel.find().sort({ createdAt: -1 }).limit(4)
+        res.status(200).send({
+            success: true,
+            message: "Recent users",
+            recentUser
+        })
+    } catch (error) {
+        console.log(error)
+        res.send("no users found")
+    }
+}
+
+//update profile
+
+exports.updateProfile = async (req, res) => {
+    try {
+        const updatedUser = await userModel.findByIdAndUpdate(req.user.id, req.body, {
+            new: true,
+        });
+        console.log(req.user.id, req.body)
+        const { id, uName, uPhone, uEmail } = updatedUser;
+
+        await roomModel.updateMany({ id, uName, uPhone, uEmail });
+
+        const token = JWT.sign({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            // uPhoto: updatedUser.profile,
+            uEmail: updatedUser.email,
+            uPhone: updatedUser.phone
+        }, process.env.SECRETE_KEY, {
+            expiresIn: '7d',
+        });
+        res.status(200).send({
+            success: true,
+            message: "Update Successfully",
+            user: {
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                phone: updatedUser.phone,
+                address: updatedUser.address,
+                role: updatedUser.role,
+                // profile: updatedUser?.profile
+            },
+            token,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "update profile failed"
+        })
+    }
+};

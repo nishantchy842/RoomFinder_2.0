@@ -6,7 +6,8 @@ export const initialState = {
   token: '',
   id: '',
   username: '',
-  userProfilePicture: ''
+  userProfilePicture: '',
+  totalUsers: 0
 };
 
 //What is createSlice in Redux Toolkit?
@@ -37,9 +38,21 @@ const userSlice = createSlice({
       state.userRole = ''
       state.userProfilePicture=''
       state.isLoggedIn = !state.isLoggedIn
+    },
+    totalUsers: (state, actions) => {
+      state.totalUsers = actions.payload
+    },
+    userDetails:(state,actions)=>{
+      if (actions.payload) {
+        const { token, id, username } = actions.payload
+        state.token = token
+        state.id = id
+        state.username = username
+        // state.userProfilePicture= profile
+      }
     }
   }
 });
 
-export const { assignUserRole, setLoginDetails, resetLoginDetails } = userSlice.actions;
+export const { assignUserRole, setLoginDetails, resetLoginDetails,totalUsers,userDetails } = userSlice.actions;
 export default userSlice.reducer;

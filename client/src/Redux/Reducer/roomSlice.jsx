@@ -1,17 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: 0,
-  currentUser: null,
-  openLogin: false,
-  loading: false,
   alert: { isApiSuccessMsgOpen: false, apiResIsSuccess: true, apiSuccessMessage: '' },
   profile: { open: false, file: null, photoURL: '' },
   images: [],
   details: { title: '', description: '', price: 0, address: '', place: '' },
   amenities: [],
   location: { lng: 0, lat: 0 },
-  rooms: [],
+  totalRoomCount: 0
 }
 
 export const roomSlice = createSlice({
@@ -46,7 +42,10 @@ export const roomSlice = createSlice({
     },
     apiResStatus: (state, actions) => {
       state.alert.apiResIsSuccess = actions.payload
-    }
+    },
+    totalRoom: (state, actions) => {
+      state.totalRoomCount = actions.payload
+    },
   },
 })
 
@@ -59,7 +58,8 @@ export const {
   DELETE_IMAGES,
   setAlertMessages,
   resetAlertMessages,
-  apiResStatus
+  apiResStatus,
+  totalRoom
 } = roomSlice.actions
 
 export default roomSlice.reducer

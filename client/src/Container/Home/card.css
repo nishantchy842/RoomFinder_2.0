@@ -15,13 +15,18 @@
   width: 40%;
   height: 160px;
   background-image: url("https://hips.hearstapps.com/hmg-prod/images/modern-living-room-black-white-1656377050.jpg?crop=1.00xw:0.755xh;0,0.202xh&resize=1200:*");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
   background-size: cover;
-  border-radius: 7px;
+  border: 0px solid #1C6EA4;
+  border-radius: 0px 60px 0px 60px;
   box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 }
 
 .gradient:nth-child(even) {
   background-image: url("https://www.thespruce.com/thmb/2_Q52GK3rayV1wnqm6vyBvgI3Ew=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg");
+  border: 0px solid #1C6EA4;
+  border-radius: 60px 0px 60px 0px;
 }

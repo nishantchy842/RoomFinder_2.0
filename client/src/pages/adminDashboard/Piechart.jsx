@@ -1,17 +1,20 @@
 import { Chart } from "react-google-charts";
-
-export const data = [
-  ["Entity", "Total Number"],
-  ["Users", 200],
-  ["Rooms", 75],
-];
-
-export const options = {
-  title: "Total stats",
-  is3D: true,
-};
+import { useSelector } from "react-redux";
 
 const Piechart = () => {
+  const { totalRoomCount } = useSelector((state) => state.room);
+  const { totalUsers } = useSelector((state) => state.user);
+
+  const data = [
+    ["Entity", "Total Number"],
+    [`Users ${totalRoomCount}`, totalRoomCount],
+    [`Rooms ${totalUsers}`, totalUsers],
+  ];
+
+  const options = {
+    title: "Total status",
+    is3D: true,
+  };
   return (
     <Chart
       chartType="PieChart"

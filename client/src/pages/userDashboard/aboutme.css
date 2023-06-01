@@ -5,8 +5,8 @@
 }
 
 .profile-dashboard-card {
-  width: 70%;
-  height: 550px;
+  width: 85%;
+  min-height: 80vh;
   background: linear-gradient(to right, rgb(137, 104, 255), rgb(175, 152, 255));
   display: flex;
   flex-direction: column;

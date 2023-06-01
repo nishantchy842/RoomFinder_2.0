@@ -1,15 +1,18 @@
 .admin-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  /* align-items: center; */
+  flex-wrap: wrap;
 }
 
 .admin-data-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .admin-room-data,
