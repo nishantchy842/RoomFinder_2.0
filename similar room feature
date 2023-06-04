@@ -1,0 +1,48 @@
+[33mfdf6d6c[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m HEAD@{0}: commit (merge): Merge branch 'testdev' of https://github.com/nishantchy842/RoomFinder_2.0 into develop
+[33m7c8c714[m[33m ([m[1;31morigin/develop[m[33m)[m HEAD@{1}: commit: similar room feature
+[33m1a35f4f[m HEAD@{2}: commit: respective room ui design done
+[33me510d00[m HEAD@{3}: commit: price filter
+[33m54216ce[m HEAD@{4}: commit: filter by place name
+[33mfa8b68d[m HEAD@{5}: commit: done pagination in frontend
+[33m56ba07e[m HEAD@{6}: commit: pagination module built in backend
+[33m84899b6[m HEAD@{7}: commit: search bar in map
+[33m8831318[m HEAD@{8}: commit: search feature added in frontend
+[33m2cea061[m HEAD@{9}: pull origin testdev: Merge made by the 'ort' strategy.
+[33m4a3cfd4[m HEAD@{10}: commit: search module added in backend
+[33m1b7821e[m HEAD@{11}: pull origin testdev: Merge made by the 'ort' strategy.
+[33mfd7422a[m HEAD@{12}: pull origin testdev: Merge made by the 'ort' strategy.
+[33ma9669c0[m HEAD@{13}: commit: some styling and responsive
+[33m5a098f4[m HEAD@{14}: commit: cluster feature updated
+[33maee33fe[m HEAD@{15}: commit: route for page not found
+[33m907c31f[m HEAD@{16}: commit: update feature added
+[33ma289e3a[m HEAD@{17}: commit: added update room controller in backend
+[33maa0ee26[m HEAD@{18}: commit: delete feature implemented
+[33md6a662d[m HEAD@{19}: commit: getting user name and picture of their respective room posted
+[33m12aed1f[m HEAD@{20}: commit: user picture feature and get particular user rooms
+[33meee1aa8[m[33m ([m[1;31morigin/Ranjit[m[33m)[m HEAD@{21}: pull origin Ranjit: Fast-forward
+[33md65e7cd[m HEAD@{22}: commit: done with Authorization
+[33mecf5c17[m HEAD@{23}: commit: done with auth and alert bar
+[33m78be36f[m HEAD@{24}: commit: card testing
+[33m8e5c2b3[m HEAD@{25}: pull origin swarup: Fast-forward
+[33mc7784e9[m HEAD@{26}: commit: working on auth
+[33m21dc7d4[m HEAD@{27}: commit: done with respective room on card click
+[33m6392da3[m HEAD@{28}: commit: test complete
+[33m2663c8f[m HEAD@{29}: commit: done with image upload using multer
+[33m64eda4c[m HEAD@{30}: commit: working on card
+[33m6a624e2[m HEAD@{31}: commit: post room from front end
+[33m839540e[m HEAD@{32}: commit: multer setup and get all room module
+[33m93e8b72[m HEAD@{33}: commit: some styles in register and login
+[33me36f2ca[m[33m ([m[1;32mswarup[m[33m)[m HEAD@{34}: pull origin swarup: Fast-forward
+[33mfd07491[m HEAD@{35}: checkout: moving from swarup to develop
+[33me36f2ca[m[33m ([m[1;32mswarup[m[33m)[m HEAD@{36}: commit: card and list room button functional
+[33me5dc06d[m HEAD@{37}: checkout: moving from develop to swarup
+[33mfd07491[m HEAD@{38}: commit: auth setup in backend
+[33mcd36d08[m HEAD@{39}: commit: add room with validation
+[33mb411ef5[m HEAD@{40}: commit: redux setup and details field added for landlord
+[33m3f1645e[m HEAD@{41}: commit: learnig to push
+[33m8c72c80[m HEAD@{42}: pull origin main: Fast-forward
+[33me5d090a[m[33m ([m[1;32mmain[m[33m)[m HEAD@{43}: checkout: moving from main to develop
+[33me5d090a[m[33m ([m[1;32mmain[m[33m)[m HEAD@{44}: checkout: moving from feature/layout to main
+[33mf1a527b[m[33m ([m[1;31morigin/feature/layout[m[33m, [m[1;32mfeature/layout[m[33m)[m HEAD@{45}: checkout: moving from main to feature/layout
+[33me5d090a[m[33m ([m[1;32mmain[m[33m)[m HEAD@{46}: Branch: renamed refs/heads/master to refs/heads/main
+[33me5d090a[m[33m ([m[1;32mmain[m[33m)[m HEAD@{48}: commit (initial): intial setup

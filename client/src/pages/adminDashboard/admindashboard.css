@@ -1,0 +1,130 @@
+.admin-container {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+
+.admin-data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-room-data,
+.admin-user-data,
+.admin-recent-user-data,
+.admin-recent-room-data {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 100%;
+}
+
+.admin-room-data,
+.admin-user-data {
+  width: 400px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-data-title {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.admin-data-icon {
+  margin-top: 10px;
+  font-size: 60px;
+}
+
+.admin-data {
+  margin-top: 5px;
+  font-size: 30px;
+}
+
+.admin-piechart-container,
+.admin-linechart-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+}
+
+.admin-recent-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items at the top */
+  flex-wrap: wrap; /* Allow wrapping of data cards */
+}
+
+.admin-recent-user-data,
+.admin-recent-room-data {
+  margin: 20px;
+  width: 100%px;
+}
+
+.admin-recent-data-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: 600px;
+}
+
+.admin-recent-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: center; /* Align grid items vertically */
+}
+
+.admin-recent-data-title {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.admin-recent-name,
+.admin-recent-time {
+  margin-top: 5px;
+  text-align: center;
+  align-self: center;
+  width: 100%; /* Adjust the width to fill the grid columns */
+}
+
+.admin-recent-data-img {
+  margin: 0 auto;
+  align-self: center;
+  height: 75px;
+  width: 75px;
+  border-radius: 45px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-recent-data-container {
+    margin-left: 0;
+    margin-top: 20px;
+    align-self: flex-end;
+  }
+}

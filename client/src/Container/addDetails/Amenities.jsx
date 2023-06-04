@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_AMENITIES } from '../../Redux/Reducer/roomSlice';
 
 const ITEM_HEIGHT = 48;
@@ -49,16 +49,18 @@ const Amenities = () => {
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([]);
     const dispatch = useDispatch()
+    const {amenities} = useSelector(state=>state.room)
 
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        dispatch(UPDATE_AMENITIES(event.target.value))
         setPersonName(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
+        dispatch(UPDATE_AMENITIES(typeof value === 'string' ? value.split(',') : value,))
+
     };
 
     return (
@@ -69,7 +71,7 @@ const Amenities = () => {
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"
                     multiple
-                    value={personName}
+                    value={amenities}
                     onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-chip" label="Amenities" />}
                     renderValue={(selected) => (

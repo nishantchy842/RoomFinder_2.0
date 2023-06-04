@@ -1,9 +1,12 @@
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Supercluster from 'supercluster';
 import { Avatar, Paper, Tooltip } from '@mui/material';
 import useRooms from "../../hooks/useRooms"
 import { useEffect, useRef, useState } from 'react';
 import './cluster.css'
+import PopupRoom from './PopUpRoom';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import Geocoder from '../addLocation/Geocoder';
 
 const supercluster = new Supercluster({
   radius: 75,
@@ -17,7 +20,7 @@ const ClusterMap = () => {
   const [bounds, setBounds] = useState([-180, -85, 180, 85]);
   const [zoom, setZoom] = useState(0);
   const data = useRooms()
-  console.log(data)
+  const [popupInfo, setPopupInfo] = useState(null);
 
   useEffect(() => {
     const points = data.map((room) => ({
@@ -30,9 +33,15 @@ const ClusterMap = () => {
         description: room.description,
         lng: room.lng,
         lat: room.lat,
-        images: room.img_collection[0],
-        // uPhoto: room.uPhoto,
-        // uName: room.uName,
+        amenities: room.amenities,
+        address: room.address,
+        images: room.img_collection,
+        uPhoto: room.uPhoto,
+        uName: room.uName,
+        uPhone: room.uPhone,
+        uEmail: room.uEmail,
+        appliedCandidates: room.appliedCandidates,
+        createdAt: room.createdAt
       },
       geometry: {
         type: 'Point',
@@ -41,6 +50,7 @@ const ClusterMap = () => {
     }));
     setPoints(points);
   }, [data]);
+
 
   useEffect(() => {
     supercluster.load(points);
@@ -55,7 +65,7 @@ const ClusterMap = () => {
   }, [mapRef?.current]);
 
   return (
-    <div className='h-[70vh]'>
+    <div className='cluter_map h-[80vh] w-[80vw]'>
       <ReactMapGL
         initialViewState={{ latitude: 27.678011981717034, longitude: 85.307303340504 }}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
@@ -63,6 +73,7 @@ const ClusterMap = () => {
         ref={mapRef}
         onZoomEnd={(e) => setZoom(Math.round(e.viewState.zoom))}
       >
+        <Geocoder />
         {clusters.map((cluster) => {
           const { cluster: isCluster, point_count } = cluster.properties;
           const [longitude, latitude] = cluster.geometry.coordinates;
@@ -74,7 +85,7 @@ const ClusterMap = () => {
                 latitude={latitude}
               >
                 <div
-                  className="cluster-marker"
+                  className="cluster-marker hover:bg-violet-700"
                   style={{
                     width: `${10 + (point_count / points.length) * 20}px`,
                     height: `${10 + (point_count / points.length) * 20}px`,
@@ -105,14 +116,30 @@ const ClusterMap = () => {
             >
               <Tooltip title={cluster.properties.uName}>
                 <Avatar
-                  src={cluster.properties.uPhoto}
+                  src={`${import.meta.env.VITE_APP_URL}/uploads/${cluster.properties.uPhoto}`}
                   component={Paper}
                   elevation={2}
+                  onClick={() => setPopupInfo(cluster.properties)}
                 />
               </Tooltip>
             </Marker>
           );
         })}
+        {popupInfo && (
+          <Popup
+            longitude={popupInfo.lng}
+            latitude={popupInfo.lat}
+            maxWidth="auto"
+            closeOnClick={false}
+            focusAfterOpen={false}
+          // onClose={() => setPopupInfo(null)}
+          >
+            <div onClick={() => setPopupInfo(null)}>
+              <AiFillCloseCircle className="h-10 w-10 absolute -top-0.5 -right-1 z-10 cursor-pointer text-red-500" />
+            </div>
+            <PopupRoom {...{ popupInfo }} />
+          </Popup>
+        )}
       </ReactMapGL>
     </div>
   )
