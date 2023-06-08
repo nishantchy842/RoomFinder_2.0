@@ -45,7 +45,7 @@ const DetailsRoom = ({ item }) => {
                             {item?.title}
                         </Grid>
                         <Grid item xs={3} className={`${styles.sectionSubText} capitalize bg-slate-400 rounded-lg text-slate-200`}>
-                            <p> <strong>price per Month:  </strong>  <span className="text-primary font-bold">Nrs {item.price}</span></p>
+                            <p> <strong>price per Month: <br /> </strong>  <span className="text-primary font-bold">Nrs {item?.price}</span></p>
                         </Grid>
                         <Grid item xs={8} className={`${styles.sectionSubText} text-primary capitalize`}>
 

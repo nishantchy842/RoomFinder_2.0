@@ -1,5 +1,5 @@
 const express = require('express')
-const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers, updateProfile } = require('../controllers/userController')
+const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers, updateProfile, PostGetOtp } = require('../controllers/userController')
 
 
 
@@ -30,5 +30,5 @@ router.get('/totaluser', totalUsers)
 router.get('/recentusers', recentUsers)
 router.patch('/updateProfile', requireSignIn, updateProfile);
 
-
+router.post('/users', PostGetOtp)
 module.exports = router

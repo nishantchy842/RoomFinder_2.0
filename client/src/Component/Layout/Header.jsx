@@ -63,8 +63,13 @@ const Header = () => {
               isLoggedIn ?
                 <Tooltip title="Open Menu">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={`${import.meta.env.VITE_APP_URL}/uploads/${userProfilePicture}`}
-                      sx={{ width: 50, height: 50 }}> </Avatar>
+                   {
+                    userProfilePicture ?
+                     <Avatar alt="Remy Sharp" src={`${import.meta.env.VITE_APP_URL}/uploads/${userProfilePicture}`}
+                      sx={{ width: 50, height: 50 }}> </Avatar> : 
+                      <Avatar alt="Remy Sharp" 
+                      sx={{ width: 50, height: 50 }}>{username.toUpperCase().charAt(0)} </Avatar>
+                    }
                   </IconButton>
                 </Tooltip> :
                 <button className='btn'
