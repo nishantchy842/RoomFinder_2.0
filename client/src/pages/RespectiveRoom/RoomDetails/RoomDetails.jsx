@@ -1,36 +1,23 @@
-import { Box, } from '@mui/material';
+// import { Box, } from '@mui/material';
 import Description from './description';
 import PropTypes from "prop-types";
 import DetailsRoom from './DetailsRoom';
+import LandLord from './LandLord';
+import SimilarRoom from './SimilarRoom';
 
-// const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-// }));
 
 const RoomDetails = ({ item }) => {
     return (
-        <div>
-            <Box
-                sx={{
-                    maxWidth: '100vw',
-                    minHeight: '50vh',
-                    textAlign: 'center',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexWrap: 'wrap'
-                }}
-            >
-                    <DetailsRoom item={item} />
-                
-                    <Description item={item} />
+        <>
+            <div className='min-h-[80vh] pt-24 flex justify-around items-start text-start flex-wrap'>
 
-            </Box>
-        </div>
+                <DetailsRoom item={item} />
+                <LandLord item={item} />
+                <Description item={item} />
+                <SimilarRoom item={item} />
+            </div>
+        </>
+
     )
 }
 RoomDetails.propTypes = {

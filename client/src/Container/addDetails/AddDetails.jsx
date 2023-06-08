@@ -22,11 +22,11 @@ const AddDetails = () => {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    const { title, description, price } = useSelector(state => state.room)
-
+    const { title, description, price, address } = useSelector(state => state.room.details)
     const dispatch = useDispatch()
 
     const handlePriceChange = (e) => {
+        dispatch(UPDATE_DETAILS({ price: e.target.value }))
         if (!editing) setEditing(true);
         clearTimeout(timer);
         timer = setTimeout(() => {
@@ -37,7 +37,6 @@ const AddDetails = () => {
             } else {
                 if (error) setError(false);
                 if (!success) setSuccess(true);
-                dispatch(UPDATE_DETAILS({ price: e.target.value }))
             }
         }, 1000);
     };
@@ -49,6 +48,8 @@ const AddDetails = () => {
             }}
             className='inputStyles min-h-[70vh] flex justify-center items-center'
         >
+            <p>Your Address is : {address}</p>
+
             <FormControl>
                 <TextField
                     sx={{ maxWidth: '500px !important' }}
@@ -80,7 +81,7 @@ const AddDetails = () => {
                 />
             </FormControl>
             <InfoField
-                mainProps={{ name: 'title', label: 'City', value: title }}
+                mainProps={{ name: 'title', label: 'Title', value: title }}
                 minLength={5}
                 required
             />

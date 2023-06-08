@@ -8,8 +8,8 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
+  color-scheme: #f5f5f5;
 }
-
 .btn {
   @apply bg-violet-600 hover:bg-violet-700 py-3 px-6 text-slate-50 rounded-lg w-auto transition dark:bg-violet-800 dark:hover:bg-violet-900;
 }
@@ -38,16 +38,15 @@
 }
 .input {
   /* color: #8707ff; */
-  color: aliceblue;
+  /* color: black; */
   border: 2px solid #8707ff;
   border-radius: 10px;
   padding: 10px 25px;
   background: transparent;
-  min-width: 50%;
+  min-width: 60%;
   /* max-width: 100%; */
  }
 
  .input:active {
   box-shadow: 2px 2px 15px #8707ff inset;
  }
- 

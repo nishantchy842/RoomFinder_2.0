@@ -1,0 +1,77 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.error-img {
+  margin-top: 0px;
+  height: 450px;
+  width: 450px;
+  margin-left: 5px;
+  margin-right: px;
+}
+
+.error-title {
+  font-size: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.error-button {
+  margin-top: 10px;
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.error-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+}
+
+.error-button:hover {
+  color: #e8e8e8;
+}
+
+.error-button:hover::before {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .error-img {
+    height: 300px;
+    width: 300px;
+  }
+
+  .error-title {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .error-button {
+    font-size: 14px;
+  }
+}
