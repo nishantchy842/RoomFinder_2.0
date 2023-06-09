@@ -66,8 +66,10 @@ const RoomCard = () => {
                 </Drawer>
             </div>
             <div >
-                <SearchBar />
+               
+                <div className='bg-secondary h-[200px] w-[100vw]'>  <SearchBar /></div>
             </div>
+            
             <div className={`${styles.paddingX} flex w-[100%] flex-row items-start flex-wrap mt-6`}>
                 {
                     room?.map((item) => {

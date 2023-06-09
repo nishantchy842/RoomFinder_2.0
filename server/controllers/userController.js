@@ -2,6 +2,7 @@ const roomModel = require('../models/roomModel')
 const userModel = require('../models/userModel')
 const { hashPassword, comparePassword } = require("../helper/userHelper");
 const JWT = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
 
 
 exports.userRegister = async (req, res) => {
@@ -33,20 +34,41 @@ exports.userRegister = async (req, res) => {
             })
         }
         const hashedPassword = await hashPassword(password)
-        const user = await new userModel({
-            name,
-            email,
-            phone,
-            address,
-            password: hashedPassword,
-            profile: req.file.filename
-        }).save()
 
-        res.status(200).send({
-            success: true,
-            message: 'Register successfully',
-            user
-        })
+        if (!req.file) {
+            const user = await new userModel({
+                name,
+                email,
+                phone,
+                address,
+                password: hashedPassword,
+            }).save()
+            res.status(200).send({
+                success: true,
+                message: 'Register successfully',
+                user
+            })
+        } else {
+            const user = await new userModel({
+                name,
+                email,
+                phone,
+                address,
+                password: hashedPassword,
+                profile: req.file.filename
+            }).save()
+            res.status(200).send({
+                success: true,
+                message: 'Register successfully',
+                user
+            })
+        }
+
+        // res.status(200).send({
+        //     success: true,
+        //     message: 'Register successfully',
+        //     user
+        // })
 
     } catch (error) {
         console.log(error)
@@ -208,3 +230,68 @@ exports.updateProfile = async (req, res) => {
         })
     }
 };
+
+//get otp
+const mongoose = require('mongoose')
+// const { Schema } = mongoose;
+const otpSchema = new mongoose.Schema(
+    {
+        otp: {
+            type: Number
+        }
+    },
+    { timestamps: true }
+)
+const Otps = mongoose.model('Otps', otpSchema)
+////////////////////////////////////////
+
+exports.PostGetOtp = async (req, res) => {
+    // console.log(req.body);
+    const email = req.body.email
+    const randomOtpCode = Math.ceil(Math.random() * 918376)
+    await Otps.create({ otp: randomOtpCode })
+
+    try {
+        const data = await userModel.findOne({ email })
+
+        if (data) {
+            if (email == data.email) {
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'nishantchaudhary842@gmail.com',
+                        pass: process.env.EMAIL_PASSWORD
+                    }
+                })
+
+                const mailOptions = {
+                    from: '08902c3a9e8db0', // sender address
+                    to: email, // list of receivers
+                    subject: 'Reset your Super App password', // Subject line
+                    text: 'Reset your password.', // plain text body
+                    html: `<h>Reset your Room Finder App password.</h><br><h>Your 2FA Code is <h><h1  style="color:#5A0047;">${randomOtpCode}</h1> ` // html body
+                }
+
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log('Error', error)
+                    } else {
+                        console.log('Email sent!' + info.response)
+                        res.status(201).json({ status: 201, info })
+                    }
+                })
+
+                res.status(200).json({
+                    msg: 'Password reset OTP sent to email.',
+                    dbUserId: data._id
+                })
+            } else {
+                res.status(401).json({ msg: "The email address doesn't exist" })
+            }
+        } else {
+            res.status(400).json({ msg: 'Email address does not exist.' })
+        }
+    } catch (e) {
+        console.log('Error:', e)
+    }
+}
