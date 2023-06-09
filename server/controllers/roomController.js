@@ -267,7 +267,7 @@ exports.placeName = async (req, res) => {
     roomModel.distinct("place")
       .then((uniquePlaces) => {
         // 'uniquePlaces' will contain an array of unique place names
-        uniquePlaces.sort();
+        uniquePlaces.sort()
         res.status(200).send({
           success: true,
           message: "get place successfull",
