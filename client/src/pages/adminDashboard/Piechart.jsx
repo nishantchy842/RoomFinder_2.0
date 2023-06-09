@@ -7,8 +7,8 @@ const Piechart = () => {
 
   const data = [
     ["Entity", "Total Number"],
-    [`Users ${totalRoomCount}`, totalRoomCount],
-    [`Rooms ${totalUsers}`, totalUsers],
+    [`Users ${totalUsers}`, totalUsers],
+    [`Rooms ${totalRoomCount}`, totalRoomCount],
   ];
 
   const options = {
