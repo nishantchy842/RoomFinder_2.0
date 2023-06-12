@@ -16,6 +16,7 @@ import Layout from '../Component/Layout/Layout';
 import axios from 'axios'
 import { UPDATE_AMENITIES, UPDATE_DETAILS, apiResStatus, setAlertMessages } from '../Redux/Reducer/roomSlice';
 import { useNavigate } from 'react-router';
+import Khalti from './khalti/khalti';
 
 const AddRoom = () => {
   const { details, location, amenities } = useSelector(state => state.room)
@@ -26,7 +27,8 @@ const AddRoom = () => {
   const [steps, setSteps] = useState([
     { label: 'Location', completed: false },
     { label: 'Details', completed: false },
-    { label: 'Images', completed: false },
+    { label: 'Payment', completed: true },
+    { label: 'Image', completed: false },
   ]);
   const [showSubmit, setShowSubmit] = useState(false);
   const handleNext = () => {
@@ -49,9 +51,9 @@ const AddRoom = () => {
 
   useEffect(() => {
     if (images.length) {
-      if (!steps[2].completed) setComplete(2, true);
+      if (!steps[2].completed) setComplete(3, true);
     } else {
-      if (steps[2].completed) setComplete(2, false);
+      if (steps[2].completed) setComplete(3, false);
     }
   }, [images]);
   useEffect(() => {
@@ -146,7 +148,8 @@ const AddRoom = () => {
             {
               0: <AddLocation />,
               1: <AddDetails />,
-              2: <div>
+              2: <Khalti />,
+              3: <div>
                 <div className="m-3">
                   <input
                     type="file"

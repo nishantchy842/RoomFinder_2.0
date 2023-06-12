@@ -3,12 +3,13 @@ const userModel = require('../models/userModel')
 const { hashPassword, comparePassword } = require("../helper/userHelper");
 const JWT = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
-
+const sendEmail = require('../utils/sendEmail')
+const Token = require('../models/token')
 
 exports.userRegister = async (req, res) => {
     try {
         const { name, email, phone, address, password } = req.body
-        //backend validation
+        //backend validationssss
         if (!name) {
             return res.status(500).send("Name is required")
         }
@@ -35,8 +36,9 @@ exports.userRegister = async (req, res) => {
         }
         const hashedPassword = await hashPassword(password)
 
+        let user = {}
         if (!req.file) {
-            const user = await new userModel({
+             user = await new userModel({
                 name,
                 email,
                 phone,
@@ -49,7 +51,7 @@ exports.userRegister = async (req, res) => {
                 user
             })
         } else {
-            const user = await new userModel({
+             user = await new userModel({
                 name,
                 email,
                 phone,
@@ -64,11 +66,15 @@ exports.userRegister = async (req, res) => {
             })
         }
 
-        // res.status(200).send({
-        //     success: true,
-        //     message: 'Register successfully',
-        //     user
-        // })
+        const token = await new Token({
+			userId: user._id,
+			token: Math.ceil(Math.random() * 918376),
+		}).save();
+		const url = `http://localhost:8000/api/auth/${user._id}/verify/${token.token}`;
+		await sendEmail(user.email, "Verify Email", url);
+
+        // res.status(201)
+		// 	.send({ message: "An Email sent to your account please verify" });
 
     } catch (error) {
         console.log(error)
