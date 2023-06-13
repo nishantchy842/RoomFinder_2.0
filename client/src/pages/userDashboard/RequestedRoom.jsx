@@ -39,11 +39,12 @@ const RequestedRoom = () => {
             <Typography id="modal-modal-title" variant="h2" component="h2" className='z-20 capitalize text-center'>
                 Requested Rooms
             </Typography>
-            <div className="about-me-container h-[80vh]">
 
-                <div className="profile-dashboard-card">
-                    {
-                        applied.length == 0 ? "there is no Request yet" :
+            <div className="about-me-container h-[80vh]">
+                {
+                    applied.length == 0 ? "there is no Request yet" :
+                        <div className="profile-dashboard-card">
+
                             <table className="table-fixed border z-10 scroll-auto">
                                 <thead>
                                     <tr className="border">
@@ -73,9 +74,11 @@ const RequestedRoom = () => {
 
                                 }
                             </table>
-                    }
-                </div>
+
+                        </div>
+                }
             </div>
+
             <RoomModel roomDetails={roomDetails} open={open} handleClose={handleClose} />
         </div>
     )

@@ -6,7 +6,7 @@ module.exports = async (email, subject, text) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'nishantchaudhary842@gmail.com',
+                user: process.env.EMAIL,
                 pass: process.env.EMAIL_PASSWORD
             }
         });
@@ -15,7 +15,8 @@ module.exports = async (email, subject, text) => {
             from: '08902c3a9e8db0',
             to: email,
             subject: subject,
-            text: text,
+            text: 'Verify your email',
+            html: `<a href=${text}>click here to Verify</a>`
         });
         console.log("email sent successfully");
     } catch (error) {

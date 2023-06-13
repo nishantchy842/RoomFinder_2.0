@@ -38,20 +38,15 @@ exports.userRegister = async (req, res) => {
 
         let user = {}
         if (!req.file) {
-             user = await new userModel({
+            user = await new userModel({
                 name,
                 email,
                 phone,
                 address,
                 password: hashedPassword,
             }).save()
-            res.status(200).send({
-                success: true,
-                message: 'Register successfully',
-                user
-            })
         } else {
-             user = await new userModel({
+            user = await new userModel({
                 name,
                 email,
                 phone,
@@ -59,22 +54,21 @@ exports.userRegister = async (req, res) => {
                 password: hashedPassword,
                 profile: req.file.filename
             }).save()
-            res.status(200).send({
-                success: true,
-                message: 'Register successfully',
-                user
-            })
         }
 
         const token = await new Token({
-			userId: user._id,
-			token: Math.ceil(Math.random() * 918376),
-		}).save();
-		const url = `http://localhost:8000/api/auth/${user._id}/verify/${token.token}`;
-		await sendEmail(user.email, "Verify Email", url);
-
-        // res.status(201)
-		// 	.send({ message: "An Email sent to your account please verify" });
+            userId: user._id,
+            token: Math.ceil(Math.random() * 918376),
+        }).save();
+        const url = `http://127.0.0.1:5173/users/${user._id}/verify/${token.token}`;
+        await sendEmail(user.email, "Verify Email", url);
+        res
+        .status(201)
+        .send({ 
+            success:true,
+            message: "An Email sent to your account please verify",
+            user
+        });
 
     } catch (error) {
         console.log(error)
@@ -110,6 +104,24 @@ exports.userPostLogin = async (req, res) => {
                 message: "Invalid Password",
             });
         }
+        //check verified mail
+        if (!user.verified) {
+            let token = await Token.findOne({ userId: user._id });
+            if (!token) {
+                token = await new Token({
+                    userId: user._id,
+                    token: Math.ceil(Math.random() * 918376),
+                }).save();
+                const url = `http://localhost:8000/api/auth/${user._id}/verify/${token.token}`;
+                await sendEmail(user.email, "Verify Email", url);
+            }
+
+            return res
+                .status(400)
+                .send({ message: "An Email sent to your account please verify" });
+        }
+
+
         //token
         const token = await JWT.sign({
             _id: user._id,

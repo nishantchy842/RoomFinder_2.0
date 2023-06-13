@@ -51,9 +51,9 @@ const AddRoom = () => {
 
   useEffect(() => {
     if (images.length) {
-      if (!steps[2].completed) setComplete(3, true);
+      if (!steps[3].completed) setComplete(3, true);
     } else {
-      if (steps[2].completed) setComplete(3, false);
+      if (steps[3].completed) setComplete(3, false);
     }
   }, [images]);
   useEffect(() => {

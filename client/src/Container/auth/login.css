@@ -13,7 +13,7 @@
   position: relative;
 }
 
-.card-inner {
+.card-inner { 
   width: min(950px,50vw);
   height: inherit;
   background: rgba(255, 255, 255, .05);

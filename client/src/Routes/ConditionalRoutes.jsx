@@ -15,6 +15,7 @@ import SearchResult from "../pages/searchResult/SearchResult";
 import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
 import Dashboard from "../pages/userDashboard/Dashboard";
 import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
+import EmailVerify from "../Container/auth/emailVerify";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -37,6 +38,7 @@ const DefaulRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="*" element={<PageNotFound />} />
+			<Route path="/users/:id/verify/:token" element={<EmailVerify />} />
 
     </Routes>
   );

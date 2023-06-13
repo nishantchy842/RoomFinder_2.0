@@ -3,7 +3,6 @@ const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers, upd
 
 const userModel = require('../models/userModel')
 const Token = require('../models/token')
-const { ObjectId } = require('mongodb');
 
 
 const router = express.Router()
