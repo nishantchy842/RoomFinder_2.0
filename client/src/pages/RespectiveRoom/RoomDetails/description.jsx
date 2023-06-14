@@ -62,10 +62,10 @@ const Description = ({ item }) => {
 
     return (
         <Box className="shadows" sx={{ height: 'auto', padding: '5px', minWidth: '97%', display: 'flex' }}>
-            <div className={`p-8 bg-secondary h-[500px] w-[50%] md:w-[40%] sm:w-[40%] z-10  bottom-2`}>
+            <div className={`p-8 h-[500px] w-[50%] md:w-[40%] sm:w-[40%] z-10  bottom-2`}>
 
                 <div>
-                    <p>Center your location to get direction</p>
+                    <p className='text-center'><strong>Center your location to get direction</strong> </p>
                     {/*                    <img className='relative left-[11rem] bottom-[4.5rem] z-10 hidden lg:block' width="50" height="100" src="https://img.icons8.com/office/80/forward-arrow.png" alt="forward-arrow" />
     */}
                 </div>
@@ -73,14 +73,14 @@ const Description = ({ item }) => {
                     {
                         directions && (
                             <div>
-                                <div className='shadows flex bg-neutral-600 h-auto p-1 justify-center items-center flex-wrap flex-col'>
+                                <div className='shadows flex h-auto p-1 justify-center items-center flex-wrap flex-col'>
                                     <AiFillCar className='bg-white p-1 rounded-full text-3xl inline-block' />
-                                    <p className=' text-white-100'>{time}</p>
-                                    <p className=' text-white-100'>{dist}</p>
+                                    <p >{time}</p>
+                                    <p >{dist}</p>
                                 </div>
-                                <div className='mt-2 grid text-white-100 shadows bg-neutral-600 h-auto p-1 flex-wrap'>
-                                    <p>steps</p>
-                                    <div className=' h-[250px] overflow-scroll'>
+                                <div className='mt-2 grid shadows h-auto p-1 flex-wrap'>
+                                    <p className='text-center'><strong>Steps</strong></p>
+                                    <div className=' h-[250px] overflow-auto'>
                                         {
                                             steps && (
                                                 <ul className="list-decimal list-inside">
