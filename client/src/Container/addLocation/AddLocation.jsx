@@ -8,9 +8,12 @@ import { useEffect, useRef } from 'react';
 import Geocoder from './Geocoder';
 import { UPDATE_DETAILS, UPDATE_LOCATION } from '../../Redux/Reducer/roomSlice';
 import { useDispatch, useSelector } from 'react-redux'
+// import { styles } from '../../Utils/Style';
+import style from './location.module.css'
 
 const AddLocation = () => {
-  const { lat, lng } = useSelector(state => state.room.location)
+  const { lat, lng, } = useSelector(state => state.room.location)
+  const { address, place, } = useSelector(state => state.room.details)
   const dispatch = useDispatch()
 
   const mapRef = useRef();
@@ -45,7 +48,9 @@ const AddLocation = () => {
     }
   }, [lng, lat]);
   return (
-    <div className='h-[60vh]'>
+    <div className={style.mapContainer}>
+      <p>your location: {address}</p>
+      <p>City: {place}</p>
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}

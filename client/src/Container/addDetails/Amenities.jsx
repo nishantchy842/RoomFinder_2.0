@@ -65,7 +65,7 @@ const Amenities = () => {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: 500 }}>
                 <InputLabel id="demo-multiple-chip-label">Amenities</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
