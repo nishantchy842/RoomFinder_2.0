@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema(
       default: 0,
     },
     appliedRooms: [],
+    verified: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

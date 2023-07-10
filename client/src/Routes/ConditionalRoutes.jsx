@@ -15,6 +15,7 @@ import SearchResult from "../pages/searchResult/SearchResult";
 import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
 import Dashboard from "../pages/userDashboard/Dashboard";
 import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
+import EmailVerify from "../Container/auth/emailVerify";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -25,7 +26,7 @@ const ConditionalRoutes = () => {
   } else {
     return <DefaulRoutes />;
   }
-}
+};
 const DefaulRoutes = () => {
   return (
     <Routes>
@@ -37,7 +38,7 @@ const DefaulRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="*" element={<PageNotFound />} />
-
+      <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
     </Routes>
   );
 };
@@ -56,7 +57,6 @@ const UserRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
-
     </Routes>
   );
 };
@@ -72,11 +72,11 @@ const AdminRoute = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/result" element={<SearchResult />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
-
     </Routes>
   );
 };
-{/* 
+{
+  /* 
  return (
     <div>
       <Routes>
@@ -94,6 +94,7 @@ const AdminRoute = () => {
 };
 
 
-*/ }
+*/
+}
 
 export default ConditionalRoutes;

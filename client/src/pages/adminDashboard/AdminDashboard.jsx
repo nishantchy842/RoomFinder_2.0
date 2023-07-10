@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { totalUsers } from "../../Redux/Reducer/userSlice";
 import { totalRoom } from "../../Redux/Reducer/roomSlice";
+import moment from 'moment'
 
 const AdminDashboard = () => {
   const [users, setusers] = useState(0);
@@ -120,7 +121,7 @@ const AdminDashboard = () => {
                   />
                   <div className="admin-recent-name">Name: {user.name}</div>
                   <div className="admin-recent-time">
-                    Time created: {user.createdAt}
+                    Time created: {moment(user.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
                   </div>
                 </div>
               ))}
@@ -140,7 +141,7 @@ const AdminDashboard = () => {
                   <div className="admin-recent-name">{room.title}</div>
                   <div className="admin-recent-name">Address: {room.place}</div>
                   <div className="admin-recent-time">
-                    Time added: {room.createdAt}
+                    Time added:{moment(room.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
                   </div>
                 </div>
               ))}

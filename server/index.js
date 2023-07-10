@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const connectDb = require("./db/Connectdb");
 const userRoute = require("./routes/userRoute");
 const roomRoute = require("./routes/roomRoute");
+const messagesRouter = require("./routes/messageRoute");
+
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
@@ -32,12 +34,13 @@ connectDb();
 //routes
 app.use("/api/auth", userRoute);
 app.use("/api/room", roomRoute);
+app.use("/", messagesRouter);
 
 io.on("connection", (socket) => {
-  console.log("connected");
+  console.log(`A user ${socket.id} is connected.`);
 
   socket.on("chat", (payload) => {
-    console.log("what is payLoad", payload);
+    console.log(payload);
     io.emit("chat", payload);
   });
 });

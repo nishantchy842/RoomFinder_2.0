@@ -3,6 +3,8 @@ const userModel = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../helper/userHelper");
 const JWT = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const sendEmail = require("../utils/sendEmail");
+const Token = require("../models/token");
 
 exports.userRegister = async (req, res) => {
   try {

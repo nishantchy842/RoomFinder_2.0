@@ -1,7 +1,8 @@
 const express = require('express')
 const { userRegister, userPostLogin, getSingleUser, totalUsers, recentUsers, updateProfile, PostGetOtp } = require('../controllers/userController')
 
-
+const userModel = require('../models/userModel')
+const Token = require('../models/token')
 
 
 const router = express.Router()
@@ -29,6 +30,29 @@ router.get('/user/:id', getSingleUser)
 router.get('/totaluser', totalUsers)
 router.get('/recentusers', recentUsers)
 router.patch('/updateProfile', requireSignIn, updateProfile);
+
+router.get("/:id/verify/:token/", async (req, res) => {
+	try {
+		const user = await userModel.findOne({ _id: req.params.id });
+		if (!user) return res.status(400).send({ message: "Invalid link" });
+
+        console.log(req.params.id)
+		const token = await Token.findOne({
+			userId: user._id.toString(),
+			token: req.params.token,
+		});
+		if (!token) return res.status(400).send({ message: "Invalid link" });
+        console.log(user._id.toString())
+		await userModel.updateOne({ _id: user._id.toString()}, {verified: true });
+        await Token.deleteOne({ _id: token._id });
+        
+		res.status(200).send({ message: "Email verified successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+
 
 router.post('/users', PostGetOtp)
 module.exports = router
