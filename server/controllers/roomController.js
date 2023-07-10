@@ -1,6 +1,7 @@
 const roomModel = require('../models/roomModel')
 const userModel = require('../models/userModel')
 const moment = require("moment");
+const { format } = require('date-fns');
 
 exports.createRoom = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ exports.getRoom = async (req, res) => {
   try {
     const rooms = await roomModel
       .find({})
-      .sort({ createdAt: -1 });
+      .sort({ title: 1 });
 
 
     res.status(200).send({
@@ -377,14 +378,44 @@ exports.totalRoom = async (req, res) => {
 //recent added room
 exports.recentRooms = async (req, res) => {
   try {
-      const recentRoom = await roomModel.find().sort({ createdAt: -1 }).limit(4)
-      res.status(200).send({
-          success:true,
-          message:"Recent users",
-          recentRoom
-      })
+    const recentRoom = await roomModel.find().sort({ createdAt: -1 }).limit(4)
+    res.status(200).send({
+      success: true,
+      message: "Recent users",
+      recentRoom
+    })
   } catch (error) {
-      console.log(error)
-      res.send("no users found")
+    console.log(error)
+    res.send("no users found")
   }
 }
+
+//sort 
+
+exports.getSortRoom = async (req, res) => {
+  try {
+    const rooms = await roomModel
+      .find({})
+      .sort({ createdAt: -1 }); // Sort by createdAt field in ascending order and name field in ascending order
+
+    const formattedRooms = rooms.map(room => ({
+      ...room._doc,
+      createdAt: format(room.createdAt, 'yyyy-MM-dd HH:mm:ss') // Format createdAt date
+    }));
+
+    res.status(200).send({
+      success: true,
+      countTotal: rooms.length,
+      message: "Get all rooms",
+      rooms: formattedRooms
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error: error.message,
+      message: "Error in getting rooms"
+    });
+  }
+};

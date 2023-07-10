@@ -37,12 +37,14 @@ app.use("/api/room", roomRoute);
 app.use("/", messagesRouter);
 
 io.on("connection", (socket) => {
-  console.log(`A user ${socket.id} is connected.`);
-
-  socket.on("chat", (payload) => {
-    console.log(payload);
-    io.emit("chat", payload);
+  //receive user's data from the front end˚
+  socket.on("messages", (usersData) => {
+    // io.emit("messages", usersData);
+    socket.join(usersData._id);
+    console.log(usersData._id);
+    socket.emit("Connected!");
   });
+  console.log(`A user ${socket.id} is connected.`);
 });
 
 server.listen(process.env.PORT, () => {

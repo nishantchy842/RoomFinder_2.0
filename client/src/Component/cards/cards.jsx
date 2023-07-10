@@ -3,8 +3,12 @@ import "./cards.css"
 import PropTypes from "prop-types"
 import { Avatar } from "@mui/material"
 import { styles } from "../../Utils/Style"
+
+
+
 const Cards = ({ item }) => {
   const navigate = useNavigate()
+
 
   return (
     <div className=" border p-2 h-[100%] mr-7 ">

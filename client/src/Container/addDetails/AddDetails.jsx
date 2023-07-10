@@ -46,13 +46,12 @@ const AddDetails = () => {
                 alignItems: 'center',
                 '& .MuiTextField-root': { width: '100%', maxWidth: 500, m: 1 },
             }}
-            className='inputStyles min-h-[70vh] flex justify-center items-center'
+            className='inputStyles min-h-[70vh] flex justify-start items-center'
         >
-            <p>Your Address is : {address}</p>
-
+            <p>Address:{"  "} {address}</p>
             <FormControl>
                 <TextField
-                    sx={{ maxWidth: '500px !important' }}
+                    sx={{ width: '500px !important' }}
                     error={error}
                     helperText={error && `This Room rent must be 1000 or more`}
                     color={success ? 'success' : 'primary'}
@@ -97,6 +96,9 @@ const AddDetails = () => {
                     multiline: true, rows: 4, required: true
 
                 }}
+            />
+            <InfoField
+                mainProps={{ name: 'people', label: 'People', value: title, placeholder: "How many peaple can stay" }}
             />
             <Amenities />
         </Stack>

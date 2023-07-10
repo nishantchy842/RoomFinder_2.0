@@ -13,7 +13,9 @@ const { createRoom,
     filterByPrice,
     requestRoom,
     totalRoom,
-    recentRooms } =
+    recentRooms,
+    getSortRoom
+ } =
     require('../controllers/roomController')
 const { requireSignIn } = require('../middlewares/authMiddleware')
 
@@ -61,5 +63,7 @@ router.post("/filterprice", filterByPrice)
 router.post('/request-room', requestRoom)
 router.get('/totalroom', totalRoom)
 router.get('/recentroom', recentRooms)
+//get sort room
+router.get('/sort',getSortRoom)
 
 module.exports = router
