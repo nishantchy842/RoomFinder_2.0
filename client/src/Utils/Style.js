@@ -13,6 +13,33 @@ const styles = {
   sectionHeadText:
     "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
   sectionSubText: "sm:text-[18px] text-[14px] tracking-wider",
+  h5: "font-bold text-[24px]",
+  extrabold: "font-extrabold text-[24px]",
+
+  sub_title: "font-bold text-[20px]",
+  medium: "font-medium text-[18px]",
+
+  semibold: "font-semibold text-[18px]",
+  bold: "font-bold text-[18px]",
+
+  body: {
+    regular: "font-normal text-[16px]",
+    medium: "font-medium text-[16px]", //500 weight
+    semibold: "font-semibold text-[16px]", //600px weight
+    bold: "font-bold text-[16px]", //700px weight
+  },
+  bodySmall: {
+    regular: "font-normal text-[14px]",
+    medium: "font-medium text-[14px]", //500 weight
+    semibold: "font-semibold text-[14px]", //600px weight
+    bold: "font-bold text-[14px]",
+  },
+  small: {
+    regular: "font-normal text-[12px]",
+    medium: "font-medium text-[12px]",
+    semibold: "font-semibold text-[12px]",
+    bold: "font-bold text-[12px]",
+  },
 };
 
 export { styles };

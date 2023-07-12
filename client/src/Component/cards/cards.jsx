@@ -1,14 +1,11 @@
-import { useNavigate } from "react-router"
-import "./cards.css"
-import PropTypes from "prop-types"
-import { Avatar } from "@mui/material"
-import { styles } from "../../Utils/Style"
-
-
+import { useNavigate } from "react-router";
+import "./cards.css";
+import PropTypes from "prop-types";
+import { Avatar } from "@mui/material";
+import { styles } from "../../Utils/Style";
 
 const Cards = ({ item }) => {
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   return (
     <div className=" border p-2 h-[100%] mr-7 ">
@@ -53,9 +50,8 @@ const Cards = ({ item }) => {
             <button
               className="btn"
               onClick={() => {
-                navigate(`/Room/${item.title}`, { state: item })
-              }
-              }
+                navigate(`/Room/${item.title}`, { state: item });
+              }}
             >
               See more details
             </button>
