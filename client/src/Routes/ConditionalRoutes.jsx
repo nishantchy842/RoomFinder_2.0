@@ -27,7 +27,7 @@ const ConditionalRoutes = () => {
   } else {
     return <DefaulRoutes />;
   }
-}
+};
 const DefaulRoutes = () => {
   return (
     <Routes>
@@ -40,7 +40,7 @@ const DefaulRoutes = () => {
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="*" element={<PageNotFound />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-
+      <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
     </Routes>
   );
 };
@@ -59,7 +59,6 @@ const UserRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
-
     </Routes>
   );
 };
@@ -77,7 +76,6 @@ const AdminRoute = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="/manage_users" element={<ManageUsers />} />
-
     </Routes>
   );
 };
