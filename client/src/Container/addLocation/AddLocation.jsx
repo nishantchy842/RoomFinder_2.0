@@ -2,22 +2,25 @@ import ReactMapGL, {
   GeolocateControl,
   Marker,
   NavigationControl,
-} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { useEffect, useRef } from 'react';
-import Geocoder from './Geocoder';
-import { UPDATE_DETAILS, UPDATE_LOCATION } from '../../Redux/Reducer/roomSlice';
-import { useDispatch, useSelector } from 'react-redux'
+} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useEffect, useRef } from "react";
+import Geocoder from "./Geocoder";
+import { UPDATE_DETAILS, UPDATE_LOCATION } from "../../Redux/Reducer/roomSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { styles } from "../../Utils/Style";
+import style from "./location.module.css";
 
 const AddLocation = () => {
-  const { lat, lng } = useSelector(state => state.room.location)
-  const dispatch = useDispatch()
+  const { lat, lng } = useSelector((state) => state.room.location);
+  const { address, place } = useSelector((state) => state.room.details);
+  const dispatch = useDispatch();
 
   const mapRef = useRef();
 
   useEffect(() => {
     if (!lng && !lat) {
-      fetch('https://ipapi.co/2403:3800:3233:1213:3d58:8a5b:acd3:add1/json/')
+      fetch("https://ipapi.co/2403:3800:3233:1213:3d58:8a5b:acd3:add1/json/")
         .then((response) => {
           return response.json();
         })
@@ -25,27 +28,43 @@ const AddLocation = () => {
           mapRef.current.flyTo({
             center: [data.longitude, data.latitude],
           });
-          dispatch(UPDATE_LOCATION({ lng: data.longitude, lat: data.latitude }))
+          dispatch(
+            UPDATE_LOCATION({ lng: data.longitude, lat: data.latitude })
+          );
         });
     }
   }, []);
 
   useEffect(() => {
     if (lng && lat) {
-      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${import.meta.env.VITE_MAP_KEY}`;
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${
+        import.meta.env.VITE_MAP_KEY
+      }`;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
           if (!data.features[0].properties.address) {
-            dispatch(UPDATE_DETAILS({ address: data.features[0].place_name, place: data.features[0].text }))
+            dispatch(
+              UPDATE_DETAILS({
+                address: data.features[0].place_name,
+                place: data.features[0].text,
+              })
+            );
           } else {
-            dispatch(UPDATE_DETAILS({ address: data.features[0].place_name, place: data.features[0].properties.address }))
+            dispatch(
+              UPDATE_DETAILS({
+                address: data.features[0].place_name,
+                place: data.features[0].properties.address,
+              })
+            );
           }
-        })
+        });
     }
   }, [lng, lat]);
   return (
-    <div className='h-[60vh]'>
+    <div className={style.mapContainer}>
+      <p className={`${styles.bold}`}>Your location: {address}</p>
+      <p className={`${styles.bold}`}>City: {place}</p>
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}
@@ -61,8 +80,7 @@ const AddLocation = () => {
           longitude={lng}
           draggable
           onDragEnd={(e) => {
-            dispatch(UPDATE_LOCATION({ lng: e.lngLat.lng, lat: e.lngLat.lat }))
-
+            dispatch(UPDATE_LOCATION({ lng: e.lngLat.lng, lat: e.lngLat.lat }));
           }}
         />
         <NavigationControl position="bottom-right" />
@@ -70,7 +88,12 @@ const AddLocation = () => {
           position="top-left"
           trackUserLocation
           onGeolocate={(e) =>
-            dispatch(UPDATE_LOCATION({ lng: e.coords.longitude, lat: e.coords.latitude }))
+            dispatch(
+              UPDATE_LOCATION({
+                lng: e.coords.longitude,
+                lat: e.coords.latitude,
+              })
+            )
           }
         />
         <Geocoder />

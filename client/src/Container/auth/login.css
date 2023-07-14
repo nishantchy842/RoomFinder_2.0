@@ -13,8 +13,8 @@
   position: relative;
 }
 
-.card-inner {
-  width: inherit;
+.card-inner { 
+  width: min(950px,50vw);
   height: inherit;
   background: rgba(255, 255, 255, .05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const roomSchema = mongoose.Schema(
   {
     lng: { type: Number, required: true },
@@ -12,7 +12,7 @@ const roomSchema = mongoose.Schema(
       maxLength: 1000,
     },
     address: { type: String, required: true },
-    place: { type: String, },
+    place: { type: String },
     amenities: {
       type: [String],
       validate: (v) => Array.isArray(v) && v.length >= 0,
@@ -22,16 +22,17 @@ const roomSchema = mongoose.Schema(
     uName: { type: String, required: true },
     uEmail: { type: String, required: true },
     uPhone: { type: String, required: true },
-    uPhoto: { type: String, default: '' },
-    appliedCandidates:
-    {
+    uPhoto: { type: String, default: "" },
+    appliedCandidates: {
       type: [],
-      required: true
+      required: true,
     },
+
+    status: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-const roomModel = mongoose.model('rooms', roomSchema);
+const roomModel = mongoose.model("rooms", roomSchema);
 
-module.exports = roomModel
+module.exports = roomModel;

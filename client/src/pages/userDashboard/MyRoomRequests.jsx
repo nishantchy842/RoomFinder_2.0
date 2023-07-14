@@ -1,4 +1,3 @@
-import { Button } from "@mui/material"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -6,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styles } from "../../Utils/Style";
+import { useNavigate } from "react-router";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -24,8 +24,8 @@ const MyRoomRequests = () => {
   const [applied, setApplied] = useState([])
   const [roomDetails, setRoomDetails] = useState({})
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate()
   const handleUser = async (userid) => {
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_APP_URL}/api/auth/user/${userid}`)
@@ -55,62 +55,71 @@ const MyRoomRequests = () => {
 
   return (
     <div>
-      <div className="about-me-container min-h-[80vh] p-2 w-screen ">
-        <div className="profile-dashboard-card shadows ">
-          <table className="table-fixed border z-10">
-            <thead>
-              <tr className="border">
-                <th className="border">Image</th>
-                <th className="border">Title</th>
-                <th className="border">Address</th>
-                <th className="border">Client Name</th>
-                <th className="border">Client Phone</th>
-                <th className="border">Applied Date</th>
-              </tr>
-            </thead>
-            <tbody>
+      <div className="about-me-container min-h-[80vh] p-2 w-full ">
+        {
+          roomDetails?.rooms?.length == 0 ?
+            <div className="text-center">
+              <p>No Room yet</p>
+              <button className="btn" onClick={() => navigate('/add-room')}>Post Your Room</button>
+            </div>
 
-              {
-                roomDetails && roomDetails?.rooms?.map((item) => {
-                  return (
-                    <tr key={item._id}>
-                      <td className="border p-5"><img src={item?.img_collection[0]} alt="/" width={100} height={100} /> </td>
-                      <td className="border p-5">{item?.title}</td>
-                      <td className="border p-5">{item?.place}</td>
-                      <td className="border p-5">
-                        {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
-                          item?.appliedCandidates?.map((userinfo) => {
-                            return <ul key={userinfo.userid} className="list-disc cursor-pointer">
-                              <li onClick={() => handleUser(userinfo.userid)} className=" hover:text-slate-600">{userinfo?.userName}</li>
-                            </ul>
-                          })
-                        }
-                      </td>
-                      <td className="border p-5">
-                        {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
-                          item?.appliedCandidates?.map((userinfo) => {
-                            return <ul key={userinfo.userid} className="list-disc">
-                              <li> {userinfo?.userPhone}</li>
-                            </ul>
-                          })
-                        }
-                      </td>
-                      <td className="border p-5">
-                        {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
-                          item?.appliedCandidates?.map((userinfo) => {
-                            return <ul key={userinfo.userid} className="list-disc">
-                              <li> {userinfo?.appliedDate}</li>
-                            </ul>
-                          })
-                        }
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
-        </div>
+            :
+            <div className="profile-dashboard-card shadows ">
+              <table className="table-fixed border z-10">
+                <thead>
+                  <tr className="border">
+                    <th className="border">Image</th>
+                    <th className="border">Title</th>
+                    <th className="border">Address</th>
+                    <th className="border">Client Name</th>
+                    <th className="border">Client Phone</th>
+                    <th className="border">Applied Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {
+                    roomDetails && roomDetails?.rooms?.map((item) => {
+                      return (
+                        <tr key={item._id}>
+                          <td className="border p-5"><img src={item?.img_collection[0]} alt="/" width={100} height={100} /> </td>
+                          <td className="border p-5">{item?.title}</td>
+                          <td className="border p-5">{item?.place}</td>
+                          <td className="border p-5">
+                            {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
+                              item?.appliedCandidates?.map((userinfo) => {
+                                return <ul key={userinfo.userid} className="list-disc cursor-pointer">
+                                  <li onClick={() => handleUser(userinfo.userid)} className=" hover:text-slate-600">{userinfo?.userName}</li>
+                                </ul>
+                              })
+                            }
+                          </td>
+                          <td className="border p-5">
+                            {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
+                              item?.appliedCandidates?.map((userinfo) => {
+                                return <ul key={userinfo.userid} className="list-disc">
+                                  <li> {userinfo?.userPhone}</li>
+                                </ul>
+                              })
+                            }
+                          </td>
+                          <td className="border p-5">
+                            {item?.appliedCandidates.length == 0 ? <span className=" text-red-700"> No Request Yet</span> :
+                              item?.appliedCandidates?.map((userinfo) => {
+                                return <ul key={userinfo.userid} className="list-disc">
+                                  <li> {userinfo?.appliedDate}</li>
+                                </ul>
+                              })
+                            }
+                          </td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
+        }
       </div>
       <Modal
         open={open}

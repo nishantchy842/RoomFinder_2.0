@@ -12,19 +12,20 @@ const Select = () => {
       <div className="gradient w-[60%]">
         <button
           className={`${styles.heroSubText} p-3 w-[150px] border border-black text-2xl uppercase rounded-lg rounded-tr-none rounded-bl-none outline-none bg-black text-white shadow-lg hover:shadow-xl hover:text-black hover:bg-white duration-200`}
-          onClick={() => navigate("/card")}
+          onClick={() => navigate("/rooms")}
         >
           Find a Room
         </button>
       </div>
       <div className="gradient w-[60%]">
         <button
-          className={`${styles.heroSubText} p-3 w-[150px] border border-black text-2xl uppercase rounded-lg rounded-tr-none rounded-bl-none outline-none bg-black text-white shadow-lg hover:shadow-xl hover:text-black hover:bg-white duration-200`} onClick={() => {
+          className={`${styles.heroSubText} p-3 w-[150px] border border-black text-2xl uppercase rounded-lg rounded-tr-none rounded-bl-none outline-none bg-black text-white shadow-lg hover:shadow-xl hover:text-black hover:bg-white duration-200`}
+          onClick={() => {
             isLoggedIn
               ? navigate("/add-room")
               : navigate("/login", {
-                state: { onSuccessNavigation: "/add-room" },
-              });
+                  state: { onSuccessNavigation: "/add-room" },
+                });
           }}
         >
           List a Room

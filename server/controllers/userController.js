@@ -3,12 +3,13 @@ const userModel = require('../models/userModel')
 const { hashPassword, comparePassword } = require("../helper/userHelper");
 const JWT = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
-
+const sendEmail = require('../utils/sendEmail')
+const Token = require('../models/token')
 
 exports.userRegister = async (req, res) => {
     try {
         const { name, email, phone, address, password } = req.body
-        //backend validation
+        //backend validationssss
         if (!name) {
             return res.status(500).send("Name is required")
         }
@@ -35,21 +36,17 @@ exports.userRegister = async (req, res) => {
         }
         const hashedPassword = await hashPassword(password)
 
+        let user = {}
         if (!req.file) {
-            const user = await new userModel({
+            user = await new userModel({
                 name,
                 email,
                 phone,
                 address,
                 password: hashedPassword,
             }).save()
-            res.status(200).send({
-                success: true,
-                message: 'Register successfully',
-                user
-            })
         } else {
-            const user = await new userModel({
+            user = await new userModel({
                 name,
                 email,
                 phone,
@@ -57,18 +54,21 @@ exports.userRegister = async (req, res) => {
                 password: hashedPassword,
                 profile: req.file.filename
             }).save()
-            res.status(200).send({
-                success: true,
-                message: 'Register successfully',
-                user
-            })
         }
 
-        // res.status(200).send({
-        //     success: true,
-        //     message: 'Register successfully',
-        //     user
-        // })
+        const token = await new Token({
+            userId: user._id,
+            token: Math.ceil(Math.random() * 918376),
+        }).save();
+        const url = `http://127.0.0.1:5173/users/${user._id}/verify/${token.token}`;
+        await sendEmail(user.email, "Verify Email", url);
+        res
+            .status(201)
+            .send({
+                success: true,
+                message: "An Email sent to your account please verify",
+                user
+            });
 
     } catch (error) {
         console.log(error)
@@ -104,6 +104,24 @@ exports.userPostLogin = async (req, res) => {
                 message: "Invalid Password",
             });
         }
+        //check verified mail
+        if (!user.verified) {
+            let token = await Token.findOne({ userId: user._id });
+            if (!token) {
+                token = await new Token({
+                    userId: user._id,
+                    token: Math.ceil(Math.random() * 918376),
+                }).save();
+                const url = `http://127.0.0.1:5173/users/${user._id}/verify/${token.token}`;
+                await sendEmail(user.email, "Verify Email", url);
+            }
+
+            return res
+                .status(400)
+                .send({ message: "An Email sent to your account please verify" });
+        }
+
+
         //token
         const token = await JWT.sign({
             _id: user._id,
@@ -156,6 +174,25 @@ exports.getSingleUser = async (req, res) => {
         })
     }
 }
+
+exports.getAllUser = async (req, res) => {
+    try {
+        const user = await userModel.find({}, '_id name email phone address role profile createdAt').sort({ createdAt: -1 })
+
+        res.status(200).send({
+            success: true,
+            message: "user info",
+            user
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "get user failed",
+        })
+    }
+}
 //count number of users
 
 exports.totalUsers = async (req, res) => {
@@ -191,7 +228,8 @@ exports.recentUsers = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
     try {
-        const updatedUser = await userModel.findByIdAndUpdate(req.user.id, req.body, {
+        const { name, address, email, phone } = req.body
+        const updatedUser = await userModel.findByIdAndUpdate(req.user.id, { name, address, email, phone }, {
             new: true,
         });
         console.log(req.user.id, req.body)
@@ -293,5 +331,19 @@ exports.PostGetOtp = async (req, res) => {
         }
     } catch (e) {
         console.log('Error:', e)
+    }
+}
+//delete user
+
+exports.deleteUser = async (req, res) => {
+    try {
+        await userModel.findByIdAndDelete(req.params.id)
+        res.status(200).send({
+            success: true,
+            message: "Deleted successfully"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: "failed to delete" })
     }
 }
