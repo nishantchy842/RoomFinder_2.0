@@ -12,54 +12,61 @@ import { totalRoom } from "../../Redux/Reducer/roomSlice";
 import moment from 'moment'
 
 const AdminDashboard = () => {
-  const [users, setusers] = useState(0)
-  const [rooms, setRooms] = useState(0)
-  const dispatch = useDispatch()
+  const [users, setusers] = useState(0);
+  const [rooms, setRooms] = useState(0);
+  const dispatch = useDispatch();
 
   const totalusers = async () => {
-    const { data } = await axios.get('http://localhost:8000/api/auth/totaluser')
-    setusers(data.totaluser)
-    dispatch(totalUsers(data.totaluser))
-  }
+    const { data } = await axios.get(
+      "http://localhost:8000/api/auth/totaluser"
+    );
+    setusers(data.totaluser);
+    dispatch(totalUsers(data.totaluser));
+  };
 
   const totalrooms = async () => {
-    const { data } = await axios.get('http://localhost:8000/api/room/totalroom')
-    setRooms(data.totalRoom)
-    dispatch(totalRoom(data.totalRoom))
-  }
+    const { data } = await axios.get(
+      "http://localhost:8000/api/room/totalroom"
+    );
+    setRooms(data.totalRoom);
+    dispatch(totalRoom(data.totalRoom));
+  };
 
   const [recentUsers, setRecentUsers] = useState([]);
 
   const recentUser = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/auth/recentusers`)
-    setRecentUsers(data.recentUser)
-  }
+    const { data } = await axios.get(
+      `http://localhost:8000/api/auth/recentusers`
+    );
+    setRecentUsers(data.recentUser);
+  };
 
-  const [recentRooms, setRecentRooms] = useState([])
+  const [recentRooms, setRecentRooms] = useState([]);
 
   const recentRoom = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/room/recentroom`)
-    setRecentRooms(data.recentRoom)
-  }
-
+    const { data } = await axios.get(
+      `http://localhost:8000/api/room/recentroom`
+    );
+    setRecentRooms(data.recentRoom);
+  };
 
   useEffect(() => {
-    totalusers()
-    totalrooms()
-    recentUser()
-    recentRoom()
-  }, [])
+    totalusers();
+    totalrooms();
+    recentUser();
+    recentRoom();
+  }, []);
 
   return (
     <Layout>
       <Box
         sx={{
-          display: { xs: 'flex', md: 'grid' },
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gridAutoRows: 'minmax(100px, auto)',
+          display: { xs: "flex", md: "grid" },
+          gridTemplateColumns: "repeat(3,1fr)",
+          gridAutoRows: "minmax(100px, auto)",
           gap: 3,
-          textAlign: 'center',
-          flexDirection: 'column',
+          textAlign: "center",
+          flexDirection: "column",
           marginTop: "90px",
         }}
       >
@@ -67,40 +74,48 @@ const AdminDashboard = () => {
           <Typography variant="h4">Total Users</Typography>
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div className="admin-data-icon">
               <FaUserFriends />
             </div>
-            <Typography variant="h4" className=" text-primary  p-2">{users}</Typography> {/* user length */}
+            <Typography variant="h4" className=" text-primary  p-2">
+              {users}
+            </Typography>{" "}
+            {/* user length */}
           </Box>
         </Paper>
         <Paper elevation={3} sx={{ p: 3 }}>
           <Typography variant="h4">Total Rooms</Typography>
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div className="admin-data-icon">
               <FaHouseUser />
             </div>
-            <Typography variant="h4" className=" text-primary p-2">{rooms}</Typography> {/* room length */}
+            <Typography variant="h4" className=" text-primary p-2">
+              {rooms}
+            </Typography>{" "}
+            {/* room length */}
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 2, gridColumn: 3, gridRow: '1/4' }}>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: 3, gridRow: "1/4" }}>
           <Box>
             <Typography variant="h4">Recently added Users</Typography>
             <List>
               {recentUsers.map((user) => (
                 <div key={user._id}>
                   <img
-                    src={`${import.meta.env.VITE_APP_URL}/uploads/${user.profile}`}
+                    src={`${import.meta.env.VITE_APP_URL}/uploads/${
+                      user.profile
+                    }`}
                     alt={`User ${user.id}`}
                     className="admin-recent-data-img"
                   />
@@ -133,10 +148,10 @@ const AdminDashboard = () => {
             </List>
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 2, gridColumn: '1/3' }}>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: "1/3" }}>
           <Piechart />
         </Paper>
-        <Paper elevation={3} sx={{ p: 2, gridColumn: '1/3' }}>
+        <Paper elevation={3} sx={{ p: 2, gridColumn: "1/3" }}>
           <Linechart />
         </Paper>
       </Box>

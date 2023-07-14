@@ -1,11 +1,9 @@
 import { Chart } from "react-google-charts";
 import { useSelector } from "react-redux";
 
-
-
 const Piechart = () => {
-  const { totalRoomCount } = useSelector(state => state.room)
-  const { totalUsers } = useSelector(state => state.user)
+  const { totalRoomCount } = useSelector((state) => state.room);
+  const { totalUsers } = useSelector((state) => state.user);
 
   const data = [
     ["Entity", "Total Number"],

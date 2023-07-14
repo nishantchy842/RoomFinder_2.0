@@ -38,12 +38,13 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [profile, setProfile] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (value) => {
-    setLoading(true)
+    setLoading(true);
     const { name, email, phoneNumber, password, address } = value;
 
     const bodyFormData = new FormData();
@@ -66,7 +67,7 @@ const Register = () => {
         dispatch(setAlertMessages(res.data.message));
         dispatch(apiResStatus(false));
       }
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       dispatch(apiResStatus(false));
       dispatch(setAlertMessages(error.response.data.message));
@@ -75,7 +76,9 @@ const Register = () => {
 
   return (
     <Layout>
-      {loading == true ? <Loader /> :
+      {loading == true ? (
+        <Loader />
+      ) : (
         <div className="login_wrapper h-screen w-auto bg-slate-800 flex flex-col justify-center items-center ">
           <div className="outer_card mt-24">
             <div className="circle"></div>
@@ -97,7 +100,9 @@ const Register = () => {
             >
               {({ errors, touched }) => (
                 <Form className="card-inner flex flex-col justify-center items-center p-5 rounded-2xl">
-                  <h1 className={`${styles.heroHeadText} text-slate-100`}>Signup</h1>
+                  <h1 className={`${styles.heroHeadText} text-slate-100`}>
+                    Signup
+                  </h1>
                   <div className="m-3">
                     <label className="btn-outline-secondary col-md-12 text-white-100">
                       {profile ? profile.name : "Upload Profile Picture"}
@@ -160,7 +165,7 @@ const Register = () => {
                     <div className=" text-red-700">{errors.phoneNumber}</div>
                   ) : null}
                   <Field
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     placeholder="Enter your password"
@@ -171,6 +176,14 @@ const Register = () => {
                     name="password"
                     component="div"
                   />
+                  <label htmlFor="showPassword" className="flex">
+                    <input
+                      type="checkbox"
+                      id="showPassword"
+                      onChange={() => setShowPassword(!showPassword)}
+                    />
+                    <p className=" text-white"> Show Password</p>
+                  </label>
                   <Field
                     type="password"
                     id="confirmPassword"
@@ -191,7 +204,7 @@ const Register = () => {
             </Formik>
           </div>
         </div>
-      }
+      )}
     </Layout>
   );
 };

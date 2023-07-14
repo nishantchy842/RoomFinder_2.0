@@ -9,24 +9,23 @@ import {
   Avatar,
   Tooltip,
   MenuItem,
-} from '@mui/material'
-import { useState } from 'react'
+} from "@mui/material";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetLoginDetails } from '../../Redux/Reducer/userSlice';
-import { AiFillMessage } from 'react-icons/ai'
-import { Modal } from 'antd';
-import MessageCard from '../messageCard';
+import { resetLoginDetails } from "../../Redux/Reducer/userSlice";
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const { isLoggedIn, userProfilePicture, username, userRole } = useSelector(state => state.user)
+  const { isLoggedIn, userProfilePicture, username, userRole } = useSelector(
+    (state) => state.user
+  );
 
-  const settings = [username, "My Post", 'Logout'];
-  const admin = [username, "Manage users", "Manage rooms", 'Logout']
+  const settings = [username, "My Room", "Logout"];
+  const admin = [username, "Manage users", "Manage rooms", "Logout"];
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -34,36 +33,30 @@ const Header = () => {
   const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
     if (e.target.textContent == "Logout") {
-      dispatch(resetLoginDetails())
-      localStorage.removeItem("token")
-      navigate('/')
+      dispatch(resetLoginDetails());
+      localStorage.removeItem("token");
+      navigate("/");
     }
-    if (e.target.textContent == "My Post") {
-      navigate('/mypost')
+    if (e.target.textContent == "My Room") {
+      navigate("/mypost");
     }
     if (e.target.textContent === username) {
-      navigate('/user-dashboard')
+      navigate("/user-dashboard");
     }
     if (e.target.textContent == "Manage users") {
-      navigate('/manage_users')
+      navigate("/manage_users");
     }
-    if (e.target.textContent == "Manage rooms") navigate('/rooms')
+    if (e.target.textContent == "Manage rooms") navigate("/rooms");
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+
   return (
     <>
       <AppBar position="static">
-        <Container maxWidth="xl" className=" bg-[#f5f5f5] shadow-md w-full fixed top-0 left-0 z-20  p-2">
-          <Toolbar disableGutters className='flex justify-between'>
+        <Container
+          maxWidth="xl"
+          className=" bg-[#f5f5f5] shadow-md w-full fixed top-0 left-0 z-20  p-2"
+        >
+          <Toolbar disableGutters className="flex justify-between">
             <div
               className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins]
     text-gray-800"
@@ -74,65 +67,66 @@ const Header = () => {
               </span>
               <span className="font-sans text-2xl ml-2">RoomFinder</span>
             </div>
-            <Box sx={{ flexGrow: 0, display: 'flex' }}>
-              <AiFillMessage className=' text-primary' onClick={showModal} />
-              {
-                isLoggedIn ?
-                  <Tooltip title={`Hello ${username}`}>
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      {
-                        userProfilePicture ?
-                          <Avatar alt="Remy Sharp" src={`${import.meta.env.VITE_APP_URL}/uploads/${userProfilePicture}`}
-                            sx={{ width: 50, height: 50 }}> </Avatar> :
-                          <Avatar alt="Remy Sharp"
-                            sx={{ width: 50, height: 50 }}>{username.toUpperCase().charAt(0)} </Avatar>
-                      }
-                    </IconButton>
-                  </Tooltip> :
-                  <button className='btn'
-                    onClick={() => navigate('/login')}
-                  >LOGIN</button>
-              }
+            <Box sx={{ flexGrow: 0, display: "flex" }}>
+              {isLoggedIn ? (
+                <Tooltip title={`Hello ${username}`}>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    {userProfilePicture ? (
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={`${
+                          import.meta.env.VITE_APP_URL
+                        }/uploads/${userProfilePicture}`}
+                        sx={{ width: 50, height: 50 }}
+                      >
+                        {" "}
+                      </Avatar>
+                    ) : (
+                      <Avatar alt="Remy Sharp" sx={{ width: 50, height: 50 }}>
+                        {username.toUpperCase().charAt(0)}{" "}
+                      </Avatar>
+                    )}
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <button className="btn" onClick={() => navigate("/login")}>
+                  LOGIN
+                </button>
+              )}
 
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: "45px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {
-                  userRole == "user" ?
-                    settings.map((setting) => (
+                {userRole == "user"
+                  ? settings.map((setting) => (
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
                     ))
-                    :
-                    admin.map((setting) => (
+                  : admin.map((setting) => (
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
-                    ))
-                }
+                    ))}
               </Menu>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      <Modal title="Basic Modal" footer={null} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <MessageCard />
-      </Modal>
     </>
   );
-}
+};
 export default Header;

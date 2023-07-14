@@ -13,6 +13,7 @@ import { UPDATE_DETAILS } from "../../Redux/Reducer/roomSlice";
 import pendingIcon from "./icons/progress1.svg";
 import { AiOutlineCheck } from "react-icons/ai";
 import { styles } from "../../Utils/Style";
+import addressIcon from "../../assets/address.png";
 
 let timer;
 
@@ -47,11 +48,12 @@ const AddDetails = () => {
         alignItems: "center",
         "& .MuiTextField-root": { width: "100%", maxWidth: 500, m: 1 },
       }}
-      className="inputStyles min-h-[70vh] flex justify-start items-center"
+      className="inputStyles flex justify-start items-center"
     >
-      <p className={`${styles.bold}`}>
-        Address:{"  "} {address}
-      </p>
+      <div className="flex border-b-2 mb-3 items-center">
+        <img src={addressIcon} width={30} height={30} alt="" />
+        <p className={`${styles.bold}`}>{address}</p>
+      </div>
       <FormControl>
         <TextField
           sx={{ width: "500px !important" }}
@@ -98,14 +100,6 @@ const AddDetails = () => {
           multiline: true,
           rows: 4,
           required: true,
-        }}
-      />
-      <InfoField
-        mainProps={{
-          name: "people",
-          label: "People",
-          value: title,
-          placeholder: "How many peaple can stay",
         }}
       />
       <Amenities />
