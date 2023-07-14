@@ -17,6 +17,7 @@ import Dashboard from "../pages/userDashboard/Dashboard";
 import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
 import EmailVerify from "../Container/auth/emailVerify";
 import ManageUsers from "../pages/adminDashboard/manageUsers";
+import Learn from "../pages/learn";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ const DefaulRoutes = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+      <Route path="/learn" element={<Learn />} />
     </Routes>
   );
 };
@@ -59,6 +61,7 @@ const UserRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
+      <Route path="/learn" element={<Learn />} />
     </Routes>
   );
 };
@@ -76,6 +79,7 @@ const AdminRoute = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
       <Route path="/manage_users" element={<ManageUsers />} />
+      <Route path="/learn" element={<Learn />} />
     </Routes>
   );
 };

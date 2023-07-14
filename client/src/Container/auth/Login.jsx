@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let { state } = useLocation();
-  console.log(state?.onSuccessNavigation, "login")
+  console.log(state?.onSuccessNavigation, "login");
   const onFinish = async (values) => {
     const { email, password } = values;
     try {
@@ -79,7 +79,9 @@ const Login = () => {
             <p className={`${styles.sectionHeadText} ${styles.paddingX}`}>
               Room Finder
             </p>
-            <p className={`${styles.sectionSubText} ${styles.paddingX} text-slate-100`}>
+            <p
+              className={`${styles.sectionSubText} ${styles.paddingX} text-slate-100`}
+            >
               Login your account
             </p>
             <Form
@@ -102,7 +104,9 @@ const Login = () => {
             >
               <Form.Item
                 label={
-                  <span className={`${styles.sectionSubText} text-slate-100 capitalize`}>
+                  <span
+                    className={`${styles.sectionSubText} text-slate-100 capitalize`}
+                  >
                     Email
                   </span>
                 }
@@ -122,7 +126,9 @@ const Login = () => {
 
               <Form.Item
                 label={
-                  <span className={`${styles.sectionSubText} text-slate-100 capitalize`}>
+                  <span
+                    className={`${styles.sectionSubText} text-slate-100 capitalize`}
+                  >
                     Password
                   </span>
                 }

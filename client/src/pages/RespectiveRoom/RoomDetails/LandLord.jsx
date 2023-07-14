@@ -9,6 +9,8 @@ import {
   setAlertMessages,
 } from "../../../Redux/Reducer/roomSlice";
 import { useNavigate } from "react-router";
+import phone from "../../../assets/telephone.png";
+import email from "../../../assets/message.png";
 
 const LandLord = ({ item }) => {
   const dispatch = useDispatch();
@@ -47,10 +49,8 @@ const LandLord = ({ item }) => {
   console.log(foundUser);
   return (
     <>
-      <div
-        className={`${styles.padding} w-full min-h-[70vh] shadows lg:w-[40%]`}
-      >
-        <div className=" min-h-[100vh] border w-full  md:w-[50%]`">
+      <div className={`${styles.padding} h-screen w-[35%] shadows`}>
+        <div className=" border h-full w-full  md:w-[50%]`">
           <div className=" relative right-0 -top-10 overflow-hidden h-24 flex flex-col justify-center items-center">
             <Image
               width={180}
@@ -59,30 +59,38 @@ const LandLord = ({ item }) => {
               className=" object-contain bg-slate-50 border rounded"
             />
           </div>
-          <div className={`${styles.paddingX}`}>
-            <p className={`${styles.heroSubText} text-center text-primary`}>
+          <div className={`text-center flex flex-col gap-y-2`}>
+            <p className={`${styles.heroSubText} uname_text  text-primary`}>
               {item.uName}
             </p>
             <div
-              className={`${styles.sectionSubText} ${styles.paddingY} text-center text-primary`}
+              className={`${styles.sectionSubText} flex flex-col gap-y-3 text-center text-primary`}
             >
-              <p>Mobile: {item.uPhone}</p>
-              <p
-                onClick={() =>
-                  window.open(
-                    `mailto:${item.uEmail}?subject=About Room&body= Write your message`
-                  )
-                }
-                className=" cursor-pointer hover:text-secondary"
-              >
-                Email: {item.uEmail}
-              </p>
+              <div className="flex pl-3 items-center gap-x-2">
+                <img src={phone} width={30} height={30} alt="" />
+                <p>{item.uPhone}</p>
+              </div>
+              <div className="flex pl-3  items-center gap-x-2">
+                <img src={email} width={30} height={30} alt="" />
+                <p
+                  onClick={() =>
+                    window.open(
+                      `mailto:${item.uEmail}?subject=About Room&body= Write your message`
+                    )
+                  }
+                  className=" cursor-pointer hover:text-secondary"
+                >
+                  {item.uEmail}
+                </p>
+              </div>
               {item.status ? (
-                <div className="occupied">
+                <div className="occupied ">
                   <p>OCCUPIED</p>
                 </div>
               ) : foundUser || result ? (
-                <Tag color="green">Requested</Tag>
+                <Tag color="green" className="pl-3 text-center">
+                  Requested
+                </Tag>
               ) : (
                 <button className="btn" onClick={handleRequest}>
                   Request Room
