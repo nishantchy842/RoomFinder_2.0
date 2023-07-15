@@ -78,7 +78,7 @@ const AddRoom = () => {
     } else {
       if (steps[3].completed) setComplete(3, false);
     }
-  }, []);
+  });
 
   useEffect(() => {
     if (location.lng || location.lat) {
@@ -112,6 +112,7 @@ const AddRoom = () => {
       address: details.address,
       place: details.place,
       amenities: amenities,
+      payment: true,
     };
     const bodyFormData = new FormData();
 

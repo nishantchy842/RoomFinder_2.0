@@ -63,8 +63,16 @@ const AddLocation = () => {
   }, [lng, lat]);
   return (
     <div className={style.mapContainer}>
-      <p className={`${styles.bold}`}>Your location: {address}</p>
-      <p className={`${styles.bold}`}>City: {place}</p>
+      <div
+        className={`${styles.bold} flex justify-center gap-x-2 items-center`}
+      >
+        <p className={`${styles.bold} location_style`}> Your location:</p>
+        <p> {address}</p>
+      </div>
+      <div className="flex justify-center gap-x-2 items-center">
+        <p className={`${styles.bold} location_style`}>City: </p>
+        <p className={`${styles.bold}`}>{place}</p>
+      </div>
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_KEY}

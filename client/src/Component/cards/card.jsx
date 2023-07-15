@@ -5,7 +5,7 @@ import Layout from "../Layout/Layout";
 import Cards from "./cards";
 import SearchBar from "../../Utils/SearchBar";
 import Paginations from "../../Utils/Pagination";
-import { Drawer, Popconfirm, Radio, Select, message } from "antd";
+import { Drawer, Popconfirm, Radio, message } from "antd";
 import { AiOutlineAlignLeft } from "react-icons/ai";
 import { Prices } from "../../config/Price";
 import { styles } from "../../Utils/Style";
@@ -19,7 +19,6 @@ import {
   apiResStatus,
   setAlertMessages,
 } from "../../Redux/Reducer/roomSlice";
-const { Option } = Select;
 
 const RoomCard = () => {
   const [room, setRoom] = useState();
@@ -180,8 +179,15 @@ const RoomCard = () => {
         <button className="btn" type="primary" onClick={showDrawer}>
           <AiOutlineAlignLeft />
         </button>
-        <Drawer title="Filter" placement="right" onClose={onClose} open={open}>
-          Filer by price
+        <Drawer
+          title={<p className=" capitalize text-lg font-bold">Filter</p>}
+          placement="right"
+          onClose={onClose}
+          open={open}
+        >
+          <p className=" capitalize text-lg font-bold border-b-2">
+            Filter by price
+          </p>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
@@ -191,27 +197,28 @@ const RoomCard = () => {
               ))}
             </Radio.Group>
           </div>
-          filter by address
-          <Select
-            defaultValue="Address"
-            style={{
-              width: 300,
-            }}
-            onChange={(e) => handlePlace(e)}
-          >
-            {place?.map((p) => {
-              return (
-                <Option key={p._id} value={p} label={p}>
-                  {p}
-                  {console.log(p)}
-                </Option>
-              );
-            })}
-          </Select>
+          <div className="addressFilter">
+            <p className=" capitalize text-lg font-bold border-b-2">
+              filter by address
+            </p>
+            <div className="flex flex-col">
+              {place?.map((p) => {
+                return (
+                  <li
+                    className="place_name"
+                    key={p._id}
+                    onClick={(e) => handlePlace(e.target.innerText)}
+                  >
+                    {p}
+                  </li>
+                );
+              })}
+            </div>
+          </div>
         </Drawer>
       </div>
       <div>
-        <div className=" h-[200px] w-[100vw]">
+        <div className=" h-[100px] w-[100vw]">
           <SearchBar />
           {userRole == "admin" ? (
             <div

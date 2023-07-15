@@ -24,6 +24,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^10.12.11",
     "khalti-checkout-web": "^2.2.0",
+    "lodash": "^4.17.21",
     "mapbox-gl": "^2.14.1",
     "mapbox-gl-directions": "^3.0.3",
     "moment": "^2.29.4",

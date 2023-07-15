@@ -2,8 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { styles } from "../../../Utils/Style";
 import { useNavigate } from "react-router";
+import _ from "lodash";
+
 const Places = () => {
   const [place, setPlace] = useState();
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const getAllPlaces = async () => {
     try {
@@ -33,14 +36,23 @@ const Places = () => {
     }
   };
 
+  const [displayedPlaces, setDisplayedPlaces] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+
+  const showNextPlaces = () => {
+    const nextPlaces = _.sampleSize(place, 20);
+    setDisplayedPlaces(nextPlaces);
+    setStartIndex(startIndex + 20);
+    setShow(true);
+  };
   return (
     <div className="min-h-[50vh] mt-10">
       <h2 className={`${styles.heroSubHeadText} text-center`}>
         View rooms in popular cities
       </h2>
-      <div className=" w-[80vw] flex items-start flex-wrap ">
-        {place &&
-          place.map((item, id) => {
+      <div>
+        <div className=" w-[80vw] flex items-start flex-wrap ">
+          {displayedPlaces.map((item, id) => {
             return (
               <div
                 key={id}
@@ -51,6 +63,10 @@ const Places = () => {
               </div>
             );
           })}
+        </div>
+        <button className="btn !bg-emerald-800" onClick={showNextPlaces}>
+          {show == false ? "Show Location" : "Next Location"}
+        </button>
       </div>
     </div>
   );

@@ -268,20 +268,25 @@ exports.productFiltersController = async (req, res) => {
 // get unique place name
 exports.placeName = async (req, res) => {
   try {
-    roomModel.distinct("place").then((uniquePlaces) => {
-      // 'uniquePlaces' will contain an array of unique place names
-      uniquePlaces.sort();
-      res.status(200).send({
-        success: true,
-        message: "get place successfull",
-        uniquePlaces,
-      });
+    const uniquePlaces = await roomModel.aggregate([
+      { $group: { _id: "$place" } },
+      { $sort: { _id: -1 } },
+      // { $limit: 20 },
+      { $sort: { _id: 1 } },
+    ]);
+
+    const places = uniquePlaces.map((place) => place._id);
+
+    res.status(200).send({
+      success: true,
+      message: "Get place successful",
+      uniquePlaces: places,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "failed to get place name",
+      message: "Failed to get place names",
     });
   }
 };
