@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.shadows {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.occupied {
+  border: 1px solid #808080;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: #3a3d5e;
+  color: white;
+  border-radius: 10px;
+}
+
+.amenity_container {
+  border: 1px solid #808080;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  /* background: #3a3d5e; */
+  color: #808080;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.MuiGrid-root {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+}
+.MuiList-root {
+  padding: 8px 10px 8px 10px !important;
+}
+.MuiList-root .MuiButtonBase-root:nth-child(1) {
+  border-bottom: 1px solid #303030;
+}
+
+.MuiButtonBase-root:nth-child(1) .MuiTypography-root {
+  font-family: "Lobster", cursive;
+}
+
+#modal-modal-title {
+  font-family: "Lobster", cursive;
+  margin-bottom: 20px;
+}
+.MuiBox-root {
+  height: auto !important;
+}
+
+#showPassword {
+  color: white !important;
+}
+.uname_text {
+  font-family: "Lobster", cursive;
+  border-bottom: 1px solid #303030;
+  margin-bottom: 20px;
+}
+.addressFilter {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.place_name {
+  height: 44px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  list-style: decimal;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+}
+.place_name:hover {
+  background: #808080;
+  color: white;
+}
+
+.location_style {
+  color: green;
+  font-size: 24px !important;
+}
