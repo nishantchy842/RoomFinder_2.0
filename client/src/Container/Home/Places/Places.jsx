@@ -46,12 +46,12 @@ const Places = () => {
     setShow(true);
   };
   return (
-    <div className="min-h-[50vh] mt-10">
+    <div className=" w-full mt-10 bg-[#f8f9f5] ">
       <h2 className={`${styles.heroSubHeadText} text-center`}>
         View rooms in popular cities
       </h2>
       <div>
-        <div className=" w-[80vw] flex items-start flex-wrap ">
+        <div className="flex items-start flex-wrap justify-center item-center">
           {displayedPlaces.map((item, id) => {
             return (
               <div
@@ -64,9 +64,11 @@ const Places = () => {
             );
           })}
         </div>
-        <button className="btn !bg-emerald-800" onClick={showNextPlaces}>
-          {show == false ? "Show Location" : "Next Location"}
-        </button>
+        <div className="flex justify-center items-center">
+          <button className="btn !bg-emerald-800" onClick={showNextPlaces}>
+            {show == false ? "Show Location" : "Next Location"}
+          </button>
+        </div>
       </div>
     </div>
   );

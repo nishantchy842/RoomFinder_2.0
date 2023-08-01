@@ -48,7 +48,7 @@ const AddDetails = () => {
         alignItems: "center",
         "& .MuiTextField-root": { width: "100%", maxWidth: 500, m: 1 },
       }}
-      className="inputStyles flex justify-start items-center"
+      className=" w-[75vw] flex justify-center items-center"
     >
       <div className="flex border-b-2 mb-3 items-center">
         <img src={addressIcon} width={30} height={30} alt="" />

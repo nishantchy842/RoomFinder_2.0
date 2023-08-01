@@ -2,6 +2,9 @@
 import Layout from "../../Component/Layout/Layout";
 import ClusterMap from "./ClusterMap";
 import Places from "./Places/Places";
+import Award from "./award";
+import PropertyType from "./propertyType";
+import RecentPropertyListed from "./recentPropertyListed";
 import Select from "./select";
 
 const Home = () => {
@@ -12,6 +15,9 @@ const Home = () => {
         <ClusterMap />
         <Select />
         <Places />
+        <PropertyType />
+        <RecentPropertyListed />
+        <Award />
       </div>
     </Layout>
   );

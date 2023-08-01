@@ -41,9 +41,11 @@ const SimilarRoom = ({ item }) => {
   }, []);
 
   return (
-    <div className={`${styles.paddingY} min-h-screen w-screen `}>
-      <p className={`${styles.heroHeadText} capitalize`}>Recommended Rooms</p>
-      <div className={` flex w-[100%] flex-row items-start flex-wrap m-6`}>
+    <div className={`${styles.paddingY} w-[30%] `}>
+      <p className={`${styles.heroSubHeadText} capitalize`}>
+        Recommended Rooms
+      </p>
+      <div className={` grid w-[100%]`}>
         {firstRoom && <Cards key={item._id} item={firstRoom} />}
         {secondRoom && <Cards key={item._id} item={secondRoom} />}
         {thirdRoom && <Cards key={item._id} item={thirdRoom} />}

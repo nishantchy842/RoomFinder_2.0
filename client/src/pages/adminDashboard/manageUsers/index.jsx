@@ -127,7 +127,7 @@ const ManageUsers = () => {
     [rowId]
   );
   return (
-    <Layout>
+    <Layout activeMenu={"/manage_users"}>
       <div className="mt-[80px]">
         <div
           className={`${styles.heroSubHeadText} w-full flex justify-center items-center`}

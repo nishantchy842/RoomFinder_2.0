@@ -1,0 +1,24 @@
+.propertyTypeContainer {
+  background: #eaf4fc;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  :global .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    .card_theme {
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 0 20px 0 rgba(112, 121, 138, 0.18);
+      cursor: pointer;
+      padding: 30px;
+      text-align: center;
+    }
+  }
+}

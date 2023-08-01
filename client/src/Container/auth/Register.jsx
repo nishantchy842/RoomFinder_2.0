@@ -79,8 +79,8 @@ const Register = () => {
       {loading == true ? (
         <Loader />
       ) : (
-        <div className="login_wrapper h-screen w-auto bg-slate-800 flex flex-col justify-center items-center ">
-          <div className="outer_card mt-24">
+        <div className="login_wrapper bg-slate-800 flex flex-col justify-center items-center mt-20 ">
+          <div className="outer_card">
             <div className="circle"></div>
             <div className="circle"></div>
             <Formik
@@ -99,37 +99,41 @@ const Register = () => {
               }}
             >
               {({ errors, touched }) => (
-                <Form className="card-inner flex flex-col justify-center items-center p-5 rounded-2xl">
-                  <h1 className={`${styles.heroHeadText} text-slate-100`}>
+                <Form className="card-inner flex flex-col justify-center items-center rounded-2xl">
+                  <h1 className={`${styles.heroSubHeadText} text-slate-100`}>
                     Signup
                   </h1>
-                  <div className="m-3">
-                    <label className="btn-outline-secondary col-md-12 text-white-100">
-                      {profile ? profile.name : "Upload Profile Picture"}
-                      <input
-                        type="file"
-                        name="photo"
-                        accept="image/*"
-                        className="input placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                        onChange={(e) => setProfile(e.target.files[0])}
-                        hidden
-                      />
-                    </label>
-                  </div>
-                  <div className="mb-3 ">
-                    {profile && (
-                      <div className="text-center">
-                        <img
-                          src={URL.createObjectURL(profile)}
-                          alt="product_photo"
-                          width={"100px"}
-                          height={"100px"}
-                          className="img img-responsive rounded-full"
-                        />
-                      </div>
-                    )}
-                  </div>
 
+                  <label className="btn-outline-secondary col-md-12 text-white-100">
+                    {profile ? (
+                      profile.name
+                    ) : (
+                      <p className="text-center">Upload Profile Picture</p>
+                    )}
+                  </label>
+                  <div className="flex items-center gap-x-2">
+                    <input
+                      type="file"
+                      name="photo"
+                      accept="image/*"
+                      className="input placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                      onChange={(e) => setProfile(e.target.files[0])}
+                      hidden
+                    />
+                    <div className="mb-3 ">
+                      {profile && (
+                        <div className="text-center">
+                          <img
+                            src={URL.createObjectURL(profile)}
+                            alt="product_photo"
+                            width={"60px"}
+                            height={"60px"}
+                            className="img img-responsive rounded-full"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
                   <Field
                     name="name"
                     placeholder="Full Name"
@@ -196,7 +200,7 @@ const Register = () => {
                     name="confirmPassword"
                     component="div"
                   />
-                  <button className="btn mt-2" type="submit">
+                  <button className="btn mt-2 !w-[60%] mb-4" type="submit">
                     Submit
                   </button>
                 </Form>

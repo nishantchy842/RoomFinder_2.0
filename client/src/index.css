@@ -9,6 +9,10 @@
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
   color-scheme: #f5f5f5;
+  @apply font-sans;
+}
+body {
+  overflow-x: hidden;
 }
 .btn {
   @apply bg-violet-600 hover:bg-violet-700 py-3 px-6 text-slate-50 rounded-lg w-auto transition dark:bg-violet-800 dark:hover:bg-violet-900;

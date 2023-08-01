@@ -11,18 +11,19 @@
 
 .cards__room-img {
   float: left;
-  height: 420px;
-  width: 327px;
+  height: 350px;
+  width: 300px;
+  object-fit: cover;
   overflow: hidden;
 }
 
 .cards__room-img img {
-  height: 420px;
-  width: 327px;
+  /* height: 420px;
+  width: 327px; */
   object-fit: fill;
   border-radius: 7px 0 0 7px;
   transition: transform 0.2s;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .cards__room-img img:hover {
@@ -31,8 +32,8 @@
 
 .cards__room-info {
   float: left;
-  height: 420px;
-  width: 327px;
+  height: 350px;
+  width: 300px;
   /* border-radius: 0 7px 10px 7px; */
   backdrop-filter: blur(7px);
   background-color: rgba(255, 255, 255, 0.5);
@@ -41,7 +42,7 @@
   transition: all 0.3s;
 }
 .cards__room-info:hover {
-  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.5);
+  /* box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.5); */
 }
 
 /* .cards__room-info:active {

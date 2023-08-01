@@ -79,11 +79,7 @@ const Login = () => {
             <p className={`${styles.sectionHeadText} ${styles.paddingX}`}>
               Room Finder
             </p>
-            <p
-              className={`${styles.sectionSubText} ${styles.paddingX} text-slate-100`}
-            >
-              Login your account
-            </p>
+
             <Form
               name="basic"
               labelCol={{
@@ -157,7 +153,7 @@ const Login = () => {
                   Submit
                 </button>
               </Form.Item>
-              <p className="mt-[15px] text-[20px] text-center text-slate-400">
+              <p className="mt-[15px] text-[20px] text-center pb-2 text-slate-400">
                 Do not have an account?{" "}
                 <Link to="/registration" className="font-bold">
                   Register

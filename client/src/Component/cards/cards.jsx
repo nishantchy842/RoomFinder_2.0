@@ -8,43 +8,40 @@ const Cards = ({ item }) => {
   const navigate = useNavigate();
 
   return (
-    <div className=" border p-2 h-[100%] mr-7 ">
-      <div className="cards__wrapper cursor-pointer">
-        <div className="cards__room-img max-h-[420px] max-w-[327px]">
-          <img src={item.img_collection[0]} alt="room image" />
-        </div>
+    <div className="border">
+      <div className="cards__room-img max-h-[420px] max-w-[327px]">
+        <img src={item.img_collection[0]} alt="room image" />
+      </div>
 
-        <div className="cards__room-info ">
-          <div className="cards__room-text">
-            <div className="flex justify-start">
-              {item.uPhoto ? (
-                <Avatar
-                  alt="Cindy Baker"
-                  src={`${import.meta.env.VITE_APP_URL}/uploads/${item.uPhoto}`}
-                />
-              ) : (
-                <Avatar sx={{ backgroundColor: "#1a1d4e" }}>
-                  {item?.uName?.charAt(0)}
-                </Avatar>
-              )}
-              <p className="bold m-2">{item?.uName}</p>
-            </div>
-            <h1 className={`${styles.heroSubText} capitalize`}>
-              {item.title.substring(0, 30)}...
-            </h1>
-            <h2
-              className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-slate-700`}
-            >
-              {item?.address?.substring(0, 50)}.....
-            </h2>
-            <p className="cards__description">
-              {`${item.description.substring(0, 50)}.....`}
-            </p>
+      <div className="cards__room-info ">
+        <div className="cards__room-text">
+          <div className="flex justify-start">
+            {item.uPhoto ? (
+              <Avatar
+                alt="Cindy Baker"
+                src={`${import.meta.env.VITE_APP_URL}/uploads/${item.uPhoto}`}
+              />
+            ) : (
+              <Avatar sx={{ backgroundColor: "#1a1d4e" }}>
+                {item?.uName?.charAt(0)}
+              </Avatar>
+            )}
+            <p className="bold m-2">{item?.uName}</p>
           </div>
+          <h1 className={`${styles.extrabold} capitalize`}>
+            {item.title.substring(0, 20)}...
+          </h1>
+          <h2
+            className={`${styles.sectionSubText} ml-7 text-[2px] capitalize text-slate-700`}
+          >
+            {item?.address?.substring(0, 30)}.....
+          </h2>
+          <p className="cards__description">
+            {`${item.description.substring(0, 30)}.....`}
+          </p>
           <div className=" flex flex-col justify-center items-center ">
             <p>
-              {" "}
-              NRs.{" "}
+              NRs.
               <span className="cards__room__price__number">{item.price}</span>
             </p>
             <button

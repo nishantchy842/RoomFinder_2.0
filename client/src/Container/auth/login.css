@@ -1,7 +1,7 @@
 .login_wrapper {
-  height: 100vh;
+  height: 90vh;
   width: auto;
-  background-image: url('../../assets/blob.svg');
+  background-image: url("../../assets/blob.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -13,10 +13,10 @@
   position: relative;
 }
 
-.card-inner { 
-  width: min(950px,50vw);
+.card-inner {
+  width: min(950px, 50vw);
   height: inherit;
-  background: rgba(255, 255, 255, .05);
+  background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
   border-radius: 8px;

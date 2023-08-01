@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./admindashboard.css";
 import { FaUserFriends, FaHouseUser } from "react-icons/fa";
-import Layout from "../../Component/Layout/Layout";
+// import Layout from "../../Component/Layout/Layout";
 import Piechart from "./Piechart";
 import Linechart from "./Linechart";
 import { Box, Divider, List, Paper, Typography } from "@mui/material";
@@ -9,7 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { totalUsers } from "../../Redux/Reducer/userSlice";
 import { totalRoom } from "../../Redux/Reducer/roomSlice";
-import moment from 'moment'
+import moment from "moment";
 
 const AdminDashboard = () => {
   const [users, setusers] = useState(0);
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <Layout>
+    <>
       <Box
         sx={{
           display: { xs: "flex", md: "grid" },
@@ -121,7 +121,8 @@ const AdminDashboard = () => {
                   />
                   <div className="admin-recent-name">Name: {user.name}</div>
                   <div className="admin-recent-time">
-                    Time created: {moment(user.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                    Time created:{" "}
+                    {moment(user.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                   </div>
                 </div>
               ))}
@@ -141,7 +142,8 @@ const AdminDashboard = () => {
                   <div className="admin-recent-name">{room.title}</div>
                   <div className="admin-recent-name">Address: {room.place}</div>
                   <div className="admin-recent-time">
-                    Time added:{moment(room.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                    Time added:
+                    {moment(room.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                   </div>
                 </div>
               ))}
@@ -155,7 +157,7 @@ const AdminDashboard = () => {
           <Linechart />
         </Paper>
       </Box>
-    </Layout>
+    </>
   );
 };
 

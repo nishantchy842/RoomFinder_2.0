@@ -1,0 +1,38 @@
+.award_main_container {
+  height: 70vh;
+  width: 100%;
+  background: #122947;
+  padding: 80px;
+  :global .award_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .icon {
+      background: hsla(0, 0%, 100%, 0.1);
+      border-radius: 4% 50%;
+      color: #fff;
+      font-size: 32px;
+      height: 100px;
+      line-height: 100px;
+      margin: 50px auto auto;
+      width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .total {
+      font-size: 50px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .name {
+      color: grey;
+    }
+    .info {
+      color: #fff;
+      font-size: 30px;
+      font-weight: 400;
+    }
+  }
+}
