@@ -29,6 +29,11 @@ const roomSchema = mongoose.Schema(
     },
     payment: { type: Boolean, default: false },
     status: { type: Boolean, default: false },
+    category: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "category",
+      validate: (v) => Array.isArray(v) && v.length >= 0,
+    },
   },
   { timestamps: true }
 );

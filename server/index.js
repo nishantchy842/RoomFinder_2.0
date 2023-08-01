@@ -4,6 +4,7 @@ const connectDb = require("./db/Connectdb");
 const userRoute = require("./routes/userRoute");
 const roomRoute = require("./routes/roomRoute");
 const messagesRouter = require("./routes/messageRoute");
+const createCategory = require("./routes/categoryRoute");
 
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -34,6 +35,7 @@ connectDb();
 //routes
 app.use("/api/auth", userRoute);
 app.use("/api/room", roomRoute);
+app.use("/api/category", createCategory);
 app.use("/", messagesRouter);
 
 io.on("connection", (socket) => {

@@ -18,6 +18,8 @@ import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
 import EmailVerify from "../Container/auth/emailVerify";
 import ManageUsers from "../pages/adminDashboard/manageUsers";
 import Learn from "../pages/learn";
+import Dashboard_admin from "../pages/adminDashboard";
+import RoomCardss from "../roomCard";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -42,7 +44,7 @@ const DefaulRoutes = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-      <Route path="/learn" element={<Learn />} />
+      <Route path="/learn" element={<RoomCardss />} />
     </Routes>
   );
 };
@@ -61,14 +63,14 @@ const UserRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
-      <Route path="/learn" element={<Learn />} />
+      <Route path="/learn" element={<RoomCardss />} />
     </Routes>
   );
 };
 const AdminRoute = () => {
   return (
     <Routes>
-      <Route path="/" element={<AdminDashboard />} />
+      <Route path="/" element={<Dashboard_admin />} />
       <Route path="/rooms" element={<RoomCard />} />
       <Route path="/update-room" element={<UpdateRoom />} />
       <Route path="/add-map" element={<AddLocation />} />

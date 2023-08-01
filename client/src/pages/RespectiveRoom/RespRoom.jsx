@@ -12,7 +12,7 @@ const RespRoom = () => {
     setRender(true);
   }, [render]);
   return (
-    <Layout>
+    <Layout activeMenu={"/rooms"}>
       <div className="mr-10 ml-10 flex flex-col flex-shrink">
         <ImgSwiper item={state} />
         <RoomDetails item={state} />

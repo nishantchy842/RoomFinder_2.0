@@ -174,115 +174,106 @@ const RoomCard = () => {
     }
   };
   return (
-    <Layout>
-      <div className="absolute top-[8rem] left-5">
-        <button className="btn" type="primary" onClick={showDrawer}>
-          <AiOutlineAlignLeft />
-        </button>
-        <Drawer
-          title={<p className=" capitalize text-lg font-bold">Filter</p>}
-          placement="right"
-          onClose={onClose}
-          open={open}
-        >
-          <p className=" capitalize text-lg font-bold border-b-2">
-            Filter by price
-          </p>
-          <div className="d-flex flex-column">
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((p) => (
-                <div key={p._id} className="m-5">
-                  <Radio value={p.array}>{p.name}</Radio>
-                </div>
-              ))}
-            </Radio.Group>
-          </div>
-          <div className="addressFilter">
+    <Layout activeMenu={"/rooms"}>
+      <div className=" ml-2">
+        <div className="absolute top-[8rem] left-5">
+          <button className="btn" type="primary" onClick={showDrawer}>
+            <AiOutlineAlignLeft />
+          </button>
+          <Drawer
+            title={<p className=" capitalize text-lg font-bold">Filter</p>}
+            placement="right"
+            onClose={onClose}
+            open={open}
+          >
             <p className=" capitalize text-lg font-bold border-b-2">
-              filter by address
+              Filter by price
             </p>
-            <div className="flex flex-col">
-              {place?.map((p) => {
-                return (
-                  <li
-                    className="place_name"
-                    key={p._id}
-                    onClick={(e) => handlePlace(e.target.innerText)}
-                  >
-                    {p}
-                  </li>
-                );
-              })}
-            </div>
-          </div>
-        </Drawer>
-      </div>
-      <div>
-        <div className=" h-[100px] w-[100vw]">
-          <SearchBar />
-          {userRole == "admin" ? (
-            <div
-              className={`${styles.heroSubHeadText} w-full flex justify-center items-center`}
-            >
-              <p>Manage rooms</p>
-            </div>
-          ) : (
-            " "
-          )}
-        </div>
-      </div>
-
-      <div
-        className={`${styles.paddingX} flex w-[100%] flex-row items-start flex-wrap mt-6`}
-      >
-        {userRole == "admin"
-          ? room?.map((item) => {
-              return (
-                <div
-                  key={item._id}
-                  className=" border-b-2  flex flex-col justify-center items-center hover:bg-[#f5f5f5]"
-                >
-                  <Cards item={item} />
-                  <div className=" mb-4 w-[40%] flex justify-around items-center gap-x-2">
-                    <button
-                      className="btn uppercase"
-                      onClick={() => handleBookedRoom(item._id)}
-                    >
-                      Occupied
-                    </button>
-                    <Popconfirm
-                      title="Delete the room"
-                      description="Are you sure to delete this room?"
-                      onConfirm={() => handleDelete(item._id)}
-                      onCancel={cancel}
-                      okText={<span style={{ color: "green" }}>Yes</span>}
-                      cancelText={<span style={{ color: "red" }}>No</span>}
-                    >
-                      <button type="link" className="btn uppercase">
-                        Delete{" "}
-                      </button>
-                    </Popconfirm>
-                    <button
-                      className="btn uppercase"
-                      onClick={() => handleUpdate(item._id)}
-                    >
-                      Update
-                    </button>
+            <div className="d-flex flex-column">
+              <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                {Prices?.map((p) => (
+                  <div key={p._id} className="m-5">
+                    <Radio value={p.array}>{p.name}</Radio>
                   </div>
-                </div>
-              );
-            })
-          : room?.map((item) => {
-              return <Cards key={item._id} item={item} />;
-            })}
-      </div>
-      {radio.length == 0 ? (
-        <div className="flex justify-end p-10">
-          <Paginations pageNumber={pageNumber} handlePage={getAllRooms} />
+                ))}
+              </Radio.Group>
+            </div>
+            <div className="addressFilter">
+              <p className=" capitalize text-lg font-bold border-b-2">
+                filter by address
+              </p>
+              <div className="flex flex-col">
+                {place?.map((p, id) => {
+                  return (
+                    <li
+                      className="place_name"
+                      key={id}
+                      onClick={(e) => handlePlace(e.target.innerText)}
+                    >
+                      {p}
+                    </li>
+                  );
+                })}
+              </div>
+            </div>
+          </Drawer>
         </div>
-      ) : (
-        " "
-      )}
+        <div className=" h-[100px]">
+          <SearchBar />
+        </div>
+
+        <div
+          className={`flex w-[100%] justify-center gap-1 items-start flex-wrap mt-6`}
+        >
+          {userRole == "admin"
+            ? room?.map((item) => {
+                return (
+                  <div
+                    key={item._id}
+                    className=" flex border flex-col gap-x-1 justify-center items-center"
+                  >
+                    <Cards item={item} />
+                    <div className=" mb-4 w-full mt-5 flex justify-center items-center gap-x-2">
+                      <button
+                        className="btn uppercase"
+                        onClick={() => handleBookedRoom(item._id)}
+                      >
+                        Occupied
+                      </button>
+                      <Popconfirm
+                        title="Delete the room"
+                        description="Are you sure to delete this room?"
+                        onConfirm={() => handleDelete(item._id)}
+                        onCancel={cancel}
+                        okText={<span style={{ color: "green" }}>Yes</span>}
+                        cancelText={<span style={{ color: "red" }}>No</span>}
+                      >
+                        <button type="link" className="btn uppercase">
+                          Delete{" "}
+                        </button>
+                      </Popconfirm>
+                      <button
+                        className="btn uppercase"
+                        onClick={() => handleUpdate(item._id)}
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            : room?.map((item) => {
+                return <Cards key={item._id} item={item} />;
+              })}
+        </div>
+        {radio.length == 0 ? (
+          <div className="flex justify-end p-10">
+            <Paginations pageNumber={pageNumber} handlePage={getAllRooms} />
+          </div>
+        ) : (
+          " "
+        )}
+      </div>
     </Layout>
   );
 };

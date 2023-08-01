@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetLoginDetails } from "../../Redux/Reducer/userSlice";
+import Notification from "../../Utils/notification";
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -68,6 +69,7 @@ const Header = () => {
               <span className="font-sans text-2xl ml-2">RoomFinder</span>
             </div>
             <Box sx={{ flexGrow: 0, display: "flex" }}>
+              <Notification />
               {isLoggedIn ? (
                 <Tooltip title={`Hello ${username}`}>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

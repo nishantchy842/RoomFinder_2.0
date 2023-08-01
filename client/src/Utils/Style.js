@@ -12,15 +12,15 @@ const styles = {
 
   sectionHeadText:
     "text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
-  sectionSubText: "sm:text-[18px] text-[14px] tracking-wider",
+  sectionSubText: "sm:text-[18px] text-[14px]",
   h5: "font-bold text-[24px]",
-  extrabold: "font-extrabold text-[24px]",
+  extrabold: "font-extrabold !text-[24px]",
 
   sub_title: "font-bold text-[20px]",
   medium: "font-medium text-[18px]",
 
-  semibold: "font-semibold text-[18px]",
-  bold: "font-bold text-[18px]",
+  semibold: "font-semibold !text-[18px]",
+  bold: "font-bold !text-[18px]",
 
   body: {
     regular: "font-normal text-[16px]",

@@ -1,23 +1,25 @@
 .mapContainer {
-    height: 60vh;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    text-align: center;
+  width: 75vw;
+  height: 60vh;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  text-align: center;
 }
 
 :global .MuiStack-root {
-    padding-top: unset !important;
-    margin-top: 60px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  padding-top: unset !important;
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 :global .MuiStack-root .MuiButtonBase-root {
-    background: rgb(124 58 237);
-    color: #ffff;
+  background: rgb(124 58 237);
+  color: #ffff;
 }
 
 :global .MuiStack-root .MuiButtonBase-root:hover {
-    background: rgb(124 58 237);
-    color: #ffff;
+  background: rgb(124 58 237);
+  color: #ffff;
 }
