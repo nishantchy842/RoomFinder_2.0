@@ -3,9 +3,31 @@ import "./cards.css";
 import PropTypes from "prop-types";
 import { Avatar } from "@mui/material";
 import { styles } from "../../Utils/Style";
+import { AiFillHeart } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Cards = ({ item }) => {
+  const { id } = useSelector((state) => state.user);
+  const [like, setLike] = useState(false);
   const navigate = useNavigate();
+
+  const handleLike = async (roomId) => {
+    await axios.put(`${import.meta.env.VITE_APP_URL}/api/room/like`, {
+      roomId: roomId,
+    });
+
+    setLike(true);
+  };
+
+  const handleUnlike = async (roomId) => {
+    await axios.put(`${import.meta.env.VITE_APP_URL}/api/room/unlike`, {
+      roomId: roomId,
+    });
+
+    setLike(false);
+  };
 
   return (
     <div className="border">
@@ -15,18 +37,32 @@ const Cards = ({ item }) => {
 
       <div className="cards__room-info ">
         <div className="cards__room-text">
-          <div className="flex justify-start">
-            {item.uPhoto ? (
-              <Avatar
-                alt="Cindy Baker"
-                src={`${import.meta.env.VITE_APP_URL}/uploads/${item.uPhoto}`}
+          <div className="flex justify-between items-center">
+            <div className="flex justify-start items-center gap-x-3">
+              {item.uPhoto ? (
+                <Avatar
+                  alt="Cindy Baker"
+                  src={`${import.meta.env.VITE_APP_URL}/uploads/${item.uPhoto}`}
+                />
+              ) : (
+                <Avatar sx={{ backgroundColor: "#1a1d4e" }}>
+                  {item?.uName?.charAt(0)}
+                </Avatar>
+              )}
+              <p className=" font-bold ">{item?.uName}</p>
+            </div>
+
+            {item?.likes.includes(id) || like ? (
+              <AiFillHeart
+                className=" text-[red] cursor-pointer"
+                onClick={() => handleUnlike(item._id)}
               />
             ) : (
-              <Avatar sx={{ backgroundColor: "#1a1d4e" }}>
-                {item?.uName?.charAt(0)}
-              </Avatar>
+              <AiFillHeart
+                className=" text-black-100 cursor-pointer"
+                onClick={() => handleLike(item._id)}
+              />
             )}
-            <p className="bold m-2">{item?.uName}</p>
           </div>
           <h1 className={`${styles.extrabold} capitalize`}>
             {item.title.substring(0, 20)}...

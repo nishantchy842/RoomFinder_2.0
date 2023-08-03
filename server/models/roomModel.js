@@ -34,6 +34,15 @@ const roomSchema = mongoose.Schema(
       ref: "category",
       validate: (v) => Array.isArray(v) && v.length >= 0,
     },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+    comments: [
+      {
+        text: String,
+        postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+        createdAt: { type: Date, default: Date.now },
+        name: { type: String },
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -114,10 +114,12 @@ exports.deleteRoom = async (req, res) => {
 exports.getSingleRoom = async (req, res) => {
   try {
     const room = await roomModel.findById(req.params.rid);
+    const likeCount = room.likes.length;
     res.status(200).send({
       success: true,
       message: "get room success",
       room,
+      likeCount,
     });
   } catch (error) {
     console.log(error);

@@ -14,12 +14,11 @@ import PageNotFound from "../Utils/PageNotFound";
 import SearchResult from "../pages/searchResult/SearchResult";
 import RoomsAccPlace from "../Container/Home/Places/RoomsAccPlace";
 import Dashboard from "../pages/userDashboard/Dashboard";
-import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
+// import AdminDashboard from "../pages/adminDashboard/AdminDashboard";
 import EmailVerify from "../Container/auth/emailVerify";
 import ManageUsers from "../pages/adminDashboard/manageUsers";
 import Learn from "../pages/learn";
 import Dashboard_admin from "../pages/adminDashboard";
-import RoomCardss from "../roomCard";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -44,7 +43,6 @@ const DefaulRoutes = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-      <Route path="/learn" element={<RoomCardss />} />
     </Routes>
   );
 };
@@ -63,7 +61,6 @@ const UserRoutes = () => {
       <Route path="/result" element={<SearchResult />} />
       <Route path="/user-dashboard" element={<Dashboard />} />
       <Route path="/rooms/:place" element={<RoomsAccPlace />} />
-      <Route path="/learn" element={<RoomCardss />} />
     </Routes>
   );
 };

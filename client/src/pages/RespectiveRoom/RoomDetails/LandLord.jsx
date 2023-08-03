@@ -46,7 +46,6 @@ const LandLord = ({ item }) => {
   );
   const foundUser = alreadyApplied.find((userid) => userid === id);
 
-  console.log(foundUser);
   return (
     <>
       <div className={`${styles.padding} h-screen w-[35%] shadows`}>

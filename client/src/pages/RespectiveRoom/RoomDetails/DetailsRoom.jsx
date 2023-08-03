@@ -5,8 +5,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { styles } from "../../../Utils/Style";
 import addressIcon from "../../../assets/address.png";
+import { AiFillHeart } from "react-icons/ai";
 
-const DetailsRoom = ({ item }) => {
+const DetailsRoom = ({ item, countLike }) => {
   const [place, setPlace] = useState(null);
 
   useEffect(() => {
@@ -25,15 +26,18 @@ const DetailsRoom = ({ item }) => {
   useEffect(() => {
     // Fetch your data from MongoDB and extract the createdAt value
     const createdAt = item.createdAt; // Replace with your createdAt value
-    // Calculate the relative time using Moment.js
     const relative = moment(createdAt).fromNow();
 
-    // Update the state with the relative time
     setTime(relative);
   }, []);
-
+  console.log(item, "likecount");
   return (
     <div className={`${styles.padding} h-screen   w-[60%] shadows`}>
+      <p
+        className={`${styles.sectionSubText} flex items-center rounded-lg lowercase bg-slate-300 text-primary absolute top-[29rem] z-10 left-[20%] p-2`}
+      >
+        {countLike} Likes <AiFillHeart className=" text-[red]" />
+      </p>
       <p
         className={`${styles.sectionSubText} rounded-lg lowercase bg-slate-300 text-primary absolute top-[29rem] z-10 right-11 p-2`}
       >
@@ -103,5 +107,6 @@ const DetailsRoom = ({ item }) => {
 };
 DetailsRoom.propTypes = {
   item: PropTypes.any.isRequired,
+  countLike: PropTypes.any,
 };
 export default DetailsRoom;

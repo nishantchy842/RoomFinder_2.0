@@ -38,7 +38,7 @@ const SimilarRoom = ({ item }) => {
   };
   useEffect(() => {
     handleData();
-  }, []);
+  }, [firstRoom, secondRoom, thirdRoom]);
 
   return (
     <div className={`${styles.paddingY} w-[30%] `}>

@@ -22,6 +22,7 @@ const { requireSignIn } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 const multer = require("multer");
+const roomModel = require("../models/roomModel");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -76,5 +77,76 @@ router.get("/totalroom", totalRoom);
 router.get("/recentroom", recentRooms);
 //get sort room
 router.get("/sort", getSortRoom);
+
+router.put("/like", requireSignIn, async (req, res) => {
+  try {
+    const result = await roomModel.findByIdAndUpdate(
+      req.body.roomId,
+      {
+        $push: { likes: req.user.id },
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+router.put("/unlike", requireSignIn, async (req, res) => {
+  try {
+    const result = await roomModel.findByIdAndUpdate(
+      req.body.roomId,
+      {
+        $pull: { likes: req.user.id },
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.put("/comment", requireSignIn, async (req, res) => {
+  try {
+    const comment = {
+      text: req.body.text,
+      name: req.user.name,
+      postedBy: req.user.id,
+    };
+
+    const result = await roomModel
+      .findByIdAndUpdate(
+        req.body.postId,
+        {
+          $push: { comments: comment },
+        },
+        {
+          new: true,
+        }
+      )
+      .populate({
+        path: "comments.postedBy",
+        select: "name phone",
+      })
+      .exec();
+    res.status(200).send({
+      success: true,
+      message: "commented successfully",
+      result: { ...result },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 module.exports = router;
