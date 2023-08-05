@@ -51,7 +51,8 @@
 ![Register_page](https://github.com/nishantchy842/RoomFinder_2.0/assets/117557072/1c7bca6f-c363-46a6-b74d-bc60197474a9)
 
 #Home Page
-![screenshot (1)](https://github.com/nishantchy842/RoomFinder_2.0/assets/117557072/8638d8be-0b18-4b74-92b4-0901ad49c8bf)
+![screenshot](https://github.com/nishantchy842/RoomFinder_2.0/assets/117557072/d91cc4d0-02f0-4d79-9978-a5fc5908c16d)
+
 
 #List of room
 ![screenshot (2)](https://github.com/nishantchy842/RoomFinder_2.0/assets/117557072/baa896eb-e958-4824-8c73-18df638849ff)
